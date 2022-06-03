@@ -1,0 +1,124 @@
+incarnation: sapere
+
+environment:
+  type: OSMEnvironment
+  parameters: [mirabilandia.osm.pbf, true]
+
+network-model: { type: ConnectWithinDistance, parameters: [1000] }
+
+_mirabilandia: &mira
+  [[44.338, 12.26],[44.335, 12.263],[44.337, 12.268],[44.34, 12.266],[44.34, 12.264],[44.34, 12.262]]
+
+_restaurants: &restaurants
+  - type: Point
+    parameters: [44.33747, 12.26208]
+    contents:
+      - molecule: name
+        concentration: "Drive-In"
+      - molecule: activity
+        concentration: "restaurant"
+  - type: Point
+    parameters: [44.33815, 12.2633]
+    contents:
+      - molecule: name
+        concentration: "Bar del Lago"
+      - molecule: activity
+        concentration: "restaurant"
+  - type: Point
+    parameters: [44.33682, 12.26425]
+    contents:
+      - molecule: name
+        concentration: "Locanda del Faro"
+      - molecule: activity
+        concentration: "restaurant"
+  - type: Point
+    parameters: [44.33589, 12.26293]
+    contents:
+      - molecule: name
+        concentration: "McDonald's"
+      - molecule: activity
+        concentration: "restaurant"
+
+_attractions: &attractions
+  - type: Point
+    parameters: [44.33691, 12.26136]
+    contents:
+      - molecule: name
+        concentration: "iSpeed"
+      - molecule: activity
+        concentration: "attraction"
+  - type: Point
+    parameters: [44.33908, 12.26462]
+    contents:
+      - molecule: name
+        concentration: "RioBravo"
+      - molecule: activity
+        concentration: "attraction"
+  - type: Point
+    parameters: [44.33852, 12.26238]
+    contents:
+      - molecule: name
+        concentration: "Raratonga"
+      - molecule: activity
+        concentration: "attraction"
+  - type: Point
+    parameters: [44.33719, 12.26472]
+    contents:
+      - molecule: name
+        concentration: "Delirium"
+      - molecule: activity
+        concentration: "attraction"
+  - type: Point
+    parameters: [44.33793, 12.26698]
+    contents:
+      - molecule: name
+        concentration: "Katun"
+      - molecule: activity
+        concentration: "attraction"
+  - type: Point
+    parameters: [44.33831, 12.26194]
+    contents:
+      - molecule: name
+        concentration: "AutoSplash"
+      - molecule: activity
+        concentration: "attraction"
+  - type: Point
+    parameters: [44.33698, 12.26281]
+    contents:
+      - molecule: name
+        concentration: "Casa Matta"
+      - molecule: activity
+        concentration: "attraction"
+  - type: Point
+    parameters: [44.33539, 12.26133]
+    contents:
+      - molecule: name
+        concentration: "DiVertical"
+      - molecule: activity
+        concentration: "attraction"
+  - type: Point
+    parameters: [44.33734, 12.26611]
+    contents:
+      - molecule: name
+        concentration: "Phobia"
+      - molecule: activity
+        concentration: "attraction"
+  - type: Point
+    parameters: [44.3368, 12.2656]
+    contents:
+      - molecule: name
+        concentration: "Columbia"
+      - molecule: activity
+        concentration: "attraction"
+  - type: Point
+    parameters: [44.33779, 12.26401]
+    contents:
+      - molecule: name
+        concentration: "Monosaurus"
+      - molecule: activity
+        concentration: "attraction"
+
+deployments:
+  - *attractions
+  - *restaurants
+
