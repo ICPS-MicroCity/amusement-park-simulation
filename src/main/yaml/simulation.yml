@@ -16,17 +16,17 @@ _bounds: &bounds
 
 # Define the time-distribution rate
 _rate: &rate
-  1.0
+  0.1
 
 # Define the gradient that activities have to spread in order to let guests know their position
 _gradient: &gradient
   - time-distribution: *rate
     type: SAPEREGradient
     parameters:
-      - monosaurus, Distance                      # Source template
+      - source, Distance                      # Source template
       - "gradient, Distance, #O"                # Gradient template
       - 1                                       # LSA value position (where the progress formula result should be stored)
-      - "(Distance + (#ROUTE * (K + 1))) + 1"   # Progress Formula
+      - "(Distance + (#ROUTE * (K + 1))) +1"   # Progress Formula
       - context, K                              # Contextualization LSA Template
       - 20000                                   # Gradient Threshold
 
@@ -35,7 +35,7 @@ _movement: &movement
   - time-distribution: *rate
     type: SAPEREGradient
     parameters:
-      - monosaurus, Distance
+      - source, Distance
       - gradient, Distance, Dest
       - 1
       - "Distance + #ROUTE"
@@ -47,7 +47,7 @@ _movement: &movement
     type: Event
     actions:
       - type: SAPEREWalkerRiseGradient
-        parameters: [guest, 1.4, 0, 0, "gradient, Distance, #O", 2]
+        parameters: [guest, 0.1, 0, 0, "gradient, Distance, #O", 2]
 
 # Define the "cloud" node that links attractions to guests
 _cloud: &cloud
@@ -63,8 +63,7 @@ _guests: &guests
     parameters: [ 10, *bounds ]
     programs: *movement
     contents:
-      - molecule: person
-      - molecule: guest
+      molecule: guest
 
 # Define restaurants
 _restaurants: &restaurants
@@ -94,11 +93,13 @@ _restaurants: &restaurants
       - molecule: "{queue, 0}"
   - type: Point
     parameters: [44.33589, 12.26293]
+    programs: *gradient
     contents:
       - molecule: name
         concentration: "McDonald's"
       - molecule: activity
       - molecule: restaurant
+      - molecule: source, 0
       - molecule: "{queue, 0}"
 
 # Define attractions
@@ -191,12 +192,10 @@ _attractions: &attractions
         concentration: "Monosaurus"
       - molecule: activity
       - molecule: attraction
-      - molecule: monosaurus
       - molecule: "{queue, 0}"
 
 # Deploy nodes
 deployments:
   - *restaurants
-  - *attractions
   - *guests
   - *cloud
