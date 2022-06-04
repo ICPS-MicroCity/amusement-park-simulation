@@ -1,21 +1,35 @@
 incarnation: sapere
 
+# Use an OpenStreetMap Environment, deploying nodes only on streets
 environment:
   type: OSMEnvironment
   parameters: [mirabilandia.osm.pbf, true]
 
-network-model: { type: ConnectWithinDistance, parameters: [1000] }
+# The network model used allows to choose the nodes that have the "cloud" molecule in order to simulate an access point behaviour
+network-model:
+  type: ConnectToAccessPoint
+  parameters: [1000.0, cloud]
 
-_mirabilandia: &mira
+# Define the physical bounds of the park
+_bounds: &bounds
   [[44.338, 12.26],[44.335, 12.263],[44.337, 12.268],[44.34, 12.266],[44.34, 12.264],[44.34, 12.262]]
 
+# Define the "cloud" node that links attractions to guests
+_cloud: &cloud
+  - type: Point
+    parameters: [44.338, 12.26]
+    contents:
+      molecule: cloud
+
+# Define guests
 _guests: &guests
   - type: Polygon
-    parameters: [ 1, *mira ]
+    parameters: [ 1, *bounds ]
     contents:
       - molecule: person
       - molecule: guest
 
+# Define restaurants
 _restaurants: &restaurants
   - type: Point
     parameters: [44.33747, 12.26208]
@@ -50,6 +64,7 @@ _restaurants: &restaurants
       - molecule: restaurant
       - molecule: "{queue, 0}"
 
+# Define attractions
 _attractions: &attractions
   - type: Point
     parameters: [44.33691, 12.26136]
@@ -140,7 +155,9 @@ _attractions: &attractions
       - molecule: attraction
       - molecule: "{queue, 0}"
 
+# Deploy nodes
 deployments:
   - *restaurants
   - *attractions
   - *guests
+  - *cloud
