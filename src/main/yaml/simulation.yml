@@ -14,17 +14,54 @@ network-model:
 _bounds: &bounds
   [[44.338, 12.26],[44.335, 12.263],[44.337, 12.268],[44.34, 12.266],[44.34, 12.264],[44.34, 12.262]]
 
+# Define the time-distribution rate
+_rate: &rate
+  1.0
+
+# Define the gradient that activities have to spread in order to let guests know their position
+_gradient: &gradient
+  - time-distribution: *rate
+    type: SAPEREGradient
+    parameters:
+      - monosaurus, Distance                      # Source template
+      - "gradient, Distance, #O"                # Gradient template
+      - 1                                       # LSA value position (where the progress formula result should be stored)
+      - "(Distance + (#ROUTE * (K + 1))) + 1"   # Progress Formula
+      - context, K                              # Contextualization LSA Template
+      - 20000                                   # Gradient Threshold
+
+# Define the movement of guests
+_movement: &movement
+  - time-distribution: *rate
+    type: SAPEREGradient
+    parameters:
+      - monosaurus, Distance
+      - gradient, Distance, Dest
+      - 1
+      - "Distance + #ROUTE"
+      - whatever
+      - 20000
+  - time-distribution:
+      type: DiracComb
+      parameters: [0.02]
+    type: Event
+    actions:
+      - type: SAPEREWalkerRiseGradient
+        parameters: [guest, 1.4, 0, 0, "gradient, Distance, #O", 2]
+
 # Define the "cloud" node that links attractions to guests
 _cloud: &cloud
   - type: Point
     parameters: [44.338, 12.26]
+    programs: *gradient
     contents:
       molecule: cloud
 
 # Define guests
 _guests: &guests
   - type: Polygon
-    parameters: [ 1, *bounds ]
+    parameters: [ 10, *bounds ]
+    programs: *movement
     contents:
       - molecule: person
       - molecule: guest
@@ -148,11 +185,13 @@ _attractions: &attractions
       - molecule: "{queue, 0}"
   - type: Point
     parameters: [44.33779, 12.26401]
+    programs: *gradient
     contents:
       - molecule: name
         concentration: "Monosaurus"
       - molecule: activity
       - molecule: attraction
+      - molecule: monosaurus
       - molecule: "{queue, 0}"
 
 # Deploy nodes
