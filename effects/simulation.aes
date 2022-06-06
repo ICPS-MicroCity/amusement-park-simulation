@@ -94,7 +94,7 @@
       "val": 14
     },
     "molFilter": true,
-    "molString": "activity",
+    "molString": "activity, N",
     "molPropertyFilter": false,
     "property": "",
     "writingPropertyValue": false,
