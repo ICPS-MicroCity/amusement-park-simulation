@@ -2,7 +2,7 @@ plugins {
     id("com.gradle.enterprise") version "3.10.1"
 }
 
-rootProject.name = "alchemist-primer"
+rootProject.name = "amusement-park-alchemist-simulation"
 
 gradleEnterprise {
     buildScan {
