@@ -5,8 +5,10 @@ variables:
     language: scala
     formula: |
       val nActivities = 10
+      val random = new scala.util.Random()
       val activities = (0 to nActivities).toList
-      activities(scala.util.Random(0).nextInt(nActivities))
+      val next = activities(random.nextInt(nActivities))
+      "destination, " + next.toString
 
 # Use an OpenStreetMap Environment, deploying nodes only on streets
 environment:
@@ -16,7 +18,7 @@ environment:
 # The network model used allows to choose the nodes that have the "cloud" molecule in order to simulate an access point behaviour
 network-model:
   type: ConnectToAccessPoint
-  parameters: [150.0, activity]
+  parameters: [150.0, "activity, N"]
 
 # Define the physical bounds of the park
 _bounds: &bounds
@@ -31,7 +33,7 @@ _gradient: &gradient
   - time-distribution: *rate
     type: SAPEREGradient
     parameters:
-      - "source, Distance"                      # Source template
+      - "activity, Distance"                      # Source template
       - "gradient, Distance, #O"                # Gradient template
       - 1                                       # LSA value position (where the progress formula result should be stored)
       - "(Distance + (#ROUTE * (K + 1))) + 1"   # Progress Formula
@@ -43,7 +45,7 @@ _movement: &movement
   - time-distribution: *rate
     type: SAPEREGradient
     parameters:
-      - source, Distance
+      - activity, Distance
       - gradient, Distance, Dest
       - 1
       - "Distance + #ROUTE"
@@ -55,13 +57,10 @@ _movement: &movement
     type: Event
     actions:
       - type: SAPEREWalkerRiseGradient
-        parameters: [guest, 0.1, 0, 0, "gradient, Distance, #O", 2]
-
-_firstDestination: &firstDestination
-  - time-distribution: *rate
-    program: "{destination, N} --> {destination, N + 1}"
-  - program: "{destination} --> {destination, 0}"
-  - program: "{destination, def: N > 1000} --> {destination}"
+        parameters: [guest, 0.1, 0, 0, "gradient, Distance, Destination", 2]
+  - program: "{destination, ID}{gradient, Distance, ID2} --> {destination, ID}{gradient, Distance, ID}"
+  - program: "{gradient, Distance, ID}{gradient, Distance, ID2} --> {gradient, Distance, ID}"
+#  - program: "{gradient, 0, ID}{destination, ID} --> {*choice}"
 
 # Define guests
 _guests: &guests
@@ -69,10 +68,11 @@ _guests: &guests
     parameters: [ 10, *bounds ]
     programs:
       - *movement
-      - *firstDestination
     contents:
       - molecule: guest
-      - molecule: destination
+      - molecule: *choice
+
+#
 
 # Define restaurants
 _restaurants: &restaurants
@@ -82,7 +82,7 @@ _restaurants: &restaurants
     contents:
       - molecule: name
         concentration: "Drive-In"
-      - molecule: activity
+      - molecule: activity, 0
       - molecule: restaurant
       - molecule: "{queue, 0}"
   - type: Point
@@ -91,7 +91,7 @@ _restaurants: &restaurants
     contents:
       - molecule: name
         concentration: "Bar del Lago"
-      - molecule: activity
+      - molecule: activity, 0
       - molecule: restaurant
       - molecule: "{queue, 0}"
   - type: Point
@@ -100,9 +100,8 @@ _restaurants: &restaurants
     contents:
       - molecule: name
         concentration: "Locanda del Faro"
-      - molecule: activity
+      - molecule: activity, 0
       - molecule: restaurant
-      - molecule: source, 0
       - molecule: "{queue, 0}"
   - type: Point
     parameters: [44.33589, 12.26293]
@@ -110,9 +109,8 @@ _restaurants: &restaurants
     contents:
       - molecule: name
         concentration: "McDonald's"
-      - molecule: activity
+      - molecule: activity, 0
       - molecule: restaurant
-      - molecule: source, 0
       - molecule: "{queue, 0}"
 
 # Define attractions
@@ -123,7 +121,7 @@ _attractions: &attractions
     contents:
       - molecule: name
         concentration: "iSpeed"
-      - molecule: activity
+      - molecule: activity, 0
       - molecule: attraction
       - molecule: "{queue, 0}"
   - type: Point
@@ -132,7 +130,7 @@ _attractions: &attractions
     contents:
       - molecule: name
         concentration: "RioBravo"
-      - molecule: activity
+      - molecule: activity, 0
       - molecule: attraction
       - molecule: "{queue, 0}"
   - type: Point
@@ -141,7 +139,7 @@ _attractions: &attractions
     contents:
       - molecule: name
         concentration: "Raratonga"
-      - molecule: activity
+      - molecule: activity, 0
       - molecule: attraction
       - molecule: "{queue, 0}"
   - type: Point
@@ -150,7 +148,7 @@ _attractions: &attractions
     contents:
       - molecule: name
         concentration: "Delirium"
-      - molecule: activity
+      - molecule: activity, 0
       - molecule: attraction
       - molecule: "{queue, 0}"
   - type: Point
@@ -159,7 +157,7 @@ _attractions: &attractions
     contents:
       - molecule: name
         concentration: "Katun"
-      - molecule: activity
+      - molecule: activity, 0
       - molecule: attraction
       - molecule: "{queue, 0}"
   - type: Point
@@ -168,7 +166,7 @@ _attractions: &attractions
     contents:
       - molecule: name
         concentration: "AutoSplash"
-      - molecule: activity
+      - molecule: activity, 0
       - molecule: attraction
       - molecule: "{queue, 0}"
   - type: Point
@@ -177,7 +175,7 @@ _attractions: &attractions
     contents:
       - molecule: name
         concentration: "Casa Matta"
-      - molecule: activity
+      - molecule: activity, 0
       - molecule: attraction
       - molecule: "{queue, 0}"
   - type: Point
@@ -186,7 +184,7 @@ _attractions: &attractions
     contents:
       - molecule: name
         concentration: "DiVertical"
-      - molecule: activity
+      - molecule: activity, 0
       - molecule: attraction
       - molecule: "{queue, 0}"
   - type: Point
@@ -195,7 +193,7 @@ _attractions: &attractions
     contents:
       - molecule: name
         concentration: "Phobia"
-      - molecule: activity
+      - molecule: activity, 0
       - molecule: attraction
       - molecule: "{queue, 0}"
   - type: Point
@@ -204,7 +202,7 @@ _attractions: &attractions
     contents:
       - molecule: name
         concentration: "Columbia"
-      - molecule: activity
+      - molecule: activity, 0
       - molecule: attraction
       - molecule: "{queue, 0}"
   - type: Point
@@ -213,11 +211,12 @@ _attractions: &attractions
     contents:
       - molecule: name
         concentration: "Monosaurus"
-      - molecule: activity
+      - molecule: activity, 0
       - molecule: attraction
       - molecule: "{queue, 0}"
 
 # Deploy nodes
 deployments:
   - *restaurants
+  - *attractions
   - *guests
