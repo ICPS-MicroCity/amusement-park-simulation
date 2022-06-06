@@ -1,5 +1,13 @@
 incarnation: sapere
 
+variables:
+  choice: &choice
+    language: scala
+    formula: |
+      val nActivities = 10
+      val activities = (0 to nActivities).toList
+      activities(scala.util.Random(0).nextInt(nActivities))
+
 # Use an OpenStreetMap Environment, deploying nodes only on streets
 environment:
   type: OSMEnvironment
@@ -8,7 +16,7 @@ environment:
 # The network model used allows to choose the nodes that have the "cloud" molecule in order to simulate an access point behaviour
 network-model:
   type: ConnectToAccessPoint
-  parameters: [1000.0, cloud]
+  parameters: [150.0, activity]
 
 # Define the physical bounds of the park
 _bounds: &bounds
@@ -16,18 +24,18 @@ _bounds: &bounds
 
 # Define the time-distribution rate
 _rate: &rate
-  0.1
+  3.14159
 
 # Define the gradient that activities have to spread in order to let guests know their position
 _gradient: &gradient
   - time-distribution: *rate
     type: SAPEREGradient
     parameters:
-      - source, Distance                      # Source template
+      - "source, Distance"                      # Source template
       - "gradient, Distance, #O"                # Gradient template
       - 1                                       # LSA value position (where the progress formula result should be stored)
-      - "(Distance + (#ROUTE * (K + 1))) +1"   # Progress Formula
-      - context, K                              # Contextualization LSA Template
+      - "(Distance + (#ROUTE * (K + 1))) + 1"   # Progress Formula
+      - "context, K"                            # Contextualization LSA Template
       - 20000                                   # Gradient Threshold
 
 # Define the movement of guests
@@ -49,26 +57,28 @@ _movement: &movement
       - type: SAPEREWalkerRiseGradient
         parameters: [guest, 0.1, 0, 0, "gradient, Distance, #O", 2]
 
-# Define the "cloud" node that links attractions to guests
-_cloud: &cloud
-  - type: Point
-    parameters: [44.338, 12.26]
-    programs: *gradient
-    contents:
-      molecule: cloud
+_firstDestination: &firstDestination
+  - time-distribution: *rate
+    program: "{destination, N} --> {destination, N + 1}"
+  - program: "{destination} --> {destination, 0}"
+  - program: "{destination, def: N > 1000} --> {destination}"
 
 # Define guests
 _guests: &guests
   - type: Polygon
     parameters: [ 10, *bounds ]
-    programs: *movement
+    programs:
+      - *movement
+      - *firstDestination
     contents:
-      molecule: guest
+      - molecule: guest
+      - molecule: destination
 
 # Define restaurants
 _restaurants: &restaurants
   - type: Point
     parameters: [44.33747, 12.26208]
+    programs: *gradient
     contents:
       - molecule: name
         concentration: "Drive-In"
@@ -77,6 +87,7 @@ _restaurants: &restaurants
       - molecule: "{queue, 0}"
   - type: Point
     parameters: [44.33815, 12.2633]
+    programs: *gradient
     contents:
       - molecule: name
         concentration: "Bar del Lago"
@@ -85,11 +96,13 @@ _restaurants: &restaurants
       - molecule: "{queue, 0}"
   - type: Point
     parameters: [44.33682, 12.26425]
+    programs: *gradient
     contents:
       - molecule: name
         concentration: "Locanda del Faro"
       - molecule: activity
       - molecule: restaurant
+      - molecule: source, 0
       - molecule: "{queue, 0}"
   - type: Point
     parameters: [44.33589, 12.26293]
@@ -106,6 +119,7 @@ _restaurants: &restaurants
 _attractions: &attractions
   - type: Point
     parameters: [44.33691, 12.26136]
+    programs: *gradient
     contents:
       - molecule: name
         concentration: "iSpeed"
@@ -114,6 +128,7 @@ _attractions: &attractions
       - molecule: "{queue, 0}"
   - type: Point
     parameters: [44.33908, 12.26462]
+    programs: *gradient
     contents:
       - molecule: name
         concentration: "RioBravo"
@@ -122,6 +137,7 @@ _attractions: &attractions
       - molecule: "{queue, 0}"
   - type: Point
     parameters: [44.33852, 12.26238]
+    programs: *gradient
     contents:
       - molecule: name
         concentration: "Raratonga"
@@ -130,6 +146,7 @@ _attractions: &attractions
       - molecule: "{queue, 0}"
   - type: Point
     parameters: [44.33719, 12.26472]
+    programs: *gradient
     contents:
       - molecule: name
         concentration: "Delirium"
@@ -138,6 +155,7 @@ _attractions: &attractions
       - molecule: "{queue, 0}"
   - type: Point
     parameters: [44.33793, 12.26698]
+    programs: *gradient
     contents:
       - molecule: name
         concentration: "Katun"
@@ -146,6 +164,7 @@ _attractions: &attractions
       - molecule: "{queue, 0}"
   - type: Point
     parameters: [44.33831, 12.26194]
+    programs: *gradient
     contents:
       - molecule: name
         concentration: "AutoSplash"
@@ -154,6 +173,7 @@ _attractions: &attractions
       - molecule: "{queue, 0}"
   - type: Point
     parameters: [44.33698, 12.26281]
+    programs: *gradient
     contents:
       - molecule: name
         concentration: "Casa Matta"
@@ -162,6 +182,7 @@ _attractions: &attractions
       - molecule: "{queue, 0}"
   - type: Point
     parameters: [44.33539, 12.26133]
+    programs: *gradient
     contents:
       - molecule: name
         concentration: "DiVertical"
@@ -170,6 +191,7 @@ _attractions: &attractions
       - molecule: "{queue, 0}"
   - type: Point
     parameters: [44.33734, 12.26611]
+    programs: *gradient
     contents:
       - molecule: name
         concentration: "Phobia"
@@ -178,6 +200,7 @@ _attractions: &attractions
       - molecule: "{queue, 0}"
   - type: Point
     parameters: [44.3368, 12.2656]
+    programs: *gradient
     contents:
       - molecule: name
         concentration: "Columbia"
@@ -198,4 +221,3 @@ _attractions: &attractions
 deployments:
   - *restaurants
   - *guests
-  - *cloud
