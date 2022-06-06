@@ -126,17 +126,17 @@
     "red": {
       "max": 255,
       "min": 0,
-      "val": 255
+      "val": 200
     },
     "blue": {
       "max": 255,
       "min": 0,
-      "val": 0
+      "val": 255
     },
     "green": {
       "max": 255,
       "min": 0,
-      "val": 151
+      "val": 0
     },
     "alpha": {
       "max": 255,
@@ -176,7 +176,7 @@
       "val": 10
     },
     "colorCache": {
-      "value": -26880
+      "value": -3669761
     }
   },
   {
