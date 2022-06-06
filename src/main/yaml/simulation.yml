@@ -9,6 +9,15 @@ variables:
       val activities = (0 to nActivities).toList
       val next = activities(random.nextInt(nActivities))
       "destination, " + next.toString
+  next: &next
+    language: scala
+    formula: |
+      val nActivities = 10
+      val random = new scala.util.Random()
+      val activities = (0 to nActivities).toList
+      val next = activities(random.nextInt(nActivities))
+      " --> {next, " + next.toString + "}"
+
 
 # Use an OpenStreetMap Environment, deploying nodes only on streets
 environment:
@@ -58,21 +67,22 @@ _movement: &movement
     actions:
       - type: SAPEREWalkerRiseGradient
         parameters: [guest, 0.1, 0, 0, "gradient, Distance, Destination", 2]
+  - time-distribution: *rate
+    program: *next
   - program: "{destination, ID}{gradient, Distance, ID2} --> {destination, ID}{gradient, Distance, ID}"
   - program: "{gradient, Distance, ID}{gradient, Distance, ID2} --> {gradient, Distance, ID}"
-#  - program: "{gradient, 0, ID}{destination, ID} --> {*choice}"
+  - program: "{gradient, 0, ID}{destination, ID}{next, ID2} --> {destination, ID2}"
+  - program: "{next, ID}{next, ID2} --> {next, ID2}"
 
 # Define guests
 _guests: &guests
   - type: Polygon
-    parameters: [ 10, *bounds ]
+    parameters: [ 1, *bounds ]
     programs:
       - *movement
     contents:
       - molecule: guest
       - molecule: *choice
-
-#
 
 # Define restaurants
 _restaurants: &restaurants
