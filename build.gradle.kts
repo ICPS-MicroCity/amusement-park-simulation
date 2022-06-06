@@ -11,16 +11,7 @@ plugins {
 repositories {
     mavenCentral()
 }
-/*
- * Only required if you plan to use Protelis, remove otherwise
- */
-sourceSets {
-    main {
-        resources {
-            srcDir("src/main/protelis")
-        }
-    }
-}
+
 dependencies {
     // Check the catalog at gradle/libs.versions.gradle
     implementation(libs.bundles.alchemist)
