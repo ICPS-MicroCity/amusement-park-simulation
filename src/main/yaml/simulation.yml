@@ -1,22 +1,15 @@
 incarnation: sapere
 
+# Define code variables
 variables:
   choice: &choice
     language: scala
     formula: |
-      val nActivities = 10
+      val nActivities = 4
       val random = new scala.util.Random()
       val activities = (0 to nActivities).toList
       val next = activities(random.nextInt(nActivities))
       "destination, " + next.toString
-  next: &next
-    language: scala
-    formula: |
-      val nActivities = 10
-      val random = new scala.util.Random()
-      val activities = (0 to nActivities).toList
-      val next = activities(random.nextInt(nActivities))
-      " --> {next, " + next.toString + "}"
 
 
 # Use an OpenStreetMap Environment, deploying nodes only on streets
@@ -27,7 +20,7 @@ environment:
 # The network model used allows to choose the nodes that have the "cloud" molecule in order to simulate an access point behaviour
 network-model:
   type: ConnectToAccessPoint
-  parameters: [150.0, "activity, N"]
+  parameters: [200.0, "activity, N"]
 
 # Define the physical bounds of the park
 _bounds: &bounds
@@ -42,7 +35,7 @@ _gradient: &gradient
   - time-distribution: *rate
     type: SAPEREGradient
     parameters:
-      - "activity, Distance"                      # Source template
+      - "activity, Distance"                    # Source template
       - "gradient, Distance, #O"                # Gradient template
       - 1                                       # LSA value position (where the progress formula result should be stored)
       - "(Distance + (#ROUTE * (K + 1))) + 1"   # Progress Formula
@@ -67,22 +60,26 @@ _movement: &movement
     actions:
       - type: SAPEREWalkerRiseGradient
         parameters: [guest, 0.1, 0, 0, "gradient, Distance, Destination", 2]
-  - time-distribution: *rate
-    program: *next
-  - program: "{destination, ID}{gradient, Distance, ID2} --> {destination, ID}{gradient, Distance, ID}"
-  - program: "{gradient, Distance, ID}{gradient, Distance, ID2} --> {gradient, Distance, ID}"
-  - program: "{gradient, 0, ID}{destination, ID}{next, ID2} --> {destination, ID2}"
-  - program: "{next, ID}{next, ID2} --> {next, ID2}"
+  - time-distribution: *rate # Redirect a guest to the activity he wants
+    program: "{destination, ID}{gradient, Distance, ID2} --> {destination, ID}{gradient, Distance, ID}"
+  - time-distribution: *rate # Redirect a guest to the next activity
+    program: "{gradient, 0, ID}{destination, ID}{next, ID2} --> {gradient, 0, ID}{destination, ID2}{next, ID}"
 
 # Define guests
 _guests: &guests
   - type: Polygon
-    parameters: [ 1, *bounds ]
+    parameters: [ 10, *bounds ]
     programs:
       - *movement
+      # Define a counter for the next activity to choose
+      - time-distribution: 0.1
+        program: "{next, N} --> {next, N+1}"
+      - time-distribution: 1.0
+        program: "{next, def: N > 15} --> {next, 0}"
     contents:
       - molecule: guest
       - molecule: *choice
+      - molecule: next, 0
 
 # Define restaurants
 _restaurants: &restaurants
