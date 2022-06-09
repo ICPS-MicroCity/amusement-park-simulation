@@ -28,7 +28,7 @@ _bounds: &bounds
 
 # Define the time-distribution rate
 _rate: &rate
-  3.14159
+  1.0
 
 # Define the gradient that activities have to spread in order to let guests know their position
 _gradient: &gradient
@@ -65,17 +65,22 @@ _movement: &movement
   - time-distribution: *rate # Redirect a guest to the next activity
     program: "{gradient, 0, ID}{destination, ID}{next, ID2} --> {gradient, 0, ID}{destination, ID2}{next, ID}"
 
+
+# Define a counter for the next activity to choose
+_activity_choice: &activity_choice
+  - time-distribution: 0.1
+    program: "{next, N} --> {next, N+1}"
+  - time-distribution: 1.0
+    program: "{next, def: N > 15} --> {next, 0}"
+
 # Define guests
 _guests: &guests
   - type: Polygon
     parameters: [ 10, *bounds ]
     programs:
       - *movement
-      # Define a counter for the next activity to choose
-      - time-distribution: 0.1
-        program: "{next, N} --> {next, N+1}"
-      - time-distribution: 1.0
-        program: "{next, def: N > 15} --> {next, 0}"
+      - *activity_choice
+
     contents:
       - molecule: guest
       - molecule: *choice
