@@ -1,0 +1,154 @@
+incarnation: protelis
+
+# The network model used allows to choose the nodes that have the "cloud" molecule in order to simulate an access point behaviour
+network-model:
+  type: ConnectToAccessPoint
+  parameters: [200.0, "activity"]
+
+# Use an OpenStreetMap Environment, deploying nodes only on streets
+environment:
+  type: OSMEnvironment
+  parameters: [mirabilandia.osm.pbf, true]
+
+# Define the physical bounds of the park
+_bounds: &bounds
+  [[44.338, 12.26],[44.335, 12.263],[44.337, 12.268],[44.34, 12.266],[44.34, 12.264],[44.34, 12.262]]
+
+# Define the movement law with a Walker that moves only on streets towards
+# a GeoPosition indicated by the concentration of the "tracking" molecule
+_move: &move
+  - time-distribution: 1
+    type: Event
+    actions:
+      - type: TargetMapWalker
+        parameters: [tracking, 1]
+
+# Define guests
+_guests: &guests
+  - type: Polygon
+    parameters: [ 10, *bounds ]
+    programs:
+      - *move
+    contents:
+      - molecule: guest
+        concentration: true
+      - molecule: tracking
+        concentration: [44.33747, 12.26208]
+
+
+# Define restaurants
+_restaurants: &restaurants
+  - type: Point
+    parameters: [44.33747, 12.26208]
+    contents:
+      - molecule: activity
+        concentration: true
+      - molecule: restaurant
+        concentration: true
+  - type: Point
+    parameters: [ 44.33815, 12.2633 ]
+    contents:
+      - molecule: activity
+        concentration: true
+      - molecule: restaurant
+        concentration: true
+  - type: Point
+    parameters: [ 44.33682, 12.26425 ]
+    contents:
+      - molecule: activity
+        concentration: true
+      - molecule: restaurant
+        concentration: true
+  - type: Point
+    parameters: [ 44.33589, 12.26293 ]
+    contents:
+      - molecule: activity
+        concentration: true
+      - molecule: restaurant
+        concentration: true
+
+# Define attractions
+_attractions: &attractions
+  - type: Point
+    parameters: [44.33691, 12.26136]
+    contents:
+      - molecule: activity
+        concentration: true
+      - molecule: attraction
+        concentration: true
+  - type: Point
+    parameters: [44.33908, 12.26462]
+    contents:
+      - molecule: activity
+        concentration: true
+      - molecule: attraction
+        concentration: true
+  - type: Point
+    parameters: [44.33852, 12.26238]
+    contents:
+      - molecule: activity
+        concentration: true
+      - molecule: attraction
+        concentration: true
+  - type: Point
+    parameters: [44.33719, 12.26472]
+    contents:
+      - molecule: activity
+        concentration: true
+      - molecule: attraction
+        concentration: true
+  - type: Point
+    parameters: [44.33793, 12.26698]
+    contents:
+      - molecule: activity
+        concentration: true
+      - molecule: attraction
+        concentration: true
+  - type: Point
+    parameters: [44.33831, 12.26194]
+    contents:
+      - molecule: activity
+        concentration: true
+      - molecule: attraction
+        concentration: true
+  - type: Point
+    parameters: [44.33698, 12.26281]
+    contents:
+      - molecule: activity
+        concentration: true
+      - molecule: attraction
+        concentration: true
+  - type: Point
+    parameters: [44.33539, 12.26133]
+    contents:
+      - molecule: activity
+        concentration: true
+      - molecule: attraction
+        concentration: true
+  - type: Point
+    parameters: [44.33734, 12.26611]
+    contents:
+      - molecule: activity
+        concentration: true
+      - molecule: attraction
+        concentration: true
+  - type: Point
+    parameters: [44.3368, 12.2656]
+    contents:
+      - molecule: activity
+        concentration: true
+      - molecule: attraction
+        concentration: true
+  - type: Point
+    parameters: [44.33779, 12.26401]
+    contents:
+      - molecule: activity
+        concentration: true
+      - molecule: attraction
+        concentration: true
+
+# Deploy nodes
+deployments:
+  - *restaurants
+  - *attractions
+  - *guests
