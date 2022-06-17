@@ -12,6 +12,15 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+    main {
+        resources {
+            srcDir("src/main/protelis")
+            srcDir("src/main/yaml")
+        }
+    }
+}
+
 dependencies {
     // Check the catalog at gradle/libs.versions.gradle
     implementation(libs.bundles.alchemist)
