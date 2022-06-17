@@ -1,16 +1,12 @@
 module org:protelis:microcity:broadcast
-import com.google.common.collect.Lists.newArrayList
 
 def position() = self.getDevicePosition()
-
 def id() = self.getDeviceUID().getId()
-
 def tuple() = [id(), position()]
-
 def neighbors() = nbr(tuple())
 
 let positions = [tuple()]
 
 share(m <- positions) {
-    foldHood(positions, neighbors(), (a, b) -> { b.subtract(tuple()).append(a) })
+    foldUnion([neighbors()]).sort()
 }
