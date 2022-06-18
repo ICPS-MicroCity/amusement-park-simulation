@@ -23,9 +23,14 @@ _move: &move
       - type: TargetMapWalker
         parameters: [tracking, 1]
 
-_broadcast: &broadcast
+_positions: &positions
   - time-distribution: 1
     program: org:protelis:microcity:positions
+  - program: send
+
+_towards: &towards
+  - time-distribution: 2
+    program: org:protelis:microcity:towards
   - program: send
 
 # Define guests
@@ -34,10 +39,15 @@ _guests: &guests
     parameters: [ 10, *bounds ]
     programs:
       - *move
-      - *broadcast
+      - *towards
+      - *positions
     contents:
       - molecule: guest
         concentration: true
+      - molecule: satisfied
+        concentration: true
+      - molecule: org:protelis:microcity:positions
+        concentration: []
       - molecule: tracking
         concentration: []
 
@@ -46,7 +56,7 @@ _restaurants: &restaurants
   - type: Point
     parameters: [44.33747, 12.26208]
     programs:
-      - *broadcast
+      - *positions
     contents:
       - molecule: activity
         concentration: true
@@ -55,7 +65,7 @@ _restaurants: &restaurants
   - type: Point
     parameters: [ 44.33815, 12.2633 ]
     programs:
-      - *broadcast
+      - *positions
     contents:
       - molecule: activity
         concentration: true
@@ -64,7 +74,7 @@ _restaurants: &restaurants
   - type: Point
     parameters: [ 44.33682, 12.26425 ]
     programs:
-      - *broadcast
+      - *positions
     contents:
       - molecule: activity
         concentration: true
@@ -73,7 +83,7 @@ _restaurants: &restaurants
   - type: Point
     parameters: [ 44.33589, 12.26293 ]
     programs:
-      - *broadcast
+      - *positions
     contents:
       - molecule: activity
         concentration: true
@@ -85,7 +95,7 @@ _attractions: &attractions
   - type: Point
     parameters: [44.33691, 12.26136]
     programs:
-      - *broadcast
+      - *positions
     contents:
       - molecule: activity
         concentration: true
@@ -94,7 +104,7 @@ _attractions: &attractions
   - type: Point
     parameters: [44.33908, 12.26462]
     programs:
-      - *broadcast
+      - *positions
     contents:
       - molecule: activity
         concentration: true
@@ -103,7 +113,7 @@ _attractions: &attractions
   - type: Point
     parameters: [44.33852, 12.26238]
     programs:
-      - *broadcast
+      - *positions
     contents:
       - molecule: activity
         concentration: true
@@ -112,7 +122,7 @@ _attractions: &attractions
   - type: Point
     parameters: [44.33719, 12.26472]
     programs:
-      - *broadcast
+      - *positions
     contents:
       - molecule: activity
         concentration: true
@@ -121,7 +131,7 @@ _attractions: &attractions
   - type: Point
     parameters: [44.33793, 12.26698]
     programs:
-      - *broadcast
+      - *positions
     contents:
       - molecule: activity
         concentration: true
@@ -130,7 +140,7 @@ _attractions: &attractions
   - type: Point
     parameters: [44.33831, 12.26194]
     programs:
-      - *broadcast
+      - *positions
     contents:
       - molecule: activity
         concentration: true
@@ -139,7 +149,7 @@ _attractions: &attractions
   - type: Point
     parameters: [44.33698, 12.26281]
     programs:
-      - *broadcast
+      - *positions
     contents:
       - molecule: activity
         concentration: true
@@ -148,7 +158,7 @@ _attractions: &attractions
   - type: Point
     parameters: [44.33539, 12.26133]
     programs:
-      - *broadcast
+      - *positions
     contents:
       - molecule: activity
         concentration: true
@@ -157,7 +167,7 @@ _attractions: &attractions
   - type: Point
     parameters: [44.33734, 12.26611]
     programs:
-      - *broadcast
+      - *positions
     contents:
       - molecule: activity
         concentration: true
@@ -166,7 +176,7 @@ _attractions: &attractions
   - type: Point
     parameters: [44.3368, 12.2656]
     programs:
-      - *broadcast
+      - *positions
     contents:
       - molecule: activity
         concentration: true
@@ -175,7 +185,7 @@ _attractions: &attractions
   - type: Point
     parameters: [44.33779, 12.26401]
     programs:
-      - *broadcast
+      - *positions
     contents:
       - molecule: activity
         concentration: true

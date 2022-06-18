@@ -1,3 +1,17 @@
 module org:protelis:microcity:towards
 
 def activities() = env.get("org:protelis:microcity:positions")
+
+def randomId(range) = round(random() * (range-1))
+
+def satisfy(value) = env.put("satisfied", value)
+
+def goTowards(id) = env.put("tracking", activities().get(id).get(1))
+
+let numberOfActivities = 15
+
+if (env.get("satisfied") == true) {
+    if (activities().size() == numberOfActivities) {
+        goTowards(randomId(numberOfActivities)); satisfy(false)
+    }
+}
