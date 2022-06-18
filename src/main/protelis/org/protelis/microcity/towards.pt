@@ -1,0 +1,3 @@
+module org:protelis:microcity:towards
+
+def activities() = env.get("org:protelis:microcity:positions")
