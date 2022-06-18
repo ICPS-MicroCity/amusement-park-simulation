@@ -25,7 +25,7 @@ _move: &move
 
 _broadcast: &broadcast
   - time-distribution: 1
-    program: org:protelis:microcity:broadcast
+    program: org:protelis:microcity:positions
   - program: send
 
 # Define guests
