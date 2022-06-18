@@ -1,0 +1,17 @@
+module org:protelis:microcity:positions
+
+def position() = self.getDevicePosition()
+def id() = self.getDeviceUID().getId()
+def tuple() = [id(), position()]
+def isActivity() = env.has("activity")
+
+def positions() =
+    if (isActivity()) {
+        [tuple()]
+    } else {
+        []
+    }
+
+share (field <- positions()) {
+    foldUnion(field).sort()
+}
