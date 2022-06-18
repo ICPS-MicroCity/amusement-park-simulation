@@ -46,6 +46,8 @@ _guests: &guests
         concentration: true
       - molecule: satisfied
         concentration: true
+      - molecule: destination
+        concentration: -1
       - molecule: org:protelis:microcity:positions
         concentration: []
       - molecule: tracking

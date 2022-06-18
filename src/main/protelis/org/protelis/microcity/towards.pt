@@ -1,17 +1,24 @@
 module org:protelis:microcity:towards
 
 def activities() = env.get("org:protelis:microcity:positions")
-
+def activity(i) = activities().get(i)
+def activityPosition(i) = activity(i).get(1)
 def randomId(range) = round(random() * (range-1))
-
 def satisfy(value) = env.put("satisfied", value)
-
-def goTowards(id) = env.put("tracking", activities().get(id).get(1))
+def position() = self.getDevicePosition()
+def goTowards(id) = env.put("tracking", activityPosition(id))
+def setDestination(id) = env.put("destination", id)
 
 let numberOfActivities = 15
+let next = randomId(numberOfActivities)
 
 if (env.get("satisfied") == true) {
     if (activities().size() == numberOfActivities) {
-        goTowards(randomId(numberOfActivities)); satisfy(false)
+        setDestination(next); goTowards(next); satisfy(false)
+    }
+} else {
+    let destination = env.get("destination")
+    if (activityPosition(destination) == position()) {
+        satisfy(true)
     }
 }
