@@ -39,7 +39,7 @@ _guests: &guests
       - molecule: guest
         concentration: true
       - molecule: tracking
-        concentration: [44.33747, 12.26208]
+        concentration: []
 
 # Define restaurants
 _restaurants: &restaurants
