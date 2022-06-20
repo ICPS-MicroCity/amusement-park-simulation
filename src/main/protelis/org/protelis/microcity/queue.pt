@@ -13,16 +13,16 @@ def destination() = env.get("destination")
 
 def destinationTuple() =
     if (isGuest()) {
-        //if (activityPosition(destination()) == position()) {
-        [[destination(), id()]]
-        //} else {
-        //    []
-        //}
+        if (activityPosition(destination()) == position()) {
+            [[id(), destination()]]
+        } else {
+            []
+        }
     } else {
         []
     }
 
 share (field <- destinationTuple()) {
-    let queue = foldUnion(foldUnion(field), nbr(destinationTuple()));
+    let queue = foldUnion(nbr(destinationTuple()));
     if (isGuest()) { [] } else { queue }
 }
