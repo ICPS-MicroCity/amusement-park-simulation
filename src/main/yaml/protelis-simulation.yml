@@ -23,21 +23,28 @@ _move: &move
       - type: TargetMapWalker
         parameters: [org:protelis:microcity:towards, 1]
 
+# Define the broadcast message from activities to guests
+# to spread their positions
 _positions: &positions
   - time-distribution: 1
     program: org:protelis:microcity:positions
   - program: send
 
+# Define the rule that establishes how guests choose the
+# next destination
 _towards: &towards
   - time-distribution: 2
     program: org:protelis:microcity:towards
   - program: send
 
+# Define the message that guests send when they get to
+# an activity in order to enqueue themselves
 _queue: &queue
   - time-distribution: 1
     program: org:protelis:microcity:queue
   - program: send
 
+# Define the action of satisfying enqueued guests
 _rounds: &rounds
   - time-distribution: 0.00001
     program: org:protelis:microcity:rounds
