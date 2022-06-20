@@ -4,7 +4,10 @@ def activities() = env.get("org:protelis:microcity:positions")
 def activity(i) = activities().get(i)
 def activityPosition(i) = activity(i).get(1)
 def randomId(range) = round(random() * (range-1))
+
 def satisfy(value) = env.put("satisfied", value)
+def enqueue(value) = env.put("inQueue", value)
+
 def position() = self.getDevicePosition()
 def goTowards(id) = env.put("tracking", activityPosition(id))
 def setDestination(id) = env.put("destination", id)
@@ -19,6 +22,6 @@ if (env.get("satisfied") == true) {
 } else {
     let destination = env.get("destination")
     if (activityPosition(destination) == position()) {
-        satisfy(false)
+        enqueue(true)
     }
 }
