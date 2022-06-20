@@ -20,6 +20,6 @@ def destinationTuple() =
     }
 
 share (field <- destinationTuple()) {
-    let queue = foldUnion(nbr(destinationTuple()));
+    let queue = foldUnion(nbr(destinationTuple())).filter(g -> { g.get(1) == id() });
     if (isGuest()) { [] } else { queue }
 }
