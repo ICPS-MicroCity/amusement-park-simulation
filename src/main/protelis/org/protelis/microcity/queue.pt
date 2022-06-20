@@ -1,0 +1,28 @@
+module org:protelis:microcity:queue
+
+def activities() = { env.get("org:protelis:microcity:positions") }
+def activity(i) = { activities().get(i) }
+def activityPosition(i) = { activity(i).get(1) }
+
+def isGuest() = env.has("guest")
+
+def position() = self.getDevicePosition()
+def id() = self.getDeviceUID().getId()
+
+def destination() = env.get("destination")
+
+def destinationTuple() =
+    if (isGuest()) {
+        //if (activityPosition(destination()) == position()) {
+        [[destination(), id()]]
+        //} else {
+        //    []
+        //}
+    } else {
+        []
+    }
+
+share (field <- destinationTuple()) {
+    let queue = foldUnion(foldUnion(field), nbr(destinationTuple()));
+    if (isGuest()) { [] } else { queue }
+}
