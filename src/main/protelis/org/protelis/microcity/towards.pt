@@ -19,6 +19,6 @@ if (env.get("satisfied") == true) {
 } else {
     let destination = env.get("destination")
     if (activityPosition(destination) == position()) {
-        satisfy(true)
+        satisfy(false)
     }
 }
