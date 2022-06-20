@@ -52,6 +52,8 @@ _guests: &guests
         concentration: true
       - molecule: satisfied
         concentration: true
+      - molecule: inQueue
+        concentration: false
       - molecule: destination
         concentration: -1
       - molecule: org:protelis:microcity:positions
