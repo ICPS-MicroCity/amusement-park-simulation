@@ -21,7 +21,7 @@ _move: &move
     type: Event
     actions:
       - type: TargetMapWalker
-        parameters: [tracking, 1]
+        parameters: [org:protelis:microcity:towards, 1]
 
 _positions: &positions
   - time-distribution: 1
@@ -57,8 +57,6 @@ _guests: &guests
       - molecule: destination
         concentration: -1
       - molecule: org:protelis:microcity:positions
-        concentration: []
-      - molecule: tracking
         concentration: []
 
 # Define restaurants

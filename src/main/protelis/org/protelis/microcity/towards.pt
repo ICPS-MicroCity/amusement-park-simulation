@@ -9,19 +9,27 @@ def satisfy(value) = env.put("satisfied", value)
 def enqueue(value) = env.put("inQueue", value)
 
 def position() = self.getDevicePosition()
-def goTowards(id) = env.put("tracking", activityPosition(id))
 def setDestination(id) = env.put("destination", id)
 
 let numberOfActivities = 15
 let next = randomId(numberOfActivities)
 
-if (env.get("satisfied") == true) {
-    if (activities().size() == numberOfActivities) {
-        setDestination(next); goTowards(next); satisfy(false)
-    }
-} else {
-    let destination = env.get("destination")
-    if (activityPosition(destination) == position()) {
-        enqueue(true)
+rep(towards <- -1.0) {
+    if (env.get("satisfied") == true) {
+        if (activities().size() == numberOfActivities) {
+            let tow = randomId(numberOfActivities)
+            setDestination(next); satisfy(false);
+            activityPosition(tow)
+        } else {
+            -1.0
+        }
+    } else {
+        let destination = env.get("destination")
+        if (activityPosition(destination) == position()) {
+            enqueue(true);
+            activityPosition(destination)
+        } else {
+            activityPosition(destination)
+        }
     }
 }
