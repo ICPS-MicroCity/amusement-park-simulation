@@ -33,7 +33,7 @@ _positions: &positions
 # Define the rule that establishes how guests choose the
 # next destination
 _towards: &towards
-  - time-distribution: 2
+  - time-distribution: 1
     program: org:protelis:microcity:towards
   - program: send
 
@@ -46,19 +46,25 @@ _queue: &queue
 
 # Define the action of satisfying enqueued guests
 _rounds: &rounds
-  - time-distribution: 0.00001
+  - time-distribution: 0.01
     program: org:protelis:microcity:rounds
   - program: send
+
+_activityPrograms: &programs
+  - *positions
+  - *queue
+  - *rounds
 
 # Define guests
 _guests: &guests
   - type: Polygon
-    parameters: [ 100, *bounds ]
+    parameters: [ 20, *bounds ]
     programs:
       - *move
       - *towards
       - *positions
       - *queue
+      - *rounds
     contents:
       - molecule: guest
         concentration: true
@@ -75,10 +81,7 @@ _guests: &guests
 _restaurants: &restaurants
   - type: Point
     parameters: [44.33747, 12.26208]
-    programs:
-      - *positions
-      - *queue
-      - *rounds
+    programs: *programs
     contents:
       - molecule: activity
         concentration: true
@@ -88,10 +91,7 @@ _restaurants: &restaurants
         concentration: 10
   - type: Point
     parameters: [ 44.33815, 12.2633 ]
-    programs:
-      - *positions
-      - *queue
-      - *rounds
+    programs: *programs
     contents:
       - molecule: activity
         concentration: true
@@ -101,10 +101,7 @@ _restaurants: &restaurants
         concentration: 10
   - type: Point
     parameters: [ 44.33682, 12.26425 ]
-    programs:
-      - *positions
-      - *queue
-      - *rounds
+    programs: *programs
     contents:
       - molecule: activity
         concentration: true
@@ -114,10 +111,7 @@ _restaurants: &restaurants
         concentration: 10
   - type: Point
     parameters: [ 44.33589, 12.26293 ]
-    programs:
-      - *positions
-      - *queue
-      - *rounds
+    programs: *programs
     contents:
       - molecule: activity
         concentration: true
@@ -130,10 +124,7 @@ _restaurants: &restaurants
 _attractions: &attractions
   - type: Point
     parameters: [44.33691, 12.26136]
-    programs:
-      - *positions
-      - *queue
-      - *rounds
+    programs: *programs
     contents:
       - molecule: activity
         concentration: true
@@ -143,10 +134,7 @@ _attractions: &attractions
         concentration: 10
   - type: Point
     parameters: [44.33908, 12.26462]
-    programs:
-      - *positions
-      - *queue
-      - *rounds
+    programs: *programs
     contents:
       - molecule: activity
         concentration: true
@@ -156,10 +144,7 @@ _attractions: &attractions
         concentration: 10
   - type: Point
     parameters: [44.33852, 12.26238]
-    programs:
-      - *positions
-      - *queue
-      - *rounds
+    programs: *programs
     contents:
       - molecule: activity
         concentration: true
@@ -169,10 +154,7 @@ _attractions: &attractions
         concentration: 10
   - type: Point
     parameters: [44.33719, 12.26472]
-    programs:
-      - *positions
-      - *queue
-      - *rounds
+    programs: *programs
     contents:
       - molecule: activity
         concentration: true
@@ -182,10 +164,7 @@ _attractions: &attractions
         concentration: 10
   - type: Point
     parameters: [44.33793, 12.26698]
-    programs:
-      - *positions
-      - *queue
-      - *rounds
+    programs: *programs
     contents:
       - molecule: activity
         concentration: true
@@ -195,10 +174,7 @@ _attractions: &attractions
         concentration: 10
   - type: Point
     parameters: [44.33831, 12.26194]
-    programs:
-      - *positions
-      - *queue
-      - *rounds
+    programs: *programs
     contents:
       - molecule: activity
         concentration: true
@@ -208,10 +184,7 @@ _attractions: &attractions
         concentration: 10
   - type: Point
     parameters: [44.33698, 12.26281]
-    programs:
-      - *positions
-      - *queue
-      - *rounds
+    programs: *programs
     contents:
       - molecule: activity
         concentration: true
@@ -221,10 +194,7 @@ _attractions: &attractions
         concentration: 10
   - type: Point
     parameters: [44.33539, 12.26133]
-    programs:
-      - *positions
-      - *queue
-      - *rounds
+    programs: *programs
     contents:
       - molecule: activity
         concentration: true
@@ -234,10 +204,7 @@ _attractions: &attractions
         concentration: 10
   - type: Point
     parameters: [44.33734, 12.26611]
-    programs:
-      - *positions
-      - *queue
-      - *rounds
+    programs: *programs
     contents:
       - molecule: activity
         concentration: true
@@ -247,10 +214,7 @@ _attractions: &attractions
         concentration: 10
   - type: Point
     parameters: [44.3368, 12.2656]
-    programs:
-      - *positions
-      - *queue
-      - *rounds
+    programs: *programs
     contents:
       - molecule: activity
         concentration: true
@@ -260,10 +224,7 @@ _attractions: &attractions
         concentration: 10
   - type: Point
     parameters: [44.33779, 12.26401]
-    programs:
-      - *positions
-      - *queue
-      - *rounds
+    programs: *programs
     contents:
       - molecule: activity
         concentration: true
