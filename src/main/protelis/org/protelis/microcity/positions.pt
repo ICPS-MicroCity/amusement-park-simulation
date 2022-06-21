@@ -1,9 +1,8 @@
 module org:protelis:microcity:positions
+import microcity.Device.*
 
-def position() = self.getDevicePosition()
-def id() = self.getDeviceUID().getId()
-def tuple() = [id(), position()]
-def isActivity() = env.has("activity")
+def tuple() = [getID().getId(), getPosition()]
+def isActivity() = has("activity")
 
 def positions() =
     if (isActivity()) {

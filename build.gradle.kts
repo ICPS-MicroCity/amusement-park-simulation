@@ -1,9 +1,11 @@
 /*
  * DEFAULT GRADLE BUILD FOR ALCHEMIST SIMULATOR
  */
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     application
+    alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.multiJvmTesting) // Pre-configures the Java toolchains
     alias(libs.plugins.taskTree) // Helps debugging dependencies among gradle tasks
 }
@@ -24,6 +26,7 @@ sourceSets {
 dependencies {
     // Check the catalog at gradle/libs.versions.gradle
     implementation(libs.bundles.alchemist)
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 multiJvm {
