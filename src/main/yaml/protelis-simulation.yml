@@ -3,7 +3,7 @@ incarnation: protelis
 # The network model used allows to choose the nodes that have the "cloud" molecule in order to simulate an access point behaviour
 network-model:
   type: ConnectToAccessPoint
-  parameters: [200.0, "activity"]
+  parameters: [150.0, "activity"]
 
 # Use an OpenStreetMap Environment, deploying nodes only on streets
 environment:
@@ -50,21 +50,27 @@ _rounds: &rounds
     program: org:protelis:microcity:rounds
   - program: send
 
+_freedom: &freedom
+  - time-distribution: 1
+    program: org:protelis:microcity:freedom
+  - program: send
+
 _activityPrograms: &programs
   - *positions
-  - *queue
-  - *rounds
+  #- *queue
+  #- *rounds
+  #- *freedom
 
 # Define guests
 _guests: &guests
   - type: Polygon
     parameters: [ 20, *bounds ]
     programs:
-      - *move
-      - *towards
+      #- *move
+      #- *towards
       - *positions
-      - *queue
-      - *rounds
+      #- *queue
+      #- *freedom
     contents:
       - molecule: guest
         concentration: true
