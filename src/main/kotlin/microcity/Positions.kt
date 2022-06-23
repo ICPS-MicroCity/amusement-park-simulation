@@ -13,11 +13,9 @@ import microcity.Utils.Molecules.ACTIVITY
 object Positions {
     data class Position(val id: Int, val coordinates: Tuple?)
 
-    private fun Tuple.toList(): List<Position> {
-        val array = this.toArray()
-        println(array.toString())
-        return ArrayList<Position>(array.toList().map {it as Position})
-    }
+    private fun Tuple.tupleToList(): List<Position> =
+        this.iterator().asSequence().map { it as Position }.toList()
+
 
     @JvmStatic
     fun positionFrom(id: Int, coordinates: Tuple): Position =
@@ -31,7 +29,14 @@ object Positions {
 
     @JvmStatic
     fun getPositions(ctx: AlchemistExecutionContext<*>): List<Position> = when {
-        has(ctx, POSITIONS) -> (get(ctx, POSITIONS) as Tuple).toList()
+        has(ctx, POSITIONS) -> when (val positions = get(ctx, POSITIONS)) {
+            is Tuple -> positions.tupleToList()
+            is java.util.ArrayList<*> -> positions.map { it as Position }
+            else -> {
+                println(positions.javaClass)
+                ArrayList()
+            }
+        }
         else -> createPositions(ctx)
     }
 
@@ -40,7 +45,6 @@ object Positions {
         ArrayList(l1.union(l2).toList()
             .filter { it.id >= 0 }
             .sortedBy { it.id })
-
 
 
 }
