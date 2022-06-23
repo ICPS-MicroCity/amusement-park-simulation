@@ -1,8 +1,8 @@
 module org:protelis:microcity:positions
-import microcity.Device.getID
+
 import microcity.Positions.createPositions
 import microcity.Positions.union
 
-share (field <- createPositions(getID().getId())) {
+share (field <- createPositions()) {
     foldHoodPlusSelf(field, (a, b) -> { union(a, b) })
 }
