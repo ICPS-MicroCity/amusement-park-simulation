@@ -17,7 +17,7 @@ object Destinations {
             (isSatisfied(ctx) && positions.isNotEmpty()) -> {
                 val next = Random.nextInt(0, positions.size)
                 val position = positions.find { it.id == next }?.coordinates ?: getCoordinates(ctx)
-                satisfy(ctx, position != getCoordinates(ctx))
+                satisfy(ctx, position == getCoordinates(ctx))
                 position
             }
             else -> current
