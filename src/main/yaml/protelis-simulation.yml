@@ -21,7 +21,7 @@ _move: &move
     type: Event
     actions:
       - type: TargetMapWalker
-        parameters: [org:protelis:microcity:towards, 1]
+        parameters: [org:protelis:microcity:destination, 1]
 
 # Define the broadcast message from activities to guests
 # to spread their positions
@@ -32,9 +32,9 @@ _positions: &positions
 
 # Define the rule that establishes how guests choose the
 # next destination
-_towards: &towards
+_destination: &destination
   - time-distribution: 1
-    program: org:protelis:microcity:towards
+    program: org:protelis:microcity:destination
   - program: send
 
 # Define the message that guests send when they get to
@@ -64,10 +64,10 @@ _activityPrograms: &programs
 # Define guests
 _guests: &guests
   - type: Polygon
-    parameters: [ 20, *bounds ]
+    parameters: [ 1, *bounds ]
     programs:
-      #- *move
-      #- *towards
+      - *move
+      - *destination
       - *positions
       #- *queue
       #- *freedom
