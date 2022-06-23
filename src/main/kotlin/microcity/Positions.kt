@@ -2,10 +2,11 @@ package microcity
 
 import org.protelis.lang.datatype.Tuple
 import it.unibo.alchemist.protelis.AlchemistExecutionContext
-import kotlin.random.Random
 import microcity.Utils.role
 import microcity.Device.has
 import microcity.Device.get
+import microcity.Device.getId
+import microcity.Device.getCoordinates
 
 object Positions {
     data class Position(val id: Int, val coordinates: Tuple?)
@@ -15,15 +16,15 @@ object Positions {
         Position(id, coordinates)
 
     @JvmStatic
-    fun createPositions(ctx: AlchemistExecutionContext<*>, id: Int): List<Position> = when {
-        role(ctx, "activity") -> ArrayList(listOf(Position(id, ctx.getCoordinates())))
+    fun createPositions(ctx: AlchemistExecutionContext<*>): List<Position> = when {
+        role(ctx, "activity") -> ArrayList(listOf(Position(getId(ctx), getCoordinates(ctx))))
         else -> ArrayList()
     }
 
     @JvmStatic
-    fun getPositions(ctx: AlchemistExecutionContext<*>, id: Int): List<Position> = when {
+    fun getPositions(ctx: AlchemistExecutionContext<*>): List<Position> = when {
         has(ctx, "positions") -> get(ctx, "positions") as List<Position>
-        else -> createPositions(ctx, id)
+        else -> createPositions(ctx, getId(ctx))
     }
 
     @JvmStatic
