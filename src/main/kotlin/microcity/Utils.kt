@@ -11,6 +11,11 @@ object Utils {
     fun role(ctx: AlchemistExecutionContext<*>, role: String): Boolean =
         has(ctx, role) && (get(ctx, role) as Boolean)
 
+    object Molecules {
+        val POSITIONS: String = "org:protelis:microcity:positions"
+        val ACTIVITY : String = "activity"
+    }
+
     object Guests {
 
         fun satisfy(ctx: AlchemistExecutionContext<*>, value: Boolean) {

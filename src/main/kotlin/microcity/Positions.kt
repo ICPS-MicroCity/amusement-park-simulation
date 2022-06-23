@@ -7,9 +7,17 @@ import microcity.Device.has
 import microcity.Device.get
 import microcity.Device.getId
 import microcity.Device.getCoordinates
+import microcity.Utils.Molecules.POSITIONS
+import microcity.Utils.Molecules.ACTIVITY
 
 object Positions {
     data class Position(val id: Int, val coordinates: Tuple?)
+
+    private fun Tuple.toList(): List<Position> {
+        val array = this.toArray()
+        println(array.toString())
+        return ArrayList<Position>(array.toList().map {it as Position})
+    }
 
     @JvmStatic
     fun positionFrom(id: Int, coordinates: Tuple): Position =
@@ -17,14 +25,14 @@ object Positions {
 
     @JvmStatic
     fun createPositions(ctx: AlchemistExecutionContext<*>): List<Position> = when {
-        role(ctx, "activity") -> ArrayList(listOf(Position(getId(ctx), getCoordinates(ctx))))
+        role(ctx, ACTIVITY) -> ArrayList(listOf(Position(getId(ctx), getCoordinates(ctx))))
         else -> ArrayList()
     }
 
     @JvmStatic
     fun getPositions(ctx: AlchemistExecutionContext<*>): List<Position> = when {
-        has(ctx, "positions") -> get(ctx, "positions") as List<Position>
-        else -> createPositions(ctx, getId(ctx))
+        has(ctx, POSITIONS) -> (get(ctx, POSITIONS) as Tuple).toList()
+        else -> createPositions(ctx)
     }
 
     @JvmStatic
