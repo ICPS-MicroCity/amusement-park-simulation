@@ -1,0 +1,8 @@
+module org:protelis:microcity:destination
+
+import microcity.Destinations.getNext
+import microcity.Device.getCoordinates
+
+rep(destination <- getNext(getCoordinates())) {
+    getNext(destination)
+}
