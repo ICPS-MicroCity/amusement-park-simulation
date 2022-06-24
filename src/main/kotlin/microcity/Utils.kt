@@ -1,10 +1,10 @@
 package microcity
 
 import it.unibo.alchemist.protelis.AlchemistExecutionContext
-import org.protelis.lang.datatype.Tuple
-import microcity.Device.has
 import microcity.Device.get
+import microcity.Device.has
 import microcity.Device.put
+import microcity.Utils.Molecules.SATISFIED
 
 object Utils {
 
@@ -12,17 +12,21 @@ object Utils {
         has(ctx, role) && (get(ctx, role) as Boolean)
 
     object Molecules {
-        val POSITIONS: String = "org:protelis:microcity:positions"
-        val ACTIVITY : String = "activity"
+        const val POSITIONS: String = "org:protelis:microcity:positions"
+        const val ACTIVITY: String = "activity"
+        const val GUEST: String = "guest"
+        const val SATISFIED: String = "satisfied"
+        const val DESTINATION: String = "org:protelis:microcity:destination"
     }
 
     object Guests {
 
+        @JvmStatic
         fun satisfy(ctx: AlchemistExecutionContext<*>, value: Boolean) {
-            put(ctx, "satisfied", value)
+            put(ctx, SATISFIED, value)
         }
 
         fun isSatisfied(ctx: AlchemistExecutionContext<*>): Boolean =
-                has(ctx, "satisfied") && (get(ctx, "satisfied") as Boolean)
+                has(ctx, SATISFIED) && (get(ctx, SATISFIED) as Boolean)
     }
 }

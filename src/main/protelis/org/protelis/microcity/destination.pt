@@ -1,8 +1,10 @@
 module org:protelis:microcity:destination
 
 import microcity.Destinations.getNext
+import microcity.Destinations.satisfy
 import microcity.Device.getCoordinates
 
-rep(destination <- getNext(getCoordinates())) {
-    getNext(destination)
+rep (dst <- getNext(getCoordinates())) {
+    satisfy(dst)
+    getNext(dst)
 }

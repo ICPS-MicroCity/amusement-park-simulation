@@ -11,7 +11,7 @@ import microcity.Utils.Molecules.POSITIONS
 import microcity.Utils.Molecules.ACTIVITY
 
 object Positions {
-    data class Position(val id: Int, val coordinates: Tuple?)
+    data class Position(val id: Int, val coordinates: Tuple)
 
     private fun Tuple.tupleToList(): List<Position> =
         this.iterator().asSequence().map { it as Position }.toList()
@@ -23,7 +23,7 @@ object Positions {
 
     @JvmStatic
     fun createPositions(ctx: AlchemistExecutionContext<*>): List<Position> = when {
-        role(ctx, ACTIVITY) -> ArrayList(listOf(Position(getId(ctx), getCoordinates(ctx))))
+        role(ctx, ACTIVITY) -> arrayListOf(Position(getId(ctx), getCoordinates(ctx)))
         else -> ArrayList()
     }
 
