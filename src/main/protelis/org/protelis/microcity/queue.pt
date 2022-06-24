@@ -1,25 +1,8 @@
 module org:protelis:microcity:queue
 
-def isGuest() = env.has("guest")
-def isInQueue() = env.get("inQueue") == true
+import microcity.Positions.createPositions
+import microcity.Queues.queueUnion
 
-def position() = self.getDevicePosition()
-def id() = self.getDeviceUID().getId()
-
-def destination() = env.get("destination")
-
-def destinationTuple() =
-    if (isGuest()) {
-        if (isInQueue()) {
-            [[id(), destination()]]
-        } else {
-            []
-        }
-    } else {
-        []
-    }
-
-share (field <- destinationTuple()) {
-    let queue = foldUnion(nbr(destinationTuple())).filter(g -> { g.get(1) == id() }).map(g -> { g.get(0) });
-    if (isGuest()) { [] } else { queue }
+share (field <- createPositions()) {
+    foldHoodPlusSelf(field, (a, b) -> { queueUnion(a, b) })
 }

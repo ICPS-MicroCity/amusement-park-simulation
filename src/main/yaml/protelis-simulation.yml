@@ -57,19 +57,19 @@ _freedom: &freedom
 
 _activityPrograms: &programs
   - *positions
-  #- *queue
+  - *queue
   #- *rounds
   #- *freedom
 
 # Define guests
 _guests: &guests
   - type: Polygon
-    parameters: [ 1, *bounds ]
+    parameters: [ 30, *bounds ]
     programs:
       - *move
       - *destination
       - *positions
-      #- *queue
+      - *queue
       #- *freedom
     contents:
       - molecule: guest
@@ -78,8 +78,6 @@ _guests: &guests
         concentration: true
       - molecule: inQueue
         concentration: false
-      - molecule: destination
-        concentration: -1
       - molecule: org:protelis:microcity:positions
         concentration: []
 

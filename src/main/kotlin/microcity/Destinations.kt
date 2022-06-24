@@ -11,17 +11,15 @@ import kotlin.random.Random
 object Destinations {
 
     @JvmStatic
-    fun getNext(ctx: AlchemistExecutionContext<*>, current: Tuple): Tuple {
-        val positions = getPositions(ctx)
-        return when {
-            (isSatisfied(ctx) && positions.isNotEmpty()) -> {
-                val next = Random.nextInt(0, positions.size)
-                val position = positions.find { it.id == next }?.coordinates ?: getCoordinates(ctx)
-                satisfy(ctx, position == getCoordinates(ctx))
-                position
-            }
-            else -> current
-        }
+    fun getNext(ctx: AlchemistExecutionContext<*>, current: Tuple): Tuple = when {
+        isSatisfied(ctx) && getPositions(ctx).isNotEmpty() ->
+            getPositions(ctx)[Random.nextInt(0, getPositions(ctx).size)].coordinates
+        else -> current
+    }
+
+    @JvmStatic
+    fun satisfy(ctx: AlchemistExecutionContext<*>, currentDestination: Tuple) {
+        satisfy(ctx, currentDestination == getCoordinates(ctx))
     }
 
 }
