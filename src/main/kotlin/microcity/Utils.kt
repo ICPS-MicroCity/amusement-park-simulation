@@ -46,6 +46,7 @@ object Utils {
         fun isEnqueued(ctx: AlchemistExecutionContext<*>): Boolean =
             has(ctx, ENQUEUED) && (get(ctx, ENQUEUED) as Boolean)
 
+        @JvmStatic
         fun isSatisfied(ctx: AlchemistExecutionContext<*>): Boolean =
                 has(ctx, SATISFIED) && (get(ctx, SATISFIED) as Boolean)
     }
