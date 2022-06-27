@@ -45,31 +45,27 @@ _queue: &queue
   - program: send
 
 # Define the action of satisfying enqueued guests
-_rounds: &rounds
+_rounds: &satisfaction
   - time-distribution: 0.01
-    program: org:protelis:microcity:rounds
-  - program: send
-
-_freedom: &freedom
-  - time-distribution: 1
-    program: org:protelis:microcity:freedom
+    program: org:protelis:microcity:satisfaction
   - program: send
 
 _activityPrograms: &programs
   - *positions
   - *queue
-  #- *rounds
+  - *satisfaction
   #- *freedom
 
 # Define guests
 _guests: &guests
   - type: Polygon
-    parameters: [ 30, *bounds ]
+    parameters: [ 10, *bounds ]
     programs:
       - *move
       - *destination
       - *positions
       - *queue
+      - *satisfaction
       #- *freedom
     contents:
       - molecule: guest
