@@ -3,6 +3,7 @@ package microcity
 import it.unibo.alchemist.protelis.AlchemistExecutionContext
 import microcity.Device.getCoordinates
 import microcity.Positions.getPositions
+import microcity.Utils.Guests.isEnqueued
 import microcity.Utils.Guests.isSatisfied
 import microcity.Utils.Guests.satisfy
 import org.protelis.lang.datatype.Tuple
@@ -21,5 +22,10 @@ object Destinations {
     fun satisfy(ctx: AlchemistExecutionContext<*>, currentDestination: Tuple) {
         satisfy(ctx, currentDestination == getCoordinates(ctx))
     }
+
+    @JvmStatic
+    fun getDestination(ctx: AlchemistExecutionContext<*>): Tuple =
+        Utils.Guests.getDestination(ctx)
+
 
 }
