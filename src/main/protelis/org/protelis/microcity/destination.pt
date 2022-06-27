@@ -3,10 +3,11 @@ module org:protelis:microcity:destination
 import microcity.Destinations.getNext
 import microcity.Destinations.satisfy
 import microcity.Utils.Guests.isEnqueued
+import microcity.Utils.Guests.isSatisfied
 import microcity.Device.getCoordinates
 
 rep (dst <- getNext(getCoordinates())) {
-    if (!isEnqueued()) {
+    if (isSatisfied()) {
         satisfy(dst)
     }
     getNext(dst)
