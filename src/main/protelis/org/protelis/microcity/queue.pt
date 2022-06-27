@@ -4,10 +4,11 @@ import microcity.Positions.createPositions
 import microcity.Queues.queueUnion
 import microcity.Queues.enqueue
 import microcity.Utils.Guests.isGuest
+import microcity.Utils.Guests.isSatisfied
 import microcity.Destinations.getDestination
 
 share (field <- createPositions()) {
-    if (isGuest()) {
+    if (isGuest() && !isSatisfied()) {
         enqueue(getDestination())
     }
     foldHoodPlusSelf(field, (a, b) -> { queueUnion(a, b) })
