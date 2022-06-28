@@ -58,7 +58,7 @@ _activityPrograms: &programs
 # Define guests
 _guests: &guests
   - type: Polygon
-    parameters: [ 10, *bounds ]
+    parameters: [ 100, *bounds ]
     programs:
       - *move
       - *destination
@@ -220,6 +220,16 @@ _attractions: &attractions
         concentration: 10
   - type: Point
     parameters: [44.33779, 12.26401]
+    programs: *programs
+    contents:
+      - molecule: activity
+        concentration: true
+      - molecule: attraction
+        concentration: true
+      - molecule: roundCapacity
+        concentration: 10
+  - type: Point
+    parameters: [ 44.33976, 12.2654 ]
     programs: *programs
     contents:
       - molecule: activity
