@@ -11,6 +11,10 @@ import kotlin.random.Random
 object Destinations {
 
     @JvmStatic
+    fun getDestination(ctx: AlchemistExecutionContext<*>): Tuple =
+        Utils.Guests.getDestination(ctx)
+
+    @JvmStatic
     fun getNext(ctx: AlchemistExecutionContext<*>, current: Tuple): Tuple = when {
         isSatisfied(ctx) && getPositions(ctx).isNotEmpty() ->
             getPositions(ctx)[Random.nextInt(0, getPositions(ctx).size)].coordinates
@@ -21,10 +25,5 @@ object Destinations {
     fun satisfy(ctx: AlchemistExecutionContext<*>, currentDestination: Tuple) {
         satisfy(ctx, currentDestination == getCoordinates(ctx))
     }
-
-    @JvmStatic
-    fun getDestination(ctx: AlchemistExecutionContext<*>): Tuple =
-        Utils.Guests.getDestination(ctx)
-
 
 }
