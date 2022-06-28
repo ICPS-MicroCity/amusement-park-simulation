@@ -3,7 +3,6 @@ package microcity
 import it.unibo.alchemist.protelis.AlchemistExecutionContext
 import microcity.Device.getCoordinates
 import microcity.Positions.getPositions
-import microcity.Utils.Guests.isEnqueued
 import microcity.Utils.Guests.isSatisfied
 import microcity.Utils.Guests.satisfy
 import org.protelis.lang.datatype.Tuple
