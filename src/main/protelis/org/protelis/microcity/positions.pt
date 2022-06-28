@@ -4,5 +4,5 @@ import microcity.Positions.activityPositions
 import microcity.Positions.union
 
 share (field <- activityPositions()) {
-    foldHoodPlusSelf(field, (a, b) -> { union(a, b) })
+    foldHoodPlusSelf(field, { a, b -> union(a, b) })
 }
