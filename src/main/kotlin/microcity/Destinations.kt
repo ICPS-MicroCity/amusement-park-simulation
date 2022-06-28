@@ -10,7 +10,6 @@ import kotlin.random.Random
 
 object Destinations {
 
-    @JvmStatic
     fun getDestination(ctx: AlchemistExecutionContext<*>): Tuple =
         Utils.Guests.getDestination(ctx)
 
