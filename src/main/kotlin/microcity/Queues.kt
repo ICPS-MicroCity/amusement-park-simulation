@@ -7,6 +7,7 @@ import microcity.Positions.Position
 import microcity.Positions.createPositions
 import microcity.Utils.Activities.getGuestsPerRound
 import microcity.Utils.Activities.getQueue
+import microcity.Utils.Activities.getSatisfied
 import microcity.Utils.Guests.getDestination
 import microcity.Utils.Guests.isGuest
 import microcity.Utils.Molecules.ACTIVITY
@@ -26,6 +27,7 @@ object Queues {
         role(ctx, ACTIVITY) -> b.union(a)
             .filter { it.coordinates == getCoordinates(ctx) }
             .filter { it.id != getId(ctx) }
+            .filterNot { getSatisfied(ctx).map { p -> p.id }.contains(it.id) }
         else -> createPositions(ctx)
     }
 
