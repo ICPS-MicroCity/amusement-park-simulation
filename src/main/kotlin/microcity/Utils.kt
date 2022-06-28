@@ -10,6 +10,7 @@ import microcity.Utils.Molecules.DESTINATION
 import microcity.Utils.Molecules.GUEST
 import microcity.Utils.Molecules.QUEUE
 import microcity.Utils.Molecules.ROUND_CAPACITY
+import microcity.Utils.Molecules.SATISFACTION
 import microcity.Utils.Molecules.SATISFIED
 import org.protelis.lang.datatype.Tuple
 
@@ -24,13 +25,14 @@ object Utils {
     }
 
     object Molecules {
-        const val POSITIONS: String = "org:protelis:microcity:positions"
         const val ACTIVITY: String = "activity"
         const val GUEST: String = "guest"
         const val SATISFIED: String = "satisfied"
+        const val ROUND_CAPACITY: String = "roundCapacity"
+        const val POSITIONS: String = "org:protelis:microcity:positions"
         const val DESTINATION: String = "org:protelis:microcity:destination"
         const val QUEUE: String = "org:protelis:microcity:queue"
-        const val ROUND_CAPACITY: String = "roundCapacity"
+        const val SATISFACTION: String = "org:protelis:microcity:satisfaction"
     }
 
     object Guests {
@@ -57,6 +59,11 @@ object Utils {
         @JvmStatic
         fun getQueue(ctx: AlchemistExecutionContext<*>): List<Position> = when {
             has(ctx, QUEUE) -> get(ctx, QUEUE) as List<Position>
+            else -> arrayListOf()
+        }
+
+        fun getSatisfied(ctx: AlchemistExecutionContext<*>): List<Position> = when {
+            has(ctx, SATISFACTION) -> get(ctx, SATISFACTION) as List<Position>
             else -> arrayListOf()
         }
 
