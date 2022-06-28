@@ -66,12 +66,9 @@ _guests: &guests
       - *queue
       - *satisfaction
     contents:
-      - molecule: guest
-        concentration: true
-      - molecule: satisfied
-        concentration: true
-      - molecule: org:protelis:microcity:positions
-        concentration: []
+      - { molecule: guest, concentration: true }
+      - { molecule: satisfied, concentration: true }
+      - { molecule: org:protelis:microcity:positions, concentration: [] }
 
 # Define restaurants
 _restaurants: &restaurants
@@ -79,42 +76,34 @@ _restaurants: &restaurants
     parameters: [44.33747, 12.26208]
     programs: *programs
     contents:
-      - molecule: activity
-        concentration: true
-      - molecule: restaurant
-        concentration: true
-      - molecule: roundCapacity
-        concentration: 10
+      - { molecule: activity, concentration: true }
+      - { molecule: restaurant, concentration: true }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Drive-In\"" }
   - type: Point
     parameters: [ 44.33815, 12.2633 ]
     programs: *programs
     contents:
-      - molecule: activity
-        concentration: true
-      - molecule: restaurant
-        concentration: true
-      - molecule: roundCapacity
-        concentration: 10
+      - { molecule: activity, concentration: true }
+      - { molecule: restaurant, concentration: true }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Bar del Lago\"" }
   - type: Point
     parameters: [ 44.33682, 12.26425 ]
     programs: *programs
     contents:
-      - molecule: activity
-        concentration: true
-      - molecule: restaurant
-        concentration: true
-      - molecule: roundCapacity
-        concentration: 10
+      - { molecule: activity, concentration: true }
+      - { molecule: restaurant, concentration: true }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Locanda del Faro\"" }
   - type: Point
     parameters: [ 44.33589, 12.26293 ]
     programs: *programs
     contents:
-      - molecule: activity
-        concentration: true
-      - molecule: restaurant
-        concentration: true
-      - molecule: roundCapacity
-        concentration: 10
+      - { molecule: activity, concentration: true }
+      - { molecule: restaurant, concentration: true }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"McDonald's\"" }
 
 # Define attractions
 _attractions: &attractions
@@ -122,122 +111,98 @@ _attractions: &attractions
     parameters: [44.33691, 12.26136]
     programs: *programs
     contents:
-      - molecule: activity
-        concentration: true
-      - molecule: attraction
-        concentration: true
-      - molecule: roundCapacity
-        concentration: 10
+      - { molecule: activity, concentration: true }
+      - { molecule: attraction, concentration: true }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"iSpeed\"" }
   - type: Point
     parameters: [44.33908, 12.26462]
     programs: *programs
     contents:
-      - molecule: activity
-        concentration: true
-      - molecule: attraction
-        concentration: true
-      - molecule: roundCapacity
-        concentration: 10
+      - { molecule: activity, concentration: true }
+      - { molecule: attraction, concentration: true }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"RioBravo\"" }
   - type: Point
     parameters: [44.33852, 12.26238]
     programs: *programs
     contents:
-      - molecule: activity
-        concentration: true
-      - molecule: attraction
-        concentration: true
-      - molecule: roundCapacity
-        concentration: 10
+      - { molecule: activity, concentration: true }
+      - { molecule: attraction, concentration: true }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Raratonga\"" }
   - type: Point
     parameters: [44.33719, 12.26472]
     programs: *programs
     contents:
-      - molecule: activity
-        concentration: true
-      - molecule: attraction
-        concentration: true
-      - molecule: roundCapacity
-        concentration: 10
+      - { molecule: activity, concentration: true }
+      - { molecule: attraction, concentration: true }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Delirium\"" }
   - type: Point
     parameters: [44.33793, 12.26698]
     programs: *programs
     contents:
-      - molecule: activity
-        concentration: true
-      - molecule: attraction
-        concentration: true
-      - molecule: roundCapacity
-        concentration: 10
+      - { molecule: activity, concentration: true }
+      - { molecule: attraction, concentration: true }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Katun\"" }
   - type: Point
     parameters: [44.33831, 12.26194]
     programs: *programs
     contents:
-      - molecule: activity
-        concentration: true
-      - molecule: attraction
-        concentration: true
-      - molecule: roundCapacity
-        concentration: 10
+      - { molecule: activity, concentration: true }
+      - { molecule: attraction, concentration: true }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Autosplash\"" }
   - type: Point
     parameters: [44.33698, 12.26281]
     programs: *programs
     contents:
-      - molecule: activity
-        concentration: true
-      - molecule: attraction
-        concentration: true
-      - molecule: roundCapacity
-        concentration: 10
+      - { molecule: activity, concentration: true }
+      - { molecule: attraction, concentration: true }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Casa Matta\"" }
   - type: Point
     parameters: [44.33539, 12.26133]
     programs: *programs
     contents:
-      - molecule: activity
-        concentration: true
-      - molecule: attraction
-        concentration: true
-      - molecule: roundCapacity
-        concentration: 10
+      - { molecule: activity, concentration: true }
+      - { molecule: attraction, concentration: true }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"DiVertical\"" }
   - type: Point
     parameters: [44.33734, 12.26611]
     programs: *programs
     contents:
-      - molecule: activity
-        concentration: true
-      - molecule: attraction
-        concentration: true
-      - molecule: roundCapacity
-        concentration: 10
+      - { molecule: activity, concentration: true }
+      - { molecule: attraction, concentration: true }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Phobia\"" }
   - type: Point
     parameters: [44.3368, 12.2656]
     programs: *programs
     contents:
-      - molecule: activity
-        concentration: true
-      - molecule: attraction
-        concentration: true
-      - molecule: roundCapacity
-        concentration: 10
+      - { molecule: activity, concentration: true }
+      - { molecule: attraction, concentration: true }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Columbia\"" }
   - type: Point
     parameters: [44.33779, 12.26401]
     programs: *programs
     contents:
-      - molecule: activity
-        concentration: true
-      - molecule: attraction
-        concentration: true
-      - molecule: roundCapacity
-        concentration: 10
+      - { molecule: activity, concentration: true }
+      - { molecule: attraction, concentration: true }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Monosaurus\"" }
   - type: Point
     parameters: [ 44.33976, 12.2654 ]
     programs: *programs
     contents:
-      - molecule: activity
-        concentration: true
-      - molecule: attraction
-        concentration: true
-      - molecule: roundCapacity
-        concentration: 10
+      - { molecule: activity, concentration: true }
+      - { molecule: attraction, concentration: true }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Master Thai\"" }
 
 # Deploy nodes
 deployments:
