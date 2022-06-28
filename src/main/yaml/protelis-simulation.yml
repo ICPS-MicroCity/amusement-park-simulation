@@ -54,7 +54,6 @@ _activityPrograms: &programs
   - *positions
   - *queue
   - *satisfaction
-  #- *freedom
 
 # Define guests
 _guests: &guests
@@ -66,7 +65,6 @@ _guests: &guests
       - *positions
       - *queue
       - *satisfaction
-      #- *freedom
     contents:
       - molecule: guest
         concentration: true
