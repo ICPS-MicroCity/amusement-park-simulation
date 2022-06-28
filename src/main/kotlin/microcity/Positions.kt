@@ -16,13 +16,16 @@ object Positions {
     private fun Tuple.tupleToList(): List<Position> =
         this.iterator().asSequence().map { it as Position }.toList()
 
-
     @JvmStatic
     fun positionFrom(id: Int, coordinates: Tuple): Position =
         Position(id, coordinates)
 
     @JvmStatic
-    fun createPositions(ctx: AlchemistExecutionContext<*>): List<Position> = when {
+    fun createPositions(ctx: AlchemistExecutionContext<*>): List<Position> =
+        arrayListOf(Position(getId(ctx), getCoordinates(ctx)))
+
+    @JvmStatic
+    fun activityPositions(ctx: AlchemistExecutionContext<*>): List<Position> = when {
         role(ctx, ACTIVITY) -> arrayListOf(Position(getId(ctx), getCoordinates(ctx)))
         else -> ArrayList()
     }
@@ -37,7 +40,7 @@ object Positions {
                 ArrayList()
             }
         }
-        else -> createPositions(ctx)
+        else -> activityPositions(ctx)
     }
 
     @JvmStatic
