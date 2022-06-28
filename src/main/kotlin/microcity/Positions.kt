@@ -27,7 +27,7 @@ object Positions {
     }
 
     @JvmStatic
-    fun union(l1: List<Position>, l2: List<Position>): List<Position> =
+    fun activityUnion(l1: List<Position>, l2: List<Position>): List<Position> =
         ArrayList(l1.union(l2).toList().sortedBy { it.id })
 
     fun getPositions(ctx: AlchemistExecutionContext<*>): List<Position> = when {
