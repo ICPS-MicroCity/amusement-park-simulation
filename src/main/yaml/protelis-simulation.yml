@@ -45,12 +45,21 @@ _queue: &queue
   - program: send
 
 # Define the action of satisfying enqueued guests
-_rounds: &satisfaction
+_satisfaction: &satisfaction
   - time-distribution: 0.01
     program: org:protelis:microcity:satisfaction
   - program: send
 
-_activityPrograms: &programs
+# Define the programs that all guests need to implement
+_guestPrograms: &guestPrograms
+  - *move
+  - *destination
+  - *positions
+  - *queue
+  - *satisfaction
+
+# Define the programs that all the activities need to implement
+_activityPrograms: &activityPrograms
   - *positions
   - *queue
   - *satisfaction
@@ -59,12 +68,7 @@ _activityPrograms: &programs
 _guests: &guests
   - type: Polygon
     parameters: [ 100, *bounds ]
-    programs:
-      - *move
-      - *destination
-      - *positions
-      - *queue
-      - *satisfaction
+    programs: *guestPrograms
     contents:
       - { molecule: guest, concentration: true }
       - { molecule: satisfied, concentration: true }
@@ -74,7 +78,7 @@ _guests: &guests
 _restaurants: &restaurants
   - type: Point
     parameters: [44.33747, 12.26208]
-    programs: *programs
+    programs: *activityPrograms
     contents:
       - { molecule: activity, concentration: true }
       - { molecule: restaurant, concentration: true }
@@ -82,7 +86,7 @@ _restaurants: &restaurants
       - { molecule: name, concentration: "\"Drive-In\"" }
   - type: Point
     parameters: [ 44.33815, 12.2633 ]
-    programs: *programs
+    programs: *activityPrograms
     contents:
       - { molecule: activity, concentration: true }
       - { molecule: restaurant, concentration: true }
@@ -90,7 +94,7 @@ _restaurants: &restaurants
       - { molecule: name, concentration: "\"Bar del Lago\"" }
   - type: Point
     parameters: [ 44.33682, 12.26425 ]
-    programs: *programs
+    programs: *activityPrograms
     contents:
       - { molecule: activity, concentration: true }
       - { molecule: restaurant, concentration: true }
@@ -98,7 +102,7 @@ _restaurants: &restaurants
       - { molecule: name, concentration: "\"Locanda del Faro\"" }
   - type: Point
     parameters: [ 44.33589, 12.26293 ]
-    programs: *programs
+    programs: *activityPrograms
     contents:
       - { molecule: activity, concentration: true }
       - { molecule: restaurant, concentration: true }
@@ -109,7 +113,7 @@ _restaurants: &restaurants
 _attractions: &attractions
   - type: Point
     parameters: [44.33691, 12.26136]
-    programs: *programs
+    programs: *activityPrograms
     contents:
       - { molecule: activity, concentration: true }
       - { molecule: attraction, concentration: true }
@@ -117,7 +121,7 @@ _attractions: &attractions
       - { molecule: name, concentration: "\"iSpeed\"" }
   - type: Point
     parameters: [44.33908, 12.26462]
-    programs: *programs
+    programs: *activityPrograms
     contents:
       - { molecule: activity, concentration: true }
       - { molecule: attraction, concentration: true }
@@ -125,7 +129,7 @@ _attractions: &attractions
       - { molecule: name, concentration: "\"RioBravo\"" }
   - type: Point
     parameters: [44.33852, 12.26238]
-    programs: *programs
+    programs: *activityPrograms
     contents:
       - { molecule: activity, concentration: true }
       - { molecule: attraction, concentration: true }
@@ -133,7 +137,7 @@ _attractions: &attractions
       - { molecule: name, concentration: "\"Raratonga\"" }
   - type: Point
     parameters: [44.33719, 12.26472]
-    programs: *programs
+    programs: *activityPrograms
     contents:
       - { molecule: activity, concentration: true }
       - { molecule: attraction, concentration: true }
@@ -141,7 +145,7 @@ _attractions: &attractions
       - { molecule: name, concentration: "\"Delirium\"" }
   - type: Point
     parameters: [44.33793, 12.26698]
-    programs: *programs
+    programs: *activityPrograms
     contents:
       - { molecule: activity, concentration: true }
       - { molecule: attraction, concentration: true }
@@ -149,7 +153,7 @@ _attractions: &attractions
       - { molecule: name, concentration: "\"Katun\"" }
   - type: Point
     parameters: [44.33831, 12.26194]
-    programs: *programs
+    programs: *activityPrograms
     contents:
       - { molecule: activity, concentration: true }
       - { molecule: attraction, concentration: true }
@@ -157,7 +161,7 @@ _attractions: &attractions
       - { molecule: name, concentration: "\"Autosplash\"" }
   - type: Point
     parameters: [44.33698, 12.26281]
-    programs: *programs
+    programs: *activityPrograms
     contents:
       - { molecule: activity, concentration: true }
       - { molecule: attraction, concentration: true }
@@ -165,7 +169,7 @@ _attractions: &attractions
       - { molecule: name, concentration: "\"Casa Matta\"" }
   - type: Point
     parameters: [44.33539, 12.26133]
-    programs: *programs
+    programs: *activityPrograms
     contents:
       - { molecule: activity, concentration: true }
       - { molecule: attraction, concentration: true }
@@ -173,7 +177,7 @@ _attractions: &attractions
       - { molecule: name, concentration: "\"DiVertical\"" }
   - type: Point
     parameters: [44.33734, 12.26611]
-    programs: *programs
+    programs: *activityPrograms
     contents:
       - { molecule: activity, concentration: true }
       - { molecule: attraction, concentration: true }
@@ -181,7 +185,7 @@ _attractions: &attractions
       - { molecule: name, concentration: "\"Phobia\"" }
   - type: Point
     parameters: [44.3368, 12.2656]
-    programs: *programs
+    programs: *activityPrograms
     contents:
       - { molecule: activity, concentration: true }
       - { molecule: attraction, concentration: true }
@@ -189,7 +193,7 @@ _attractions: &attractions
       - { molecule: name, concentration: "\"Columbia\"" }
   - type: Point
     parameters: [44.33779, 12.26401]
-    programs: *programs
+    programs: *activityPrograms
     contents:
       - { molecule: activity, concentration: true }
       - { molecule: attraction, concentration: true }
@@ -197,7 +201,7 @@ _attractions: &attractions
       - { molecule: name, concentration: "\"Monosaurus\"" }
   - type: Point
     parameters: [ 44.33976, 12.2654 ]
-    programs: *programs
+    programs: *activityPrograms
     contents:
       - { molecule: activity, concentration: true }
       - { molecule: attraction, concentration: true }
@@ -209,3 +213,17 @@ deployments:
   - *restaurants
   - *attractions
   - *guests
+
+export:
+  - type: CSVExporter
+    parameters:
+      fileNameRoot: "data"
+      exportPath: "data"
+      interval: 5.0
+    data:
+      - time
+      - type: MicroCityExporter
+
+terminate:
+  - type: AfterTime
+    parameters: 4000
