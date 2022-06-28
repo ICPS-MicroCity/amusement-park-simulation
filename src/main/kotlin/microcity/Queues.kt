@@ -16,17 +16,17 @@ import microcity.Utils.role
 object Queues {
 
     @JvmStatic
+    fun dequeue(ctx: AlchemistExecutionContext<*>): List<Position> = when {
+        role(ctx, ACTIVITY) -> ArrayList(getQueue(ctx).take(getGuestsPerRound(ctx)))
+        else -> arrayListOf()
+    }
+
+    @JvmStatic
     fun queueUnion(ctx: AlchemistExecutionContext<*>, a: List<Position>, b: List<Position>): List<Position> = when {
         role(ctx, ACTIVITY) -> b.union(a)
             .filter { it.coordinates == getCoordinates(ctx) }
             .filter { it.id != getId(ctx) }
         else -> createPositions(ctx)
-    }
-
-    @JvmStatic
-    fun dequeue(ctx: AlchemistExecutionContext<*>): List<Position> = when {
-        role(ctx, ACTIVITY) -> ArrayList(getQueue(ctx).take(getGuestsPerRound(ctx)))
-        else -> arrayListOf()
     }
 
     @JvmStatic
