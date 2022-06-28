@@ -45,9 +45,6 @@ object Positions {
 
     @JvmStatic
     fun union(l1: List<Position>, l2: List<Position>): List<Position> =
-        ArrayList(l1.union(l2).toList()
-            .filter { it.id >= 0 }
-            .sortedBy { it.id })
-
+        ArrayList(l1.union(l2).toList().sortedBy { it.id })
 
 }
