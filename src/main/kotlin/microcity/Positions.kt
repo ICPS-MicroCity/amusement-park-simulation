@@ -17,10 +17,6 @@ object Positions {
         this.iterator().asSequence().map { it as Position }.toList()
 
     @JvmStatic
-    fun positionFrom(id: Int, coordinates: Tuple): Position =
-        Position(id, coordinates)
-
-    @JvmStatic
     fun createPositions(ctx: AlchemistExecutionContext<*>): List<Position> =
         arrayListOf(Position(getId(ctx), getCoordinates(ctx)))
 
@@ -31,6 +27,9 @@ object Positions {
     }
 
     @JvmStatic
+    fun union(l1: List<Position>, l2: List<Position>): List<Position> =
+        ArrayList(l1.union(l2).toList().sortedBy { it.id })
+
     fun getPositions(ctx: AlchemistExecutionContext<*>): List<Position> = when {
         has(ctx, POSITIONS) -> when (val positions = get(ctx, POSITIONS)) {
             is Tuple -> positions.tupleToList()
@@ -42,9 +41,4 @@ object Positions {
         }
         else -> activityPositions(ctx)
     }
-
-    @JvmStatic
-    fun union(l1: List<Position>, l2: List<Position>): List<Position> =
-        ArrayList(l1.union(l2).toList().sortedBy { it.id })
-
 }
