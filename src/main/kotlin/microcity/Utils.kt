@@ -50,9 +50,9 @@ object Utils {
         fun getDestination(ctx: AlchemistExecutionContext<*>): Tuple =
             if (has(ctx, DESTINATION)) get(ctx, DESTINATION) as Tuple else getCoordinates(ctx)
 
-        fun getSatisfactions(ctx: AlchemistExecutionContext<*>): Int = when {
-            has(ctx, SATISFACTIONS) -> get(ctx, SATISFACTIONS) as Int
-            else -> 0
+        fun getSatisfactions(ctx: AlchemistExecutionContext<*>): Double = when {
+            has(ctx, SATISFACTIONS) -> get(ctx, SATISFACTIONS) as Double
+            else -> 0.0
         }
 
     }
