@@ -23,6 +23,13 @@ object Queues {
     }
 
     @JvmStatic
+    fun addSatisfaction(ctx: AlchemistExecutionContext<*>, value: Boolean) {
+        if (value) {
+            Device.put(ctx, Utils.Molecules.SATISFACTIONS, Utils.Guests.getSatisfactions(ctx) + 1)
+        }
+    }
+
+    @JvmStatic
     fun queueUnion(ctx: AlchemistExecutionContext<*>, a: List<Position>, b: List<Position>): List<Position> = when {
         role(ctx, ACTIVITY) -> b.union(a)
             .filter { it.coordinates == getCoordinates(ctx) }
