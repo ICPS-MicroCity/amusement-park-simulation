@@ -6,8 +6,10 @@ import it.unibo.alchemist.model.interfaces.Reaction
 import it.unibo.alchemist.model.interfaces.Time
 
 class MicroCityExporter : Extractor<Double> {
+    val numbers: List<Double> = listOf(0.0, 1.0, 2.0)
+
     override val columnNames: List<String>
-        get() = TODO("Not yet implemented")
+        get() = listOf("org:protelis:microcity:satisfaction")
 
     override fun <T> extractData(
         environment: Environment<T, *>,
@@ -15,7 +17,11 @@ class MicroCityExporter : Extractor<Double> {
         time: Time,
         step: Long
     ): Map<String, Double> {
-        TODO("Not yet implemented")
+        return columnNames.flatMap { name ->
+            numbers.map { number ->
+                name to number
+            }
+        }.toMap()
     }
 }
 
