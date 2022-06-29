@@ -8,8 +8,6 @@ import microcity.Positions.createPositions
 import microcity.Utils.Activities.getGuestsPerRound
 import microcity.Utils.Activities.getQueue
 import microcity.Utils.Activities.getSatisfied
-import microcity.Utils.Guests.getDestination
-import microcity.Utils.Guests.isGuest
 import microcity.Utils.Molecules.ACTIVITY
 import microcity.Utils.Molecules.GUEST
 import microcity.Utils.role
