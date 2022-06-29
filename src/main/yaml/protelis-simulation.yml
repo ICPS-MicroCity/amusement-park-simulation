@@ -72,6 +72,7 @@ _guests: &guests
     contents:
       - { molecule: guest, concentration: true }
       - { molecule: satisfied, concentration: true }
+      - { molecule: satisfactions, concentration: 0 }
       - { molecule: org:protelis:microcity:positions, concentration: [] }
 
 # Define restaurants
