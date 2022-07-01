@@ -1,5 +1,12 @@
 incarnation: protelis
 
+variables:
+  speed: &speed
+    language: kotlin
+    formula: >
+      import kotlin.random.Random
+      Random.nextDouble(0.1, 2.0)
+
 # The network model used allows to choose the nodes that have the "cloud" molecule in order to simulate an access point behaviour
 network-model:
   type: ConnectToAccessPoint
@@ -21,7 +28,7 @@ _move: &move
     type: Event
     actions:
       - type: TargetMapWalker
-        parameters: [org:protelis:microcity:destination, 1]
+        parameters: [org:protelis:microcity:destination, *speed]
 
 # Define the broadcast message from activities to guests
 # to spread their positions
