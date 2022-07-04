@@ -8,7 +8,7 @@ import microcity.Device.get
 import microcity.Device.getId
 import microcity.Device.getCoordinates
 import microcity.Utils.Molecules.POSITIONS
-import microcity.Utils.Molecules.ACTIVITY
+import microcity.Utils.Molecules.ATTRACTION
 
 object Positions {
     data class Position(val id: Int, val coordinates: Tuple)
@@ -21,13 +21,13 @@ object Positions {
         arrayListOf(Position(getId(ctx), getCoordinates(ctx)))
 
     @JvmStatic
-    fun activityPositions(ctx: AlchemistExecutionContext<*>): List<Position> = when {
-        role(ctx, ACTIVITY) -> arrayListOf(Position(getId(ctx), getCoordinates(ctx)))
+    fun attractionPositions(ctx: AlchemistExecutionContext<*>): List<Position> = when {
+        role(ctx, ATTRACTION) -> arrayListOf(Position(getId(ctx), getCoordinates(ctx)))
         else -> ArrayList()
     }
 
     @JvmStatic
-    fun activityUnion(l1: List<Position>, l2: List<Position>): List<Position> =
+    fun attractionUnion(l1: List<Position>, l2: List<Position>): List<Position> =
         ArrayList(l1.union(l2).toList().sortedBy { it.id })
 
     fun getPositions(ctx: AlchemistExecutionContext<*>): List<Position> = when {
@@ -39,6 +39,6 @@ object Positions {
                 ArrayList()
             }
         }
-        else -> activityPositions(ctx)
+        else -> attractionPositions(ctx)
     }
 }

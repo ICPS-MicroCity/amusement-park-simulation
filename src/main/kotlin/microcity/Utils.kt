@@ -7,7 +7,7 @@ import microcity.Device.has
 import microcity.Device.put
 import microcity.Positions.Position
 import microcity.Utils.Molecules.DESTINATION
-import microcity.Utils.Molecules.GUEST
+import microcity.Utils.Molecules.VISITOR
 import microcity.Utils.Molecules.QUEUE
 import microcity.Utils.Molecules.ROUND_CAPACITY
 import microcity.Utils.Molecules.SATISFACTION
@@ -21,8 +21,8 @@ object Utils {
         has(ctx, role) && (get(ctx, role) as Boolean)
 
     object Molecules {
-        const val ACTIVITY: String = "activity"
-        const val GUEST: String = "guest"
+        const val ATTRACTION: String = "attraction"
+        const val VISITOR: String = "visitor"
         const val SATISFIED: String = "satisfied"
         const val ROUND_CAPACITY: String = "roundCapacity"
         const val POSITIONS: String = "org:protelis:microcity:positions"
@@ -32,15 +32,15 @@ object Utils {
         const val SATISFACTIONS: String = "satisfactions"
     }
 
-    object Guests {
+    object Visitors {
 
         @JvmStatic
-        fun isGuest(ctx: AlchemistExecutionContext<*>): Boolean =
-            role(ctx, GUEST)
+        fun isVisitor(ctx: AlchemistExecutionContext<*>): Boolean =
+            role(ctx, VISITOR)
 
         @JvmStatic
         fun satisfy(ctx: AlchemistExecutionContext<*>, value: Boolean) {
-            if (isGuest(ctx)) put(ctx, SATISFIED, value)
+            if (isVisitor(ctx)) put(ctx, SATISFIED, value)
         }
 
         @JvmStatic
@@ -57,7 +57,7 @@ object Utils {
 
     }
 
-    object Activities {
+    object Attractions {
         fun getQueue(ctx: AlchemistExecutionContext<*>): List<Position> = when {
             has(ctx, QUEUE) -> get(ctx, QUEUE) as List<Position>
             else -> arrayListOf()
@@ -68,7 +68,7 @@ object Utils {
             else -> arrayListOf()
         }
 
-        fun getGuestsPerRound(ctx: AlchemistExecutionContext<*>): Int =
+        fun getVisitorsPerRound(ctx: AlchemistExecutionContext<*>): Int =
             (get(ctx, ROUND_CAPACITY) as Double).toInt()
     }
 }

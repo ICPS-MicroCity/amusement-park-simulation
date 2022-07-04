@@ -2,7 +2,7 @@ module org:protelis:microcity:destination
 
 import microcity.Destinations.getNext
 import microcity.Destinations.satisfy
-import microcity.Utils.Guests.isSatisfied
+import microcity.Utils.Visitors.isSatisfied
 import microcity.Device.getCoordinates
 
 rep (dst <- getNext(getCoordinates())) {

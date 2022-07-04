@@ -3,15 +3,15 @@ package microcity
 import it.unibo.alchemist.protelis.AlchemistExecutionContext
 import microcity.Device.getCoordinates
 import microcity.Positions.getPositions
-import microcity.Utils.Guests.isSatisfied
-import microcity.Utils.Guests.satisfy
+import microcity.Utils.Visitors.isSatisfied
+import microcity.Utils.Visitors.satisfy
 import org.protelis.lang.datatype.Tuple
 import kotlin.random.Random
 
 object Destinations {
 
     fun getDestination(ctx: AlchemistExecutionContext<*>): Tuple =
-        Utils.Guests.getDestination(ctx)
+        Utils.Visitors.getDestination(ctx)
 
     @JvmStatic
     fun getNext(ctx: AlchemistExecutionContext<*>, current: Tuple): Tuple = when {
