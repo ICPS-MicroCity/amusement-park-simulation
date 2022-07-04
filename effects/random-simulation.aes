@@ -154,7 +154,7 @@
       "val": 10
     },
     "molFilter": true,
-    "molString": "attraction",
+    "molString": "ride",
     "molPropertyFilter": true,
     "property": "attractionType",
     "writingPropertyValue": false,
