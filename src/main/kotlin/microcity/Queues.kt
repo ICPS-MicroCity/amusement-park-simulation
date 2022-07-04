@@ -16,7 +16,7 @@ object Queues {
 
     @JvmStatic
     fun dequeue(ctx: AlchemistExecutionContext<*>): List<Position> = when {
-        role(ctx, ATTRACTION) -> ArrayList(getQueue(ctx).take(getVisitorsPerRound(ctx)))
+        role(ctx, ATTRACTION) -> ArrayList(getQueue(ctx).take(Math.min(getVisitorsPerRound(ctx), getQueue(ctx).size)))
         else -> arrayListOf()
     }
 

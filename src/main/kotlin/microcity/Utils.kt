@@ -9,7 +9,7 @@ import microcity.Positions.Position
 import microcity.Utils.Molecules.DESTINATION
 import microcity.Utils.Molecules.VISITOR
 import microcity.Utils.Molecules.QUEUE
-import microcity.Utils.Molecules.ROUND_CAPACITY
+import microcity.Utils.Molecules.CAPACITY
 import microcity.Utils.Molecules.SATISFACTION
 import microcity.Utils.Molecules.SATISFACTIONS
 import microcity.Utils.Molecules.SATISFIED
@@ -24,7 +24,7 @@ object Utils {
         const val ATTRACTION: String = "attraction"
         const val VISITOR: String = "visitor"
         const val SATISFIED: String = "satisfied"
-        const val ROUND_CAPACITY: String = "roundCapacity"
+        const val CAPACITY: String = "capacity"
         const val POSITIONS: String = "org:protelis:microcity:positions"
         const val DESTINATION: String = "org:protelis:microcity:destination"
         const val QUEUE: String = "org:protelis:microcity:queue"
@@ -69,6 +69,6 @@ object Utils {
         }
 
         fun getVisitorsPerRound(ctx: AlchemistExecutionContext<*>): Int =
-            (get(ctx, ROUND_CAPACITY) as Double).toInt()
+            (get(ctx, CAPACITY) as Double).toInt()
     }
 }
