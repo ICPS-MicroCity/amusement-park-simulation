@@ -34,7 +34,7 @@
       "val": 8
     },
     "molFilter": true,
-    "molString": "guest",
+    "molString": "visitor",
     "molPropertyFilter": false,
     "property": "",
     "writingPropertyValue": false,
@@ -94,7 +94,7 @@
       "val": 14
     },
     "molFilter": true,
-    "molString": "activity",
+    "molString": "attraction",
     "molPropertyFilter": false,
     "property": "",
     "writingPropertyValue": false,
@@ -117,66 +117,6 @@
     },
     "colorCache": {
       "value": -16777216
-    }
-  },
-  {
-    "type": "class it.unibo.alchemist.boundary.gui.effects.DrawShape",
-    "curIncarnation": "protelis",
-    "mode": "FILL_RECTANGLE",
-    "red": {
-      "max": 255,
-      "min": 0,
-      "val": 200
-    },
-    "blue": {
-      "max": 255,
-      "min": 0,
-      "val": 255
-    },
-    "green": {
-      "max": 255,
-      "min": 0,
-      "val": 0
-    },
-    "alpha": {
-      "max": 255,
-      "min": 0,
-      "val": 255
-    },
-    "scaleFactor": {
-      "max": 100,
-      "min": 0,
-      "val": 50
-    },
-    "size": {
-      "max": 100,
-      "min": 0,
-      "val": 10
-    },
-    "molFilter": true,
-    "molString": "restaurant",
-    "molPropertyFilter": false,
-    "property": "",
-    "writingPropertyValue": false,
-    "c": "ALPHA",
-    "reverse": false,
-    "propoom": {
-      "max": 10,
-      "min": -10,
-      "val": 0
-    },
-    "minprop": {
-      "max": 10,
-      "min": -10,
-      "val": 0
-    },
-    "maxprop": {
-      "max": 10,
-      "min": -10,
-      "val": 10
-    },
-    "colorCache": {
-      "value": -3669761
     }
   },
   {
