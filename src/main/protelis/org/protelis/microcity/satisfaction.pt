@@ -3,7 +3,7 @@ module org:protelis:microcity:satisfaction
 import microcity.Queues.dequeue
 import microcity.Queues.addSatisfaction
 import microcity.Queues.satisfactionUnion
-import microcity.Utils.Guests.satisfy
+import microcity.Utils.Visitors.satisfy
 
 share (field <- dequeue()) {
     let satisfied = foldHoodPlusSelf(field, { a, b -> satisfactionUnion(a, b) })

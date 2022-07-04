@@ -17,16 +17,16 @@ class MicroCityExporter : Extractor<Int> {
         time: Time,
         step: Long
     ): Map<String, Int> {
-        val guests = environment.nodes.filter { it.contains(SimpleMolecule(GUEST)) }
-        return guests.map { "$SATISFACTIONS@${it.id}" }.zip (
-            guests
+        val visitors = environment.nodes.filter { it.contains(SimpleMolecule(VISITOR)) }
+        return visitors.map { "$SATISFACTIONS@${it.id}" }.zip (
+            visitors
                 .map { it.getConcentration(SimpleMolecule(SATISFACTIONS))?.asNumber<Int>() }
                 .mapNotNull { it?: 0 }
         ).toMap().toSortedMap()
     }
 
     companion object {
-        private const val GUEST = "guest"
+        private const val VISITOR = "visitor"
         private const val SATISFACTIONS = "satisfactions"
 
         private inline fun <reified T: Number> Any.asNumber(): T = when (this) {

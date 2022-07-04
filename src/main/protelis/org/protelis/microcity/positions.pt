@@ -1,8 +1,8 @@
 module org:protelis:microcity:positions
 
-import microcity.Positions.activityPositions
-import microcity.Positions.activityUnion
+import microcity.Positions.attractionPositions
+import microcity.Positions.attractionUnion
 
-share (field <- activityPositions()) {
-    foldHoodPlusSelf(field, { a, b -> activityUnion(a, b) })
+share (field <- attractionPositions()) {
+    foldHoodPlusSelf(field, { a, b -> attractionUnion(a, b) })
 }
