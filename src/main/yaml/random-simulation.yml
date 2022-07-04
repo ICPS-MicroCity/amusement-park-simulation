@@ -117,7 +117,7 @@ _attractions: &attractions
       - { molecule: roundCapacity, concentration: 10 }
       - { molecule: name, concentration: "\"McDonald's\"" }
   - type: Point
-    parameters: [44.33691, 12.26136]
+    parameters: [44.33679, 12.26153]
     programs: *attractionPrograms
     contents:
       - { molecule: attraction, concentration: true }
@@ -125,15 +125,15 @@ _attractions: &attractions
       - { molecule: roundCapacity, concentration: 10 }
       - { molecule: name, concentration: "\"iSpeed\"" }
   - type: Point
-    parameters: [44.33908, 12.26462]
+    parameters: [44.339, 12.26475]
     programs: *attractionPrograms
     contents:
       - { molecule: attraction, concentration: true }
       - { molecule: attractionType, concentration: "\"ride\"" }
       - { molecule: roundCapacity, concentration: 10 }
-      - { molecule: name, concentration: "\"RioBravo\"" }
+      - { molecule: name, concentration: "\"Rio Bravo\"" }
   - type: Point
-    parameters: [44.33852, 12.26238]
+    parameters: [44.33861, 12.26225]
     programs: *attractionPrograms
     contents:
       - { molecule: attraction, concentration: true }
@@ -149,7 +149,7 @@ _attractions: &attractions
       - { molecule: roundCapacity, concentration: 10 }
       - { molecule: name, concentration: "\"Delirium\"" }
   - type: Point
-    parameters: [44.33793, 12.26698]
+    parameters: [44.33927, 12.26615]
     programs: *attractionPrograms
     contents:
       - { molecule: attraction, concentration: true }
@@ -157,7 +157,7 @@ _attractions: &attractions
       - { molecule: roundCapacity, concentration: 10 }
       - { molecule: name, concentration: "\"Katun\"" }
   - type: Point
-    parameters: [44.33831, 12.26194]
+    parameters: [44.33861, 12.26225]
     programs: *attractionPrograms
     contents:
       - { molecule: attraction, concentration: true }
@@ -165,15 +165,7 @@ _attractions: &attractions
       - { molecule: roundCapacity, concentration: 10 }
       - { molecule: name, concentration: "\"Autosplash\"" }
   - type: Point
-    parameters: [44.33698, 12.26281]
-    programs: *attractionPrograms
-    contents:
-      - { molecule: attraction, concentration: true }
-      - { molecule: attractionType, concentration: "\"ride\"" }
-      - { molecule: roundCapacity, concentration: 10 }
-      - { molecule: name, concentration: "\"Casa Matta\"" }
-  - type: Point
-    parameters: [44.33539, 12.26133]
+    parameters: [44.33579, 12.26133]
     programs: *attractionPrograms
     contents:
       - { molecule: attraction, concentration: true }
@@ -197,7 +189,7 @@ _attractions: &attractions
       - { molecule: roundCapacity, concentration: 10 }
       - { molecule: name, concentration: "\"Columbia\"" }
   - type: Point
-    parameters: [44.33779, 12.26401]
+    parameters: [44.33779, 12.26399]
     programs: *attractionPrograms
     contents:
       - { molecule: attraction, concentration: true }
@@ -205,13 +197,277 @@ _attractions: &attractions
       - { molecule: roundCapacity, concentration: 10 }
       - { molecule: name, concentration: "\"Monosaurus\"" }
   - type: Point
-    parameters: [ 44.33976, 12.2654 ]
+    parameters: [ 44.33981, 12.265katun4 ]
     programs: *attractionPrograms
     contents:
       - { molecule: attraction, concentration: true }
       - { molecule: attractionType, concentration: "\"ride\"" }
       - { molecule: roundCapacity, concentration: 10 }
       - { molecule: name, concentration: "\"Master Thai\"" }
+  - type: Point
+    parameters: [ 44.33896, 12.26327 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Desmo Race\"" }
+  - type: Point
+    parameters: [ 44.3391, 12.26335 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Kiddy Monster\"" }
+  - type: Point
+    parameters: [ 44.33922, 12.26328 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Diavel Ring\"" }
+  - type: Point
+    parameters: [ 44.33935, 12.26324 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Scrumbler Run\"" }
+  - type: Point
+    parameters: [ 44.33911, 12.26314 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Experience Building\"" }
+  - type: Point
+    parameters: [ 44.33547, 12.26279 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Blue River\"" }
+  - type: Point
+    parameters: [ 44.3365, 12.26194 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Las Vegas\"" }
+  - type: Point
+    parameters: [ 44.33666, 12.26241 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Mini Cars\"" }
+  - type: Point
+    parameters: [ 44.33692, 12.26213 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Naxcar\"" }
+  - type: Point
+    parameters: [ 44.33799, 12.26254 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Mini Stunt\"" }
+  - type: Point
+    parameters: [ 44.33703, 12.26269 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Casa Matta\"" }
+  - type: Point
+    parameters: [ 44.33696, 12.26288 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Flying Arturo\"" }
+  - type: Point
+    parameters: [ 44.33677, 12.26278 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Fantasy Land\"" }
+  - type: Point
+    parameters: [ 44.33647, 12.26294 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Santa Fe Express\"" }
+  - type: Point
+    parameters: [ 44.33674, 12.26306 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Carousel\"" }
+  - type: Point
+    parameters: [ 44.33749, 12.26245 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Mini Rapide\"" }
+  - type: Point
+    parameters: [ 44.33759, 12.26284 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Leprotto Express\"" }
+  - type: Point
+    parameters: [ 44.33716, 12.26288 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Arkade\"" }
+  - type: Point
+    parameters: [ 44.33727, 12.26452 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Reptilium\"" }
+  - type: Point
+    parameters: [ 44.33743, 12.26489 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Bicisauro\"" }
+  - type: Point
+    parameters: [ 44.33754, 12.26542 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Rexplorer\"" }
+  - type: Point
+    parameters: [ 44.33755, 12.26509 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"BrontoCars\"" }
+  - type: Point
+    parameters: [ 44.33782, 12.26465 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Raptotana\"" }
+  - type: Point
+    parameters: [ 44.33696, 12.26486 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Fort Alamo\"" }
+  - type: Point
+    parameters: [ 44.33672, 12.2652 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Buffalo Bill Rodeo\"" }
+  - type: Point
+    parameters: [ 44.3368, 12.26556 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Oil Towers\"" }
+  - type: Point
+    parameters: [ 44.33699, 12.26582 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Geronimo Towers\"" }
+  - type: Point
+    parameters: [ 44.3372, 12.26572 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Aquila Tonante\"" }
+  - type: Point
+    parameters: [ 44.33769, 12.26609 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Pakal\"" }
+  - type: Point
+    parameters: [ 44.33844, 12.26585 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"El Dorado Falls\"" }
+  - type: Point
+    parameters: [ 44.33923, 12.2618 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Euro Will\"" }
+  - type: Point
+    parameters: [ 44.33594, 12.26255 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Aquaqua\"" }
+  - type: Point
+    parameters: [ 44.33514, 12.26233 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attractionType, concentration: "\"ride\"" }
+      - { molecule: roundCapacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Reset\"" }
 
 # Deploy nodes
 deployments:
