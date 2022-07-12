@@ -197,7 +197,7 @@ _attractions: &attractions
       - { molecule: capacity, concentration: 10 }
       - { molecule: name, concentration: "\"Monosaurus\"" }
   - type: Point
-    parameters: [ 44.33981, 12.265katun4 ]
+    parameters: [ 44.33981, 12.2654 ]
     programs: *attractionPrograms
     contents:
       - { molecule: attraction, concentration: true }
