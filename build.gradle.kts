@@ -95,3 +95,7 @@ tasks.withType(KotlinCompile::class.java).configureEach {
         freeCompilerArgs += "-Xjvm-default=enable"
     }
 }
+
+tasks.withType<Jar> {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
