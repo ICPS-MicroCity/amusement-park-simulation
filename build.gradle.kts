@@ -89,3 +89,9 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
         // task.dependsOn(classpathJar) // Uncomment to switch to jar-based classpath resolution
         runAll.dependsOn(task)
     }
+
+tasks.withType(KotlinCompile::class.java).configureEach {
+    kotlinOptions {
+        freeCompilerArgs += "-Xjvm-default=enable"
+    }
+}
