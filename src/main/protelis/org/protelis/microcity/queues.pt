@@ -1,0 +1,8 @@
+module org:protelis:microcity:positions
+
+import microcity.Queues.createQueue
+import microcity.Queues.queuesUnion
+
+share (field <- createQueue()) {
+    foldHoodPlusSelf(field, { a, b -> queuesUnion(a, b) })
+}

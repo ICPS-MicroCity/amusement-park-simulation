@@ -1,14 +1,14 @@
 package microcity
 
-import org.protelis.lang.datatype.Tuple
 import it.unibo.alchemist.protelis.AlchemistExecutionContext
-import microcity.Utils.role
-import microcity.Device.has
 import microcity.Device.get
-import microcity.Device.getId
 import microcity.Device.getCoordinates
-import microcity.Utils.Molecules.POSITIONS
+import microcity.Device.getId
+import microcity.Device.has
 import microcity.Utils.Molecules.ATTRACTION
+import microcity.Utils.Molecules.POSITIONS
+import microcity.Utils.role
+import org.protelis.lang.datatype.Tuple
 
 object Positions {
     data class Position(val id: Int, val coordinates: Tuple)
