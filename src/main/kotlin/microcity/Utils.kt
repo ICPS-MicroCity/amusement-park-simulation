@@ -15,6 +15,9 @@ import microcity.Utils.Molecules.SATISFACTIONS
 import microcity.Utils.Molecules.SATISFIED
 import microcity.Utils.Molecules.SHORTEST_QUEUE_POLICY
 import microcity.Utils.Molecules.VISITOR
+import microcity.policy.NextPolicy
+import microcity.policy.RandomPolicy
+import microcity.policy.ShortestQueuePolicy
 import org.protelis.lang.datatype.Tuple
 
 object Utils {
@@ -32,7 +35,7 @@ object Utils {
         const val QUEUE: String = "org:protelis:microcity:queue"
         const val SATISFACTION: String = "org:protelis:microcity:satisfaction"
         const val SATISFACTIONS: String = "satisfactions"
-        const val NEXT_POLICY: String = "nextPolicy"
+        const val NEXT_POLICY: String = "next-policy"
         const val SHORTEST_QUEUE_POLICY: String = "shortestQueue"
     }
 
@@ -60,8 +63,8 @@ object Utils {
         }
 
         fun getNextPolicy(ctx: AlchemistExecutionContext<*>): NextPolicy = when {
-            has(ctx, NEXT_POLICY) && get(ctx, NEXT_POLICY) == SHORTEST_QUEUE_POLICY -> NextPolicy.SHORTEST_QUEUE
-            else -> NextPolicy.RANDOM
+            has(ctx, NEXT_POLICY) && get(ctx, NEXT_POLICY) == SHORTEST_QUEUE_POLICY -> ShortestQueuePolicy()
+            else -> RandomPolicy()
         }
     }
 

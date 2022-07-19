@@ -15,10 +15,7 @@ object Destinations {
         Utils.Visitors.getDestination(ctx)
 
     @JvmStatic
-    fun getNext(ctx: AlchemistExecutionContext<*>, current: Tuple): Tuple = when (getNextPolicy(ctx)) {
-        NextPolicy.RANDOM -> randomly(ctx, current)
-        NextPolicy.SHORTEST_QUEUE -> TODO()
-    }
+    fun getNext(ctx: AlchemistExecutionContext<*>, current: Tuple): Tuple = getNextPolicy(ctx).getNext(ctx, current)
 
     private fun randomly(ctx: AlchemistExecutionContext<*>, current: Tuple): Tuple = when {
         isSatisfied(ctx) && getPositions(ctx).isNotEmpty() ->
