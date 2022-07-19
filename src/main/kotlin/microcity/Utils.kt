@@ -6,10 +6,12 @@ import microcity.Device.getCoordinates
 import microcity.Device.has
 import microcity.Device.put
 import microcity.Positions.Position
+import microcity.Queues.Queue
 import microcity.Utils.Molecules.CAPACITY
 import microcity.Utils.Molecules.DESTINATION
 import microcity.Utils.Molecules.NEXT_POLICY
 import microcity.Utils.Molecules.QUEUE
+import microcity.Utils.Molecules.QUEUES
 import microcity.Utils.Molecules.SATISFACTION
 import microcity.Utils.Molecules.SATISFACTIONS
 import microcity.Utils.Molecules.SATISFIED
@@ -33,6 +35,7 @@ object Utils {
         const val POSITIONS: String = "org:protelis:microcity:positions"
         const val DESTINATION: String = "org:protelis:microcity:destination"
         const val QUEUE: String = "org:protelis:microcity:queue"
+        const val QUEUES: String = "org:protelis:microcity:queues"
         const val SATISFACTION: String = "org:protelis:microcity:satisfaction"
         const val SATISFACTIONS: String = "satisfactions"
         const val NEXT_POLICY: String = "next-policy"
@@ -60,6 +63,11 @@ object Utils {
         fun getSatisfactions(ctx: AlchemistExecutionContext<*>): Double = when {
             has(ctx, SATISFACTIONS) -> get(ctx, SATISFACTIONS) as Double
             else -> 0.0
+        }
+
+        fun getQueues(ctx: AlchemistExecutionContext<*>): List<Queue> = when {
+            has(ctx, QUEUES) -> get(ctx, QUEUES) as List<Queue>
+            else -> arrayListOf()
         }
 
         fun getNextPolicy(ctx: AlchemistExecutionContext<*>): NextPolicy = when {
