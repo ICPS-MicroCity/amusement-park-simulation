@@ -13,16 +13,17 @@ import microcity.Utils.Molecules.VISITOR
 import microcity.Utils.role
 
 object Queues {
+    data class Queue(val attraction: Position, val visitors: List<Position>)
 
     @JvmStatic
-    fun createQueue(ctx: AlchemistExecutionContext<*>): List<Position> = when {
-        role(ctx, ATTRACTION) -> getQueue(ctx)
+    fun createQueue(ctx: AlchemistExecutionContext<*>): List<Queue> = when {
+        role(ctx, ATTRACTION) -> arrayListOf(Queue(Position(getId(ctx), getCoordinates(ctx)), getQueue(ctx)))
         else -> ArrayList()
     }
 
     @JvmStatic
-    fun queuesUnion(l1: List<Position>, l2: List<Position>): List<Position> =
-        ArrayList(l1.union(l2).toList())
+    fun queuesUnion(l1: List<Queue>, l2: List<Queue>): List<Queue> =
+        ArrayList(l1.union(l2).toList().sortedBy { it.attraction.id })
 
     @JvmStatic
     fun dequeue(ctx: AlchemistExecutionContext<*>): List<Position> = when {

@@ -7,7 +7,6 @@ import microcity.Utils.Visitors.getNextPolicy
 import microcity.Utils.Visitors.isSatisfied
 import microcity.Utils.Visitors.satisfy
 import org.protelis.lang.datatype.Tuple
-import kotlin.random.Random
 
 object Destinations {
 
@@ -15,11 +14,8 @@ object Destinations {
         Utils.Visitors.getDestination(ctx)
 
     @JvmStatic
-    fun getNext(ctx: AlchemistExecutionContext<*>, current: Tuple): Tuple = getNextPolicy(ctx).getNext(ctx, current)
-
-    private fun randomly(ctx: AlchemistExecutionContext<*>, current: Tuple): Tuple = when {
-        isSatisfied(ctx) && getPositions(ctx).isNotEmpty() ->
-            getPositions(ctx)[Random.nextInt(0, getPositions(ctx).size)].coordinates
+    fun getNext(ctx: AlchemistExecutionContext<*>, current: Tuple): Tuple = when {
+        isSatisfied(ctx) && getPositions(ctx).isNotEmpty() -> getNextPolicy(ctx).getNext(ctx)
         else -> current
     }
 
