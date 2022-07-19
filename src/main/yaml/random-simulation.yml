@@ -1,16 +1,9 @@
 incarnation: protelis
 
-variables:
-  speed: &speed
-    language: kotlin
-    formula: >
-      import kotlin.random.Random
-      Random.nextDouble(0.1, 2.0)
-
-# The network model used allows to choose the nodes that have the "cloud" molecule in order to simulate an access point behaviour
+# The network model used allows to choose the nodes that have the "attraction" molecule in order to simulate an access point behaviour
 network-model:
   type: ConnectToAccessPoint
-  parameters: [150.0, "attraction"]
+  parameters: [100.0, "attraction"]
 
 # Use an OpenStreetMap Environment, deploying nodes only on streets
 environment:
@@ -28,7 +21,7 @@ _move: &move
     type: Event
     actions:
       - type: TargetMapWalker
-        parameters: [org:protelis:microcity:destination, *speed]
+        parameters: [org:protelis:microcity:destination, 1.0]
 
 # Define the broadcast message from activities to visitors
 # to spread their positions
@@ -80,6 +73,7 @@ _visitors: &visitors
       - { molecule: visitor, concentration: true }
       - { molecule: satisfied, concentration: true }
       - { molecule: satisfactions, concentration: 0 }
+      - { molecule: nextPolicy, concentration: "\"random\"" }
       - { molecule: org:protelis:microcity:positions, concentration: [] }
 
 # Define attractions

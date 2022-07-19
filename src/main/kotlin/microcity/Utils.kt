@@ -6,13 +6,15 @@ import microcity.Device.getCoordinates
 import microcity.Device.has
 import microcity.Device.put
 import microcity.Positions.Position
-import microcity.Utils.Molecules.DESTINATION
-import microcity.Utils.Molecules.VISITOR
-import microcity.Utils.Molecules.QUEUE
 import microcity.Utils.Molecules.CAPACITY
+import microcity.Utils.Molecules.DESTINATION
+import microcity.Utils.Molecules.NEXT_POLICY
+import microcity.Utils.Molecules.QUEUE
 import microcity.Utils.Molecules.SATISFACTION
 import microcity.Utils.Molecules.SATISFACTIONS
 import microcity.Utils.Molecules.SATISFIED
+import microcity.Utils.Molecules.SHORTEST_QUEUE_POLICY
+import microcity.Utils.Molecules.VISITOR
 import org.protelis.lang.datatype.Tuple
 
 object Utils {
@@ -30,6 +32,8 @@ object Utils {
         const val QUEUE: String = "org:protelis:microcity:queue"
         const val SATISFACTION: String = "org:protelis:microcity:satisfaction"
         const val SATISFACTIONS: String = "satisfactions"
+        const val NEXT_POLICY: String = "nextPolicy"
+        const val SHORTEST_QUEUE_POLICY: String = "shortestQueue"
     }
 
     object Visitors {
@@ -55,6 +59,10 @@ object Utils {
             else -> 0.0
         }
 
+        fun getNextPolicy(ctx: AlchemistExecutionContext<*>): NextPolicy = when {
+            has(ctx, NEXT_POLICY) && get(ctx, NEXT_POLICY) == SHORTEST_QUEUE_POLICY -> NextPolicy.SHORTEST_QUEUE
+            else -> NextPolicy.RANDOM
+        }
     }
 
     object Attractions {
