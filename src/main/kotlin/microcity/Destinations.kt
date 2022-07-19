@@ -20,14 +20,14 @@ object Destinations {
         NextPolicy.SHORTEST_QUEUE -> TODO()
     }
 
-    fun randomly(ctx: AlchemistExecutionContext<*>, current: Tuple): Tuple = when {
+    private fun randomly(ctx: AlchemistExecutionContext<*>, current: Tuple): Tuple = when {
         isSatisfied(ctx) && getPositions(ctx).isNotEmpty() ->
             getPositions(ctx)[Random.nextInt(0, getPositions(ctx).size)].coordinates
         else -> current
     }
 
     @JvmStatic
-    fun satisfy(ctx: AlchemistExecutionContext<*>, currentDestination: Tuple) {
+    fun dissatisfy(ctx: AlchemistExecutionContext<*>, currentDestination: Tuple) {
         satisfy(ctx, currentDestination == getCoordinates(ctx))
     }
 }

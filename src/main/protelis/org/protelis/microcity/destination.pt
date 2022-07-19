@@ -1,13 +1,13 @@
 module org:protelis:microcity:destination
 
 import microcity.Destinations.getNext
-import microcity.Destinations.satisfy
+import microcity.Destinations.dissatisfy
 import microcity.Utils.Visitors.isSatisfied
 import microcity.Device.getCoordinates
 
 rep (dst <- getNext(getCoordinates())) {
     if (isSatisfied()) {
-        satisfy(dst)
+        dissatisfy(dst)
     }
     getNext(dst)
 }
