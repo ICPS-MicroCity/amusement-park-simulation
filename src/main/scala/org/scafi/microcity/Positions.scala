@@ -5,7 +5,7 @@ import it.unibo.alchemist.model.scafi.ScafiIncarnationForAlchemist.{AggregatePro
 import org.scala.microcity.Destination.{NextPolicy, RandomPolicy}
 import org.scala.microcity.Positions.{Position, attractionPosition, attractionUnion, position}
 import org.scala.microcity.Queues.{addSatisfaction, dequeue, queueUnion, satisfactionUnion}
-import org.scala.microcity.Utils.Molecules.{ATTRACTION, DESTINATION, POSITIONS, QUEUE, SATISFACTION}
+import org.scala.microcity.Utils.Molecules.{ATTRACTION, POSITIONS, QUEUE, SATISFACTION}
 import org.scala.microcity.Utils.{NodeInformation, coordinates, dissatisfy, role, satisfied, satisfy}
 
 class Positions extends AggregateProgram with StandardSensors with ScafiAlchemistSupport {
