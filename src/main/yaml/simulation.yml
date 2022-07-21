@@ -3,7 +3,7 @@ incarnation: protelis
 # The network model used allows to choose the nodes that have the "attraction" molecule in order to simulate an access point behaviour
 network-model:
   type: ConnectToAccessPoint
-  parameters: [200.0, "attraction"]
+  parameters: [100.0, "attraction"]
 
 # Use an OpenStreetMap Environment, deploying nodes only on streets
 environment:
@@ -84,41 +84,6 @@ _visitors: &visitors
       - { molecule: satisfactions, concentration: 0 }
       - { molecule: next-policy, concentration: "\"random\"" }
       - { molecule: org:protelis:microcity:positions, concentration: [] }
-
-_restaurants: &restaurants
-  - type: Point
-    parameters: [ 44.33747, 12.26208 ]
-    programs: *attractionPrograms
-    contents:
-      - { molecule: attraction, concentration: true }
-      - { molecule: attraction-type, concentration: "\"restaurant\"" }
-      - { molecule: capacity, concentration: 10 }
-      - { molecule: name, concentration: "\"Drive-In\"" }
-  - type: Point
-    parameters: [ 44.33815, 12.2633 ]
-    programs: *attractionPrograms
-    contents:
-      - { molecule: attraction, concentration: true }
-      - { molecule: attraction-type, concentration: "\"restaurant\"" }
-      - { molecule: capacity, concentration: 10 }
-      - { molecule: name, concentration: "\"Bar del Lago\"" }
-  - type: Point
-    parameters: [ 44.33682, 12.26425 ]
-    programs: *attractionPrograms
-    contents:
-      - { molecule: attraction, concentration: true }
-      - { molecule: attraction-type, concentration: "\"restaurant\"" }
-      - { molecule: capacity, concentration: 10 }
-      - { molecule: name, concentration: "\"Locanda del Faro\"" }
-  - type: Point
-    parameters: [ 44.33589, 12.26293 ]
-    programs: *attractionPrograms
-    contents:
-      - { molecule: attraction, concentration: true }
-      - { molecule: attraction-type, concentration: "\"restaurant\"" }
-      - { molecule: capacity, concentration: 10 }
-      - { molecule: name, concentration: "\"McDonald's\"" }
-
 
 # Define attractions
 _attractions: &attractions
@@ -509,8 +474,7 @@ _attractions: &attractions
 
 # Deploy nodes
 deployments:
-  #- *attractions
-  - *restaurants
+  - *attractions
   - *visitors
 
 export:
