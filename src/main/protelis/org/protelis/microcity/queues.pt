@@ -4,5 +4,5 @@ import microcity.Queues.createQueue
 import microcity.Queues.queuesUnion
 
 share (field <- createQueue()) {
-    foldHoodPlusSelf(field, { a, b -> queuesUnion(a, b) })
+    foldHood(createQueue(), field, { a, b -> queuesUnion(a, b) })
 }
