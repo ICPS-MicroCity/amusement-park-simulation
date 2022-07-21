@@ -1,19 +1,16 @@
 [versions]
-alchemist = "24.0.7"
-kotlin = "1.7.0"
+alchemist = "24.1.0"
 
 [libraries]
 alchemist = { module = "it.unibo.alchemist:alchemist", version.ref = "alchemist" }
 alchemist-incarnation-protelis = { module = "it.unibo.alchemist:alchemist-incarnation-protelis", version.ref = "alchemist" }
-alchemist-incarnation-sapere = { module = "it.unibo.alchemist:alchemist-incarnation-sapere", version.ref = "alchemist" }
 alchemist-swingui = { module = "it.unibo.alchemist:alchemist-swingui", version.ref = "alchemist" }
 alchemist-maps = { module = "it.unibo.alchemist:alchemist-maps", version.ref = "alchemist" }
-protelis-interpreter = "org.protelis:protelis-interpreter:16.1.2"
+alchemist-incarnation-scafi = { module = "it.unibo.alchemist:alchemist-incarnation-scafi", version.ref = "alchemist"}
 
 [bundles]
-alchemist = ["alchemist", "protelis-interpreter", "alchemist-incarnation-protelis", "alchemist-incarnation-sapere", "alchemist-swingui", "alchemist-maps"]
+alchemist = ["alchemist", "alchemist-incarnation-scafi", "alchemist-swingui", "alchemist-maps"]
 
 [plugins]
-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-multiJvmTesting = "org.danilopianini.multi-jvm-test-plugin:0.4.0"
+multiJvmTesting = "org.danilopianini.multi-jvm-test-plugin:0.4.8"
 taskTree = "com.dorongold.task-tree:2.1.0"

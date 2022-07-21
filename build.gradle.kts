@@ -1,40 +1,26 @@
-/*
- * DEFAULT GRADLE BUILD FOR ALCHEMIST SIMULATOR
- */
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     application
-    alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.multiJvmTesting) // Pre-configures the Java toolchains
     alias(libs.plugins.taskTree) // Helps debugging dependencies among gradle tasks
+    scala
 }
 
 repositories {
     mavenCentral()
 }
 
-sourceSets {
-    main {
-        resources {
-            srcDir("src/main/protelis")
-            srcDir("src/main/yaml")
-        }
-    }
-}
-
 dependencies {
     // Check the catalog at gradle/libs.versions.gradle
     implementation(libs.bundles.alchemist)
-    implementation(kotlin("stdlib-jdk8"))
 }
 
 multiJvm {
-    jvmVersionForCompilation.set(latestJava)
+    jvmVersionForCompilation.set(11)
 }
 
 val batch: String by project
 val maxTime: String by project
+val variables: String by project
 
 val alchemistGroup = "Run Alchemist"
 /*
@@ -50,7 +36,7 @@ val runAll by tasks.register<DefaultTask>("runAll") {
 File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
     .filter { it.extension == "yml" } // pick all yml files in src/main/yaml
     .sortedBy { it.nameWithoutExtension } // sort them, we like reproducibility
-    .forEach {
+    .forEach { it ->
         // one simulation file -> one gradle task
         val task by tasks.register<JavaExec>("run${it.nameWithoutExtension.capitalize()}") {
             group = alchemistGroup // This is for better organization when running ./gradlew tasks
@@ -78,10 +64,14 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
                 // If it is running in a Continuous Integration environment, use the "headless" mode of the simulator
                 // Namely, force the simulator not to use graphical output.
                 args("-hl", "-t", maxTime)
+                if(variables.isNotEmpty()) {
+                    args("-var")
+                    variables.split(",").forEach { args(it) }
+                }
             } else {
                 // A graphics environment should be available, so load the effects for the UI from the "effects" folder
                 // Effects are expected to be named after the simulation file
-                args("-g", "effects/${it.nameWithoutExtension}.aes")
+                args("-g", "effects/${it.nameWithoutExtension}.json")
             }
             // This tells gradle that this task may modify the content of the export directory
             outputs.dir(exportsDir)
@@ -90,20 +80,9 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
         runAll.dependsOn(task)
     }
 
-tasks.withType(KotlinCompile::class.java).configureEach {
-    kotlinOptions {
-        freeCompilerArgs += "-Xjvm-default=enable"
-    }
+tasks.withType<Tar>().configureEach {
+    duplicatesStrategy = DuplicatesStrategy.WARN
 }
-
-tasks.withType<Jar> {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
-
-tasks.withType<Tar> {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
-
-tasks.withType<Zip> {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+tasks.withType<Zip>().configureEach {
+    duplicatesStrategy = DuplicatesStrategy.WARN
 }
