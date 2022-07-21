@@ -4,6 +4,7 @@ import it.unibo.alchemist.protelis.AlchemistExecutionContext
 import microcity.Device.getCoordinates
 import microcity.Positions.getPositions
 import microcity.Utils.Visitors.getNextPolicy
+import microcity.Utils.Visitors.getQueues
 import microcity.Utils.Visitors.isSatisfied
 import microcity.Utils.Visitors.satisfy
 import org.protelis.lang.datatype.Tuple
@@ -15,7 +16,7 @@ object Destinations {
 
     @JvmStatic
     fun getNext(ctx: AlchemistExecutionContext<*>, current: Tuple): Tuple = when {
-        isSatisfied(ctx) && getPositions(ctx).isNotEmpty() -> getNextPolicy(ctx).getNext(ctx)
+        isSatisfied(ctx) && getPositions(ctx).isNotEmpty() && getQueues(ctx).isNotEmpty() -> getNextPolicy(ctx).getNext(ctx)
         else -> current
     }
 

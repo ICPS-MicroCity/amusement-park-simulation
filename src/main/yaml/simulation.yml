@@ -82,7 +82,7 @@ _visitors: &visitors
       - { molecule: visitor, concentration: true }
       - { molecule: satisfied, concentration: true }
       - { molecule: satisfactions, concentration: 0 }
-      - { molecule: next-policy, concentration: "\"random\"" }
+      - { molecule: next-policy, concentration: "\"shortestQueue\"" }
       - { molecule: org:protelis:microcity:positions, concentration: [] }
 
 # Define attractions
