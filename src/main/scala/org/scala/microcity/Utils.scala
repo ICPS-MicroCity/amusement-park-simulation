@@ -12,11 +12,13 @@ object Utils {
     val ATTRACTION: String = "attraction"
     val VISITOR: String = "visitor"
     val SATISFIED: String = "satisfied"
-    val POSITIONS: String = "org.scafi.microcity.Positions"
-    val SATISFACTION: String = "org.scafi.microcity.Satisfaction"
-    val QUEUE: String = "org.scafi.microcity.Queue"
+    val POSITIONS: String = "positions"
+    val SATISFACTION: String = "satisfaction"
+    val QUEUE: String = "queue"
+    val QUEUES: String = "queues"
     val CAPACITY: String = "capacity"
     val SATISFACTIONS: String = "satisfactions"
+    val DESTINATION: String = "destination"
   }
 
   def role(role: String)(implicit node: NodeManager): Boolean = node.has(role) && node.get[Boolean](role)

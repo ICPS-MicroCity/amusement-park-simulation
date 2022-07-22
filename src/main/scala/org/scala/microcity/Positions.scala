@@ -23,5 +23,7 @@ object Positions {
   def attractionPositions(implicit node: NodeManager): List[Position] =
     if (node.has(POSITIONS)) node.get[List[Position]](POSITIONS) else List()
 
-  implicit def toCoordinates(p: P): Coordinates = Coordinates(p._1, p._2)
+  implicit def toCoordinates(p: P): Coordinates = Coordinates(round(p._1), round(p._2))
+
+  def round(d: Double)(implicit r: Int = 100000): Double = (d * r).round.toDouble / r.toDouble
 }

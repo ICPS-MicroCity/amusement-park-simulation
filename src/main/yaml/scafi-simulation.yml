@@ -63,7 +63,7 @@ _reactions:
       type: Event
       actions:
         - type: TargetMapWalker
-          parameters: [org.scafi.microcity.Destination, 1.0]
+          parameters: [destination, 1.0]
 
 
 # Define the programs that all visitors need to implement

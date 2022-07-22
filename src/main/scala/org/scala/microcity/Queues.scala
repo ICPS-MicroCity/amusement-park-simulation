@@ -1,28 +1,50 @@
 package org.scala.microcity
 
 import it.unibo.alchemist.model.implementations.nodes.NodeManager
+import it.unibo.alchemist.model.scafi.ScafiIncarnationForAlchemist.AggregateProgram
 import org.scala.microcity.Positions.{Position, position, toCoordinates}
 import org.scala.microcity.Utils.Molecules.{ATTRACTION, SATISFACTIONS, VISITOR}
-import org.scala.microcity.Utils.{NodeInformation, getQueue, getSatisfied, getVisitorsPerRound, role}
+import org.scala.microcity.Utils._
 
-object Queues {
+object Queues extends AggregateProgram {
+  case class Queue(attraction: Position, visitors: Int)
+
   def queueUnion(l1: List[Position], l2: List[Position])(implicit info: NodeInformation): List[Position] =
-    if (role(ATTRACTION)(info.node))
+    mux(role(ATTRACTION)(info.node)) {
       (l1 ++ l2).distinct
         .filter(_.coordinates == toCoordinates(info.sensors.currentPosition()))
         .filter(_.id != info.id)
-        .filterNot( p => getSatisfied(info.node).map(_.id).contains(p.id))
-    else
+        .filterNot(p => getSatisfied(info.node).map(_.id).contains(p.id))
+    } {
       position(info.id, info.sensors.currentPosition())(info.node)
+    }
+
+  def queuesUnion(l1: List[Queue], l2: List[Queue])(implicit info: NodeInformation): List[Queue] =
+    (l1 ++ l2).distinct.sortBy(_.attraction.id)
 
   def dequeue(implicit node: NodeManager): List[Position] =
-    if (role(ATTRACTION)) getQueue.take(getVisitorsPerRound.min(getQueue.size))
-    else List()
+    mux(role(ATTRACTION)) {
+      getQueue.take(getVisitorsPerRound.min(getQueue.size))
+    } {
+      List()
+    }
 
   def satisfactionUnion(l1: List[Position], l2: List[Position])(implicit info: NodeInformation): List[Position] =
-    if (role(VISITOR)(info.node)) (l1 ++ l2).distinct.filter(_.id == info.id)
-    else (l1 ++ l2).distinct.filter(_.coordinates == toCoordinates(info.sensors.currentPosition()))
+    mux(role(VISITOR)(info.node)) {
+      (l1 ++ l2).distinct.filter(_.id == info.id)
+    } {
+      (l1 ++ l2).distinct.filter(_.coordinates == toCoordinates(info.sensors.currentPosition()))
+    }
 
   def addSatisfaction(value: Boolean)(implicit node: NodeManager): Unit =
-    if (value) node.put(SATISFACTIONS, node.get[Int](SATISFACTIONS) + 1)
+    mux(value) { node.put(SATISFACTIONS, node.get[Int](SATISFACTIONS) + 1) } {}
+
+  def createQueue(implicit info: NodeInformation): List[Queue] =
+    mux(role(ATTRACTION)(info.node)) {
+      List(Queue(Position(info.id, Utils.coordinates(info.sensors)), getQueue(info.node).size))
+    } {
+      List()
+    }
+
+  override def main(): Any = ???
 }
