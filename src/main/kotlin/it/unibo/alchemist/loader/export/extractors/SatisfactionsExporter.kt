@@ -5,8 +5,10 @@ import it.unibo.alchemist.model.implementations.molecules.SimpleMolecule
 import it.unibo.alchemist.model.interfaces.Actionable
 import it.unibo.alchemist.model.interfaces.Environment
 import it.unibo.alchemist.model.interfaces.Time
+import microcity.Utils.Molecules.SATISFACTIONS
+import microcity.Utils.Molecules.VISITOR
 
-class MicroCityExporter : Extractor<Int> {
+class SatisfactionsExporter : Extractor<Int> {
 
     override val columnNames: List<String>
         get() = listOf("$SATISFACTIONS@id")
@@ -26,9 +28,6 @@ class MicroCityExporter : Extractor<Int> {
     }
 
     companion object {
-        private const val VISITOR = "visitor"
-        private const val SATISFACTIONS = "satisfactions"
-
         private inline fun <reified T : Number> Any.asNumber(): T = when (this) {
             is T -> this
             is Number -> when (T::class) {

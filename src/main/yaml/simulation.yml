@@ -480,12 +480,20 @@ deployments:
 export:
   - type: CSVExporter
     parameters:
-      fileNameRoot: "data"
+      fileNameRoot: "satisfactions"
       exportPath: "data"
-      interval: 5.0
+      interval: 10.0
     data:
       - time
-      - type: MicroCityExporter
+      - type: SatisfactionsExporter
+  - type: CSVExporter
+    parameters:
+      fileNameRoot: "waitingTime"
+      exportPath: "data"
+      interval: 1.0
+    data:
+      - time
+      - type: WaitingTimeExporter
 
 terminate:
   - type: AfterTime
