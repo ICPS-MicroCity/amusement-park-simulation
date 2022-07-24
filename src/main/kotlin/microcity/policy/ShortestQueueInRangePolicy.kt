@@ -8,9 +8,7 @@ import org.protelis.lang.datatype.Tuple
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-class ShortestQueueInRangePolicy : NextPolicy {
-    private val range: Double = 0.001
-
+class ShortestQueueInRangePolicy(private val range: Double = 0.001) : NextPolicy {
     override fun getNext(ctx: AlchemistExecutionContext<*>): Tuple =
         getQueues(ctx).filter { withinRange(it, ctx) }.minByOrNull { it.visitors.size }?.attraction?.coordinates ?: ShortestQueuePolicy().getNext(ctx)
 
@@ -18,7 +16,7 @@ class ShortestQueueInRangePolicy : NextPolicy {
         sqrt(
             (getCoordinates(ctx).getAsDouble(0) - queue.attraction.coordinates.getAsDouble(0)).pow(2.0) +
                 (getCoordinates(ctx).getAsDouble(1) - queue.attraction.coordinates.getAsDouble(1)).pow(2.0)
-        ) < range
+        ) < this.range
 
     private fun Tuple.getAsDouble(index: Int): Double = this.get(index) as Double
 }
