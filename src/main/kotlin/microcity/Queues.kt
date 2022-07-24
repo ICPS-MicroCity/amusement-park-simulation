@@ -13,7 +13,7 @@ import microcity.Utils.Molecules.VISITOR
 import microcity.Utils.role
 
 object Queues {
-    data class Queue(val attraction: Position, val visitors: List<Position>)
+    data class Queue(val attraction: Position, var visitors: List<Position>)
 
     @JvmStatic
     fun createQueue(ctx: AlchemistExecutionContext<*>): List<Queue> = when {
@@ -22,15 +22,15 @@ object Queues {
     }
 
     @JvmStatic
-    fun queuesUnion(ctx: AlchemistExecutionContext<*>, l1: List<Queue>, l2: List<Queue>): List<Queue> = when {
-        role(ctx, ATTRACTION) -> createQueue(ctx)
-        else -> ArrayList(
+    fun queuesUnion(ctx: AlchemistExecutionContext<*>, l1: List<Queue>, l2: List<Queue>): List<Queue> =
+        ArrayList(
             l1.filter { l2.find { q -> q.attraction.id == it.attraction.id } == null }
                 .union(l2)
                 .toList()
                 .sortedBy { it.attraction.id }
-        )
-    }
+        ).apply {
+            this.find { it.attraction.id == getId(ctx) }?.visitors = getQueue(ctx)
+        }
 
     @JvmStatic
     fun dequeue(ctx: AlchemistExecutionContext<*>): List<Position> = when {
