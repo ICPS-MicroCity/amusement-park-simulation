@@ -76,13 +76,13 @@ _attractionPrograms: &attractionPrograms
 # Define visitors
 _visitors: &visitors
   - type: Polygon
-    parameters: [ 100, *bounds ]
+    parameters: [ 10000, *bounds ]
     programs: *visitorPrograms
     contents:
       - { molecule: visitor, concentration: true }
       - { molecule: satisfied, concentration: true }
       - { molecule: satisfactions, concentration: 0 }
-      - { molecule: next-policy, concentration: "\"shortestQueue\"" }
+      - { molecule: next-policy, concentration: "\"shortestQueueRange\"" }
       - { molecule: org:protelis:microcity:positions, concentration: [] }
 
 # Define attractions
