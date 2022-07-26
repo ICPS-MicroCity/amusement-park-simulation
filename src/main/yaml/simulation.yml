@@ -76,7 +76,7 @@ _attractionPrograms: &attractionPrograms
 # Define visitors
 _visitors: &visitors
   - type: Polygon
-    parameters: [ 10000, *bounds ]
+    parameters: [ 100, *bounds ]
     programs: *visitorPrograms
     contents:
       - { molecule: visitor, concentration: true }
@@ -84,6 +84,8 @@ _visitors: &visitors
       - { molecule: satisfactions, concentration: 0 }
       - { molecule: next-policy, concentration: "\"shortestQueueRange\"" }
       - { molecule: org:protelis:microcity:positions, concentration: [] }
+      - { molecule: org:protelis:microcity:queues, concentration: [] }
+
 
 # Define attractions
 _attractions: &attractions
@@ -497,4 +499,4 @@ export:
 
 terminate:
   - type: AfterTime
-    parameters: 4000
+    parameters: 400000

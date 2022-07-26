@@ -69,7 +69,10 @@ object Utils {
         }
 
         fun getQueues(ctx: AlchemistExecutionContext<*>): List<Queue> = when {
-            has(ctx, QUEUES) -> get(ctx, QUEUES) as List<Queue>
+            has(ctx, QUEUES) -> when (val l = get(ctx, QUEUES)) {
+                is List<*> -> l as List<Queue>
+                else -> listOf()
+            }
             else -> arrayListOf()
         }
 
