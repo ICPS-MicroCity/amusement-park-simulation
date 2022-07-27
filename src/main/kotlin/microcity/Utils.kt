@@ -43,6 +43,7 @@ object Utils {
         const val NEXT_POLICY: String = "next-policy"
         const val SHORTEST_QUEUE_POLICY: String = "shortestQueue"
         const val SHORTEST_QUEUE_RANGE_POLICY: String = "shortestQueueRange"
+        const val WAITING_TIME: String = "waiting-time"
     }
 
     object Visitors {
