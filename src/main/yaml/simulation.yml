@@ -1,5 +1,21 @@
 incarnation: protelis
 
+variables:
+  strategy: &strategy
+    type: ArbitraryVariable
+    parameters: ["\"random\"", ["\"shortestQueue\"", "\"shortestQueueRange\""]]
+  scenarioSeed: &scenarioSeed
+    type: LinearVariable
+    parameters: [0, 0, 9, 1]
+  simulationSeed: &simulationSeed
+    type: LinearVariable
+    parameters: [0, 0, 9, 1]
+
+
+seeds:
+  scenario: *scenarioSeed
+  simulation: *simulationSeed
+
 # The network model used allows to choose the nodes that have the "attraction" molecule in order to simulate an access point behaviour
 network-model:
   type: ConnectToAccessPoint
@@ -76,13 +92,14 @@ _attractionPrograms: &attractionPrograms
 # Define visitors
 _visitors: &visitors
   - type: Polygon
-    parameters: [ 100, *bounds ]
+    parameters: [ 1, *bounds ]
     programs: *visitorPrograms
     contents:
       - { molecule: visitor, concentration: true }
       - { molecule: satisfied, concentration: true }
       - { molecule: satisfactions, concentration: 0 }
-      - { molecule: next-policy, concentration: "\"shortestQueueRange\"" }
+      - { molecule: next-policy, concentration: *strategy }
+      - { molecule: waiting-time, concentration: 0 }
       - { molecule: org:protelis:microcity:positions, concentration: [] }
       - { molecule: org:protelis:microcity:queues, concentration: [] }
 

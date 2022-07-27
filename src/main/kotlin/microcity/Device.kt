@@ -1,5 +1,7 @@
 package microcity
 
+import it.unibo.alchemist.model.implementations.times.DoubleTime
+import it.unibo.alchemist.model.interfaces.Time
 import it.unibo.alchemist.protelis.AlchemistExecutionContext
 import org.protelis.lang.datatype.Tuple
 import kotlin.math.roundToInt
@@ -12,7 +14,10 @@ object Device {
 
     @JvmStatic
     fun getId(ctx: AlchemistExecutionContext<*>): Int =
-            ctx.getDeviceUID().toString().replace(DEVICE_PREFIX, EMPTY_PREFIX).toInt()
+        ctx.getDeviceUID().toString().replace(DEVICE_PREFIX, EMPTY_PREFIX).toInt()
+
+    @JvmStatic
+    fun getCurrentTime(ctx: AlchemistExecutionContext<*>): Time = DoubleTime(ctx.getCurrentTime().toDouble())
 
     @JvmStatic
     fun getCoordinates(ctx: AlchemistExecutionContext<*>): Tuple = ctx.getCoordinates().map { ((it as Double) * APPROX).roundToInt() / APPROX }
