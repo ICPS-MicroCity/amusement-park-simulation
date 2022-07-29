@@ -16,9 +16,9 @@ def main(path, data_type, strategy):
     file_names = glob.glob(path + data_type + "*\"" + strategy + "\"*.csv")
     dfs = [extract_dataframe(file_name) for file_name in file_names]
     ops = [np.mean, np.sum, np.var]
-    results = [[extract(df, op, 15) for df in dfs] for op in ops]
+    results = [[extract(df, op, 22) for df in dfs] for op in ops]
     print("Means:", np.mean(results[0], axis=0))
-    # print("Variances:", np.mean(results[2], axis=0))
+    print("Variances:", np.mean(results[2], axis=0))
     # print("Sums:", np.mean(results[1], axis=0))
 
 
