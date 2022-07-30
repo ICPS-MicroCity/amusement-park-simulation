@@ -12,15 +12,33 @@ def extract(df, f, size):
     return [f(df.loc[i][1:]) for i in range(size)]
 
 
+def get_files(path, data_type, strategy):
+    return glob.glob(path + data_type + "*\"" + strategy + "\"*.csv")
+
+
 def main(path, data_type, strategy):
-    file_names = glob.glob(path + data_type + "*\"" + strategy + "\"*.csv")
-    dfs = [extract_dataframe(file_name) for file_name in file_names]
     ops = [np.mean, np.sum, np.var]
-    results = [[extract(df, op, 22) for df in dfs] for op in ops]
-    print("Means:", np.mean(results[0], axis=0))
-    print("Variances:", np.mean(results[2], axis=0))
-    # print("Sums:", np.mean(results[1], axis=0))
+    n_lines = 22
+
+    match data_type:
+        case "ratio":
+            s_dfs = [extract_dataframe(file_name) for file_name in get_files(path, "satisfactions", strategy)]
+            wt_dfs = [extract_dataframe(file_name) for file_name in get_files(path, "waitingTime", strategy)]
+            s_mean = np.mean([extract(df, ops[0], n_lines) for df in s_dfs], axis=0)
+            wt_mean = np.mean([extract(df, ops[0], n_lines) for df in wt_dfs], axis=0)
+            print("ratio:", np.divide(s_mean, wt_mean))
+        case _:
+            dfs = [extract_dataframe(file_name) for file_name in get_files(path, data_type, strategy)]
+            results = [[extract(df, op, n_lines) for df in dfs] for op in ops]
+            print("mean " + data_type + ":", np.mean(results[0], axis=0))
 
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2], sys.argv[3])
+    match len(sys.argv):
+        case 4:
+            main(sys.argv[1], sys.argv[2], sys.argv[3])
+        case _:
+            print("In order to run the program you must specify the arguments:\n\n",
+                  "\tpython3 data-evaluation.py <path-to-files> <data_type> <strategy>\n\n",
+                  "<data-type> can be one among \"satisfactions\", \"waitingTime\" and \"ratio\"\n",
+                  "<strategy> can be one among \"random\", \"shortestQueue\" and \"shortestQueueRange\"\n")
