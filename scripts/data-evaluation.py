@@ -24,9 +24,11 @@ def main(path, data_type, strategy):
         case "ratio":
             s_dfs = [extract_dataframe(file_name) for file_name in get_files(path, "satisfactions", strategy)]
             wt_dfs = [extract_dataframe(file_name) for file_name in get_files(path, "waitingTime", strategy)]
-            s_mean = np.mean([extract(df, ops[0], n_lines) for df in s_dfs], axis=0)
-            wt_mean = np.mean([extract(df, ops[0], n_lines) for df in wt_dfs], axis=0)
-            print("ratio:", np.divide(s_mean, wt_mean)[::5])
+            s_results = [extract(df, ops[0], n_lines) for df in s_dfs]
+            wt_results = [extract(df, ops[0], n_lines) for df in wt_dfs]
+            s_mean = np.mean(s_results, axis=0)
+            wt_mean = np.mean(wt_results, axis=0)
+            print("ratio:", np.divide(wt_mean[1:], s_mean[1:])[::5])
         case _:
             dfs = [extract_dataframe(file_name) for file_name in get_files(path, data_type, strategy)]
             results = [[extract(df, op, n_lines) for df in dfs] for op in ops]
