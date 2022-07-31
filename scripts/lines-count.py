@@ -5,7 +5,7 @@ import numpy as np
 
 
 def extract_dataframe(file_name):
-    return pd.read_csv(file_name, skiprows=8, header=None, sep="\s+", engine="python")
+    return pd.read_csv(file_name, skiprows=9, header=None, sep="\s+", engine="python")
 
 
 def extract(df, f):
