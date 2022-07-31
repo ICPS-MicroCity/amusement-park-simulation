@@ -18,7 +18,7 @@ def get_files(path, data_type, strategy):
 
 def main(path, data_type, strategy):
     ops = [np.mean, np.sum, np.var]
-    n_lines = 22
+    n_lines = 41
 
     match data_type:
         case "ratio":
@@ -26,11 +26,11 @@ def main(path, data_type, strategy):
             wt_dfs = [extract_dataframe(file_name) for file_name in get_files(path, "waitingTime", strategy)]
             s_mean = np.mean([extract(df, ops[0], n_lines) for df in s_dfs], axis=0)
             wt_mean = np.mean([extract(df, ops[0], n_lines) for df in wt_dfs], axis=0)
-            print("ratio:", np.divide(s_mean, wt_mean))
+            print("ratio:", np.divide(s_mean, wt_mean)[::5])
         case _:
             dfs = [extract_dataframe(file_name) for file_name in get_files(path, data_type, strategy)]
             results = [[extract(df, op, n_lines) for df in dfs] for op in ops]
-            print("mean " + data_type + ":", np.mean(results[0], axis=0))
+            print("mean " + data_type + ":", np.mean(results[0], axis=0)[::5])
 
 
 if __name__ == "__main__":
