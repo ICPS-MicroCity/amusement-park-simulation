@@ -12,11 +12,20 @@ import microcity.Utils.Attractions.getVisitorsPerRound
 import microcity.Utils.Molecules.ATTRACTION
 import microcity.Utils.Molecules.VISITOR
 import microcity.Utils.Molecules.WAITING_TIME
+import microcity.Utils.Visitors.getDestination
 import microcity.Utils.Visitors.getQueues
 import microcity.Utils.role
+import org.protelis.lang.datatype.Tuple
 
 object Queues {
     data class Queue(val attraction: Position, var visitors: List<Position>)
+    data class Visitor(val position: Position, val destination: Tuple)
+
+    @JvmStatic
+    fun createVisitors(ctx: AlchemistExecutionContext<*>): List<Visitor> = when {
+        role(ctx, VISITOR) -> arrayListOf(Visitor(createPositions(ctx)[0], getDestination(ctx)))
+        else -> arrayListOf()
+    }
 
     @JvmStatic
     fun createQueue(ctx: AlchemistExecutionContext<*>): List<Queue> = when {
@@ -52,12 +61,13 @@ object Queues {
     }
 
     @JvmStatic
-    fun queueUnion(ctx: AlchemistExecutionContext<*>, a: List<Position>, b: List<Position>): List<Position> = when {
+    fun queueUnion(ctx: AlchemistExecutionContext<*>, a: List<Visitor>, b: List<Visitor>): List<Visitor> = when {
         role(ctx, ATTRACTION) -> b.union(a)
-            .filter { it.coordinates == getCoordinates(ctx) }
-            .filter { it.id != getId(ctx) }
-            .filterNot { getSatisfied(ctx).map { p -> p.id }.contains(it.id) }
-        else -> createPositions(ctx)
+            .filter { it.position.coordinates == getCoordinates(ctx) }
+            .filter { it.destination == getCoordinates(ctx) }
+            .filter { it.position.id != getId(ctx) }
+            .filterNot { getSatisfied(ctx).map { p -> p.id }.contains(it.position.id) }
+        else -> createVisitors(ctx)
     }
 
     @JvmStatic
