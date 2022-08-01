@@ -2,6 +2,7 @@ package microcity
 
 import it.unibo.alchemist.model.implementations.times.DoubleTime
 import it.unibo.alchemist.protelis.AlchemistExecutionContext
+import microcity.Device.get
 import microcity.Device.getCoordinates
 import microcity.Device.getId
 import microcity.Positions.Position
@@ -81,7 +82,7 @@ object Queues {
 
     @JvmStatic
     fun updateWaitingTime(ctx: AlchemistExecutionContext<*>, time: DoubleTime) {
-        if (role(ctx, VISITOR) && getQueues(ctx).any { q -> q.visitors.any { v -> v.id == getId(ctx) } }) {
+        if (role(ctx, VISITOR) && !(get(ctx, "moving") as Boolean)) {
             Device.put(
                 ctx,
                 WAITING_TIME,

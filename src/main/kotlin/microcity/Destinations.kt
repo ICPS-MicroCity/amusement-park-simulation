@@ -16,7 +16,7 @@ object Destinations {
 
     @JvmStatic
     fun getNext(ctx: AlchemistExecutionContext<*>, current: Tuple): Tuple = when {
-        isSatisfied(ctx) && getPositions(ctx).isNotEmpty() && getQueues(ctx).isNotEmpty() -> getNextPolicy(ctx).getNext(ctx)
+        isSatisfied(ctx) && getPositions(ctx).isNotEmpty() && getQueues(ctx).size > 1 -> getNextPolicy(ctx).getNext(ctx)
         else -> current
     }
 

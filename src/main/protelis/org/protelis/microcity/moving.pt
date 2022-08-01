@@ -1,0 +1,9 @@
+module org:protelis:microcity:moving
+
+import microcity.Positions.updateMoving
+import microcity.Device.getCoordinates
+
+rep (pos <- getCoordinates()) {
+    updateMoving(pos)
+    getCoordinates()
+}
