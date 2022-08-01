@@ -3,13 +3,13 @@ incarnation: protelis
 variables:
   strategy: &strategy
     type: ArbitraryVariable
-    parameters: ["\"shortestQueueRange\"", ["\"shortestQueue\"", "\"shortestQueueRange\""]]
+    parameters: ["\"random\"", ["\"random\"", "\"shortestQueue\"", "\"shortestQueueRange\""]]
   scenarioSeed: &scenarioSeed
     type: LinearVariable
-    parameters: [0, 0, 9, 1]
+    parameters: [0, 0, 4, 1]
   simulationSeed: &simulationSeed
     type: LinearVariable
-    parameters: [0, 0, 9, 1]
+    parameters: [0, 0, 4, 1]
 
 
 seeds:
@@ -33,11 +33,11 @@ _bounds: &bounds
 # Define the movement law with a Walker that moves only on streets towards
 # a GeoPosition indicated by the concentration of the tracking molecule
 _move: &move
-  - time-distribution: 3
+  - time-distribution: 1
     type: Event
     actions:
       - type: TargetMapWalker
-        parameters: [org:protelis:microcity:destination, 5.0]
+        parameters: [org:protelis:microcity:destination, 1.0]
 
 # Define the broadcast message from attractions to visitors
 # to spread their positions
@@ -49,7 +49,7 @@ _positions: &positions
 # Define the rule that establishes how visitors choose the
 # next destination
 _destination: &destination
-  - time-distribution: 3
+  - time-distribution: 1
     program: org:protelis:microcity:destination
   - program: send
 
@@ -73,6 +73,11 @@ _satisfaction: &satisfaction
     program: org:protelis:microcity:satisfaction
   - program: send
 
+_moving: &moving
+  - time-distribution: 1
+    program: org:protelis:microcity:moving
+  - program: send
+
 # Define the programs that all visitors need to implement
 _visitorPrograms: &visitorPrograms
   - *move
@@ -81,6 +86,7 @@ _visitorPrograms: &visitorPrograms
   - *queue
   - *queues
   - *satisfaction
+  - *moving
 
 # Define the programs that all the attractions need to implement
 _attractionPrograms: &attractionPrograms
@@ -92,7 +98,7 @@ _attractionPrograms: &attractionPrograms
 # Define visitors
 _visitors: &visitors
   - type: Polygon
-    parameters: [ 2, *bounds ]
+    parameters: [ 3000, *bounds ]
     programs: *visitorPrograms
     contents:
       - { molecule: visitor, concentration: true }
@@ -100,6 +106,7 @@ _visitors: &visitors
       - { molecule: satisfactions, concentration: 0 }
       - { molecule: next-policy, concentration: *strategy }
       - { molecule: waiting-time, concentration: 0 }
+      - { molecule: moving, concentration: false }
       - { molecule: org:protelis:microcity:positions, concentration: [] }
       - { molecule: org:protelis:microcity:queues, concentration: [] }
 
@@ -501,7 +508,7 @@ export:
     parameters:
       fileNameRoot: "satisfactions"
       exportPath: "data"
-      interval: 10.0
+      interval: 100.0
     data:
       - time
       - type: SatisfactionsExporter
@@ -509,11 +516,11 @@ export:
     parameters:
       fileNameRoot: "waitingTime"
       exportPath: "data"
-      interval: 1.0
+      interval: 100.0
     data:
       - time
       - type: WaitingTimeExporter
 
 terminate:
   - type: AfterTime
-    parameters: 400000
+    parameters: 5000

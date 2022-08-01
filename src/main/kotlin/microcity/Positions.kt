@@ -5,6 +5,7 @@ import microcity.Device.get
 import microcity.Device.getCoordinates
 import microcity.Device.getId
 import microcity.Device.has
+import microcity.Device.put
 import microcity.Utils.Molecules.ATTRACTION
 import microcity.Utils.Molecules.POSITIONS
 import microcity.Utils.role
@@ -15,6 +16,11 @@ object Positions {
 
     private fun Tuple.tupleToList(): List<Position> =
         this.iterator().asSequence().map { it as Position }.toList()
+
+    @JvmStatic
+    fun updateMoving(ctx: AlchemistExecutionContext<*>, position: Tuple) {
+        put(ctx, "moving", position != getCoordinates(ctx))
+    }
 
     @JvmStatic
     fun createPositions(ctx: AlchemistExecutionContext<*>): List<Position> =
