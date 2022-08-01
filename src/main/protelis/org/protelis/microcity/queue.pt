@@ -1,6 +1,6 @@
 module org:protelis:microcity:queue
 
-import microcity.Positions.createPositions
+import microcity.Queues.createVisitors
 import microcity.Queues.queueUnion
 import microcity.Queues.updateWaitingTime
 import microcity.Device.getCurrentTime
@@ -10,6 +10,6 @@ rep (time <- getCurrentTime()) {
     getCurrentTime()
 }
 
-share (field <- createPositions()) {
+share (field <- createVisitors()) {
     foldHoodPlusSelf(field, { a, b -> queueUnion(a, b) })
 }

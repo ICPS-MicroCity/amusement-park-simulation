@@ -23,6 +23,7 @@ import microcity.policy.RandomPolicy
 import microcity.policy.ShortestQueueInRangePolicy
 import microcity.policy.ShortestQueuePolicy
 import org.protelis.lang.datatype.Tuple
+import org.protelis.lang.datatype.impl.ArrayTupleImpl
 
 object Utils {
 
@@ -86,7 +87,7 @@ object Utils {
 
     object Attractions {
         fun getQueue(ctx: AlchemistExecutionContext<*>): List<Position> = when {
-            has(ctx, QUEUE) -> get(ctx, QUEUE) as List<Position>
+            has(ctx, QUEUE) -> (get(ctx, QUEUE) as List<Queues.Visitor>).map { it.position }
             else -> arrayListOf()
         }
 

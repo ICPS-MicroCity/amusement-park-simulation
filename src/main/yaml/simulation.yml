@@ -3,7 +3,7 @@ incarnation: protelis
 variables:
   strategy: &strategy
     type: ArbitraryVariable
-    parameters: ["\"random\"", ["\"shortestQueue\"", "\"shortestQueueRange\""]]
+    parameters: ["\"shortestQueueRange\"", ["\"shortestQueue\"", "\"shortestQueueRange\""]]
   scenarioSeed: &scenarioSeed
     type: LinearVariable
     parameters: [0, 0, 9, 1]
@@ -33,11 +33,11 @@ _bounds: &bounds
 # Define the movement law with a Walker that moves only on streets towards
 # a GeoPosition indicated by the concentration of the tracking molecule
 _move: &move
-  - time-distribution: 1
+  - time-distribution: 3
     type: Event
     actions:
       - type: TargetMapWalker
-        parameters: [org:protelis:microcity:destination, 1.0]
+        parameters: [org:protelis:microcity:destination, 5.0]
 
 # Define the broadcast message from attractions to visitors
 # to spread their positions
@@ -49,7 +49,7 @@ _positions: &positions
 # Define the rule that establishes how visitors choose the
 # next destination
 _destination: &destination
-  - time-distribution: 1
+  - time-distribution: 3
     program: org:protelis:microcity:destination
   - program: send
 
@@ -92,7 +92,7 @@ _attractionPrograms: &attractionPrograms
 # Define visitors
 _visitors: &visitors
   - type: Polygon
-    parameters: [ 1, *bounds ]
+    parameters: [ 2, *bounds ]
     programs: *visitorPrograms
     contents:
       - { molecule: visitor, concentration: true }
