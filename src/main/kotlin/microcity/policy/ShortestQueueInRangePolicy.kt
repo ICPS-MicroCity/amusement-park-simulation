@@ -3,14 +3,24 @@ package microcity.policy
 import it.unibo.alchemist.protelis.AlchemistExecutionContext
 import microcity.Device.getCoordinates
 import microcity.Queues.Queue
+import microcity.Utils.Visitors.getDestination
 import microcity.Utils.Visitors.getQueues
 import org.protelis.lang.datatype.Tuple
 import kotlin.math.pow
 import kotlin.math.sqrt
+import kotlin.random.Random
 
 class ShortestQueueInRangePolicy(private val range: Double = 0.001) : NextPolicy {
     override fun getNext(ctx: AlchemistExecutionContext<*>): Tuple =
-        getQueues(ctx).filter { withinRange(it, ctx) }.minByOrNull { it.visitors.size }?.attraction?.coordinates ?: ShortestQueuePolicy().getNext(ctx)
+        getQueues(ctx).filter { getDestination(ctx) != it.attraction.coordinates }
+            .filter { withinRange(it, ctx) }
+            .filter { it.visitors.size == getQueues(ctx).minBy { q -> q.visitors.size }.visitors.size }
+            .let {
+                when (it.isNotEmpty()) {
+                    true -> it[Random.nextInt(0, it.size)].attraction.coordinates
+                    else -> ShortestQueuePolicy().getNext(ctx)
+                }
+            }
 
     private fun withinRange(queue: Queue, ctx: AlchemistExecutionContext<*>): Boolean =
         sqrt(
