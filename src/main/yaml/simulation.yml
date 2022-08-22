@@ -98,18 +98,35 @@ _attractionPrograms: &attractionPrograms
 # Define visitors
 _visitors: &visitors
   - type: Polygon
-    parameters: [ 3000, *bounds ]
+    parameters: [ 100, *bounds ]
     programs: *visitorPrograms
     contents:
       - { molecule: visitor, concentration: true }
       - { molecule: satisfied, concentration: true }
       - { molecule: satisfactions, concentration: 0 }
-      - { molecule: next-policy, concentration: *strategy }
+      - { molecule: next-policy, concentration: "\"shortestQueueRange\"" }
       - { molecule: waiting-time, concentration: 0 }
       - { molecule: moving, concentration: false }
       - { molecule: org:protelis:microcity:positions, concentration: [] }
       - { molecule: org:protelis:microcity:queues, concentration: [] }
 
+_less: &less
+  - type: Point
+    parameters: [44.33747, 12.26208]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attraction-type, concentration: "\"restaurant\"" }
+      - { molecule: capacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Drive-In\"" }
+  - type: Point
+    parameters: [ 44.33815, 12.2633 ]
+    programs: *attractionPrograms
+    contents:
+      - { molecule: attraction, concentration: true }
+      - { molecule: attraction-type, concentration: "\"restaurant\"" }
+      - { molecule: capacity, concentration: 10 }
+      - { molecule: name, concentration: "\"Bar del Lago\"" }
 
 # Define attractions
 _attractions: &attractions

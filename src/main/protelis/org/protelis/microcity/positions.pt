@@ -1,8 +1,11 @@
 module org:protelis:microcity:positions
 
+import protelis:coord:nonselfstabilizing:accumulation
 import microcity.Positions.attractionPositions
 import microcity.Positions.attractionUnion
 
-share (field <- attractionPositions()) {
-    foldHoodPlusSelf(field, { a, b -> attractionUnion(a, b) })
-}
+gossip (attractionPositions(), (a, b) -> { attractionUnion(a, b) })
+
+// share (field <- attractionPositions()) {
+//    foldHoodPlusSelf(field, { a, b -> attractionUnion(a, b) })
+//}
