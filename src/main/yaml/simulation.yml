@@ -98,7 +98,7 @@ _attractionPrograms: &attractionPrograms
 # Define visitors
 _visitors: &visitors
   - type: Polygon
-    parameters: [ 300, *bounds ]
+    parameters: [ 100, *bounds ]
     programs: *visitorPrograms
     contents:
       - { molecule: visitor, concentration: true }
