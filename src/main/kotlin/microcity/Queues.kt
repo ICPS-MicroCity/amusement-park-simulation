@@ -36,11 +36,13 @@ object Queues {
 
     @JvmStatic
     fun queuesUnion(ctx: AlchemistExecutionContext<*>, a: List<Queue>, b: List<Queue>): List<Queue> =
-        a.filter { b.find { q -> q.attraction.id == it.attraction.id } == null }
-            .union(b).toList().sortedBy { it.attraction.id }
-                .apply {
-                    this.find { it.attraction.id == getId(ctx) }?.visitors = getQueue(ctx)
-                }
+        ArrayList(
+            a.filter { b.find { q -> q.attraction.id == it.attraction.id } == null }
+                .union(b).toList().sortedBy { it.attraction.id }
+                    .apply {
+                        this.find { it.attraction.id == getId(ctx) }?.visitors = getQueue(ctx)
+                    }
+        )
 
     @JvmStatic
     fun dequeue(ctx: AlchemistExecutionContext<*>): List<Position> = when {
