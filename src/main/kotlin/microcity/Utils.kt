@@ -9,7 +9,9 @@ import microcity.Positions.Position
 import microcity.Queues.Queue
 import microcity.Utils.Molecules.CAPACITY
 import microcity.Utils.Molecules.DESTINATION
+import microcity.Utils.Molecules.LAZY_POPULAR_POLICY
 import microcity.Utils.Molecules.NEXT_POLICY
+import microcity.Utils.Molecules.POPULARITY
 import microcity.Utils.Molecules.QUEUE
 import microcity.Utils.Molecules.QUEUES
 import microcity.Utils.Molecules.SATISFACTION
@@ -18,12 +20,8 @@ import microcity.Utils.Molecules.SATISFIED
 import microcity.Utils.Molecules.SHORTEST_QUEUE_POLICY
 import microcity.Utils.Molecules.SHORTEST_QUEUE_RANGE_POLICY
 import microcity.Utils.Molecules.VISITOR
-import microcity.policy.NextPolicy
-import microcity.policy.RandomPolicy
-import microcity.policy.ShortestQueueInRangePolicy
-import microcity.policy.ShortestQueuePolicy
+import microcity.policy.*
 import org.protelis.lang.datatype.Tuple
-import org.protelis.lang.datatype.impl.ArrayTupleImpl
 
 object Utils {
 
@@ -37,6 +35,7 @@ object Utils {
         const val CAPACITY: String = "capacity"
         const val POSITIONS: String = "org:protelis:microcity:positions"
         const val DESTINATION: String = "org:protelis:microcity:destination"
+        const val POPULARITY: String = "popularity"
         const val QUEUE: String = "org:protelis:microcity:queue"
         const val QUEUES: String = "org:protelis:microcity:queues"
         const val SATISFACTION: String = "org:protelis:microcity:satisfaction"
@@ -44,6 +43,7 @@ object Utils {
         const val NEXT_POLICY: String = "next-policy"
         const val SHORTEST_QUEUE_POLICY: String = "shortestQueue"
         const val SHORTEST_QUEUE_RANGE_POLICY: String = "shortestQueueRange"
+        const val LAZY_POPULAR_POLICY: String = "lazyPopular"
         const val WAITING_TIME: String = "waiting-time"
     }
 
@@ -81,6 +81,7 @@ object Utils {
         fun getNextPolicy(ctx: AlchemistExecutionContext<*>): NextPolicy = when {
             has(ctx, NEXT_POLICY) && get(ctx, NEXT_POLICY) == SHORTEST_QUEUE_POLICY -> ShortestQueuePolicy()
             has(ctx, NEXT_POLICY) && get(ctx, NEXT_POLICY) == SHORTEST_QUEUE_RANGE_POLICY -> ShortestQueueInRangePolicy()
+            has(ctx, NEXT_POLICY) && get(ctx, NEXT_POLICY) == LAZY_POPULAR_POLICY -> LazyPopularPolicy()
             else -> RandomPolicy()
         }
     }
@@ -98,5 +99,8 @@ object Utils {
 
         fun getVisitorsPerRound(ctx: AlchemistExecutionContext<*>): Int =
             (get(ctx, CAPACITY) as Double).toInt()
+
+        @JvmStatic
+        fun getPopularity(ctx: AlchemistExecutionContext<*>): Int = get(ctx, POPULARITY) as Int
     }
 }
