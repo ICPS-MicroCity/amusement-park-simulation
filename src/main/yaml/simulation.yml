@@ -73,6 +73,13 @@ _satisfaction: &satisfaction
     program: org:protelis:microcity:satisfaction
   - program: send
 
+# Generates a recommendation for the visitor
+_recommendation: &recommendation
+  - time-distribution: 0.01 # once every 100 seconds
+    program: org:protelis:microcity:recommendation
+  - program: send
+
+# Establishes whether the visitor is moving or not
 _moving: &moving
   - time-distribution: 1 # once per second
     program: org:protelis:microcity:moving
@@ -82,6 +89,7 @@ _moving: &moving
 _visitorPrograms: &visitorPrograms
   - *move
   - *destination
+  - *recommendation
   - *positions
   - *queue
   - *queues
