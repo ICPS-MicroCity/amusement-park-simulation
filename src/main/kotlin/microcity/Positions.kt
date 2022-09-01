@@ -29,14 +29,12 @@ object Positions {
     @JvmStatic
     fun attractionPositions(ctx: AlchemistExecutionContext<*>): List<Position> = when {
         role(ctx, ATTRACTION) -> arrayListOf(Position(getId(ctx), getCoordinates(ctx)))
-        else -> ArrayList()
+        else -> arrayListOf(Position(getId(ctx), getCoordinates(ctx)))
     }
 
     @JvmStatic
     fun attractionUnion(l1: List<Position>, l2: List<Position>): List<Position> =
-        ArrayList(
-            l1.union(l2).toList().sortedBy { it.id }
-        )
+        ArrayList(l2.filter { l1.find { p -> p.id == it.id } == null }.union(l1).toList().sortedBy { it.id })
 
     fun getPositions(ctx: AlchemistExecutionContext<*>): List<Position> = when {
         has(ctx, POSITIONS) -> when (val positions = get(ctx, POSITIONS)) {
