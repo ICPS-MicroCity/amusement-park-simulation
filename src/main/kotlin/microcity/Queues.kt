@@ -35,20 +35,12 @@ object Queues {
     }
 
     @JvmStatic
-    fun flatting(a: List<Queue>, b: List<Queue>): List<Queue> =
+    fun queuesUnion(ctx: AlchemistExecutionContext<*>, a: List<Queue>, b: List<Queue>): List<Queue> =
         a.filter { b.find { q -> q.attraction.id == it.attraction.id } == null }
             .union(b).toList().sortedBy { it.attraction.id }
-
-    @JvmStatic
-    fun queuesUnion(ctx: AlchemistExecutionContext<*>, l1: List<Queue>, l2: List<Queue>): List<Queue> =
-        ArrayList(
-            l1.filter { l2.find { q -> q.attraction.id == it.attraction.id } == null }
-                .union(l2)
-                .toList()
-                .sortedBy { it.attraction.id }
-        ).apply {
-            this.find { it.attraction.id == getId(ctx) }?.visitors = getQueue(ctx)
-        }
+                .apply {
+                    this.find { it.attraction.id == getId(ctx) }?.visitors = getQueue(ctx)
+                }
 
     @JvmStatic
     fun dequeue(ctx: AlchemistExecutionContext<*>): List<Position> = when {
