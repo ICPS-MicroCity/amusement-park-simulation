@@ -12,6 +12,7 @@ import microcity.Utils.Molecules.DESTINATION
 import microcity.Utils.Molecules.LAZY_POPULAR_POLICY
 import microcity.Utils.Molecules.NEXT_POLICY
 import microcity.Utils.Molecules.POPULARITY
+import microcity.Utils.Molecules.PREVIOUS_DESTINATION
 import microcity.Utils.Molecules.QUEUE
 import microcity.Utils.Molecules.QUEUES
 import microcity.Utils.Molecules.RECOMMENDATION_POLICY
@@ -46,6 +47,7 @@ object Utils {
         const val SHORTEST_QUEUE_POLICY: String = "shortestQueue"
         const val SHORTEST_QUEUE_RANGE_POLICY: String = "shortestQueueRange"
         const val LAZY_POPULAR_POLICY: String = "lazyPopular"
+        const val PREVIOUS_DESTINATION: String = "previous-destination"
         const val WAITING_TIME: String = "waiting-time"
     }
 
@@ -63,6 +65,10 @@ object Utils {
         @JvmStatic
         fun isSatisfied(ctx: AlchemistExecutionContext<*>): Boolean =
             has(ctx, SATISFIED) && (get(ctx, SATISFIED) as Boolean)
+
+        fun setPreviousDestination(ctx: AlchemistExecutionContext<*>, destination: Tuple) {
+            put(ctx, PREVIOUS_DESTINATION, destination)
+        }
 
         fun getDestination(ctx: AlchemistExecutionContext<*>): Tuple =
             if (has(ctx, DESTINATION)) get(ctx, DESTINATION) as Tuple else getCoordinates(ctx)

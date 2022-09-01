@@ -108,6 +108,7 @@ _visitors: &visitors
       - { molecule: next-policy, concentration: "\"lazyPopular\"" }
       - { molecule: waiting-time, concentration: 0 }
       - { molecule: moving, concentration: false }
+      - { molecule: previous-destination, concentration: [] }
       - { molecule: org:protelis:microcity:positions, concentration: [] }
       - { molecule: org:protelis:microcity:queues, concentration: [] }
 
