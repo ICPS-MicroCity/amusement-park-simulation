@@ -5,22 +5,23 @@ import it.unibo.alchemist.protelis.AlchemistExecutionContext
 import microcity.Device.get
 import microcity.Device.getCoordinates
 import microcity.Device.getId
+import microcity.Positions.Attraction
 import microcity.Positions.Position
 import microcity.Positions.createPositions
 import microcity.Utils.Attractions.getPopularity
 import microcity.Utils.Attractions.getQueue
 import microcity.Utils.Attractions.getSatisfied
-import microcity.Utils.Attractions.getVisitorsPerRound
+import microcity.Utils.Attractions.getCapacity
+import microcity.Utils.Attractions.getDuration
 import microcity.Utils.Molecules.ATTRACTION
 import microcity.Utils.Molecules.VISITOR
 import microcity.Utils.Molecules.WAITING_TIME
 import microcity.Utils.Visitors.getDestination
-import microcity.Utils.Visitors.getQueues
 import microcity.Utils.role
 import org.protelis.lang.datatype.Tuple
 
 object Queues {
-    data class Queue(val attraction: Position, var visitors: List<Position>)
+    data class Queue(val attraction: Attraction, var visitors: List<Position>)
     data class Visitor(val position: Position, val destination: Tuple)
 
     @JvmStatic
@@ -31,14 +32,21 @@ object Queues {
 
     @JvmStatic
     fun createQueue(ctx: AlchemistExecutionContext<*>): List<Queue> = when {
-        role(ctx, ATTRACTION) -> arrayListOf(Queue(Position(getId(ctx), getCoordinates(ctx), getPopularity(ctx)), getQueue(ctx)))
+        role(ctx, ATTRACTION) -> arrayListOf(
+                Queue(Attraction(
+                                Position(getId(ctx), getCoordinates(ctx)),
+                                getPopularity(ctx),
+                                getCapacity(ctx),
+                                getDuration(ctx)
+                ), getQueue(ctx))
+        )
         else -> ArrayList()
     }
 
     @JvmStatic
     fun queuesUnion(a: List<Queue>, b: List<Queue>): List<Queue> = ArrayList(
-        b.filter { a.find { q -> q.attraction.id == it.attraction.id } == null }
-            .union(a).toList().sortedBy { it.attraction.id }
+        b.filter { a.find { q -> q.attraction.position.id == it.attraction.position.id } == null }
+            .union(a).toList().sortedBy { it.attraction.position.id }
     )
 
     @JvmStatic
@@ -46,7 +54,7 @@ object Queues {
         role(
             ctx,
             ATTRACTION
-        ) -> ArrayList(getQueue(ctx).take(getVisitorsPerRound(ctx).coerceAtMost(getQueue(ctx).size)))
+        ) -> ArrayList(getQueue(ctx).take(getCapacity(ctx).coerceAtMost(getQueue(ctx).size)))
         else -> arrayListOf()
     }
 
