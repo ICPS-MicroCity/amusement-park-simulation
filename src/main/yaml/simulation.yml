@@ -19,7 +19,7 @@ seeds:
 # The network model used allows to choose the nodes that have the "attraction" molecule in order to simulate an access point behaviour
 network-model:
   type: ConnectToAccessPoint
-  parameters: [100.0, "attraction"]
+  parameters: [150.0, "attraction"]
 
 # Use an OpenStreetMap Environment, deploying nodes only on streets
 environment:
@@ -99,7 +99,7 @@ _attractionPrograms: &attractionPrograms
 # Define visitors
 _visitors: &visitors
   - type: Polygon
-    parameters: [ 1, *bounds ]
+    parameters: [ 10, *bounds ]
     programs: *visitorPrograms
     contents:
       - { molecule: visitor, concentration: true }
