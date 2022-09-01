@@ -7,6 +7,7 @@ import microcity.Device.getCoordinates
 import microcity.Device.getId
 import microcity.Positions.Position
 import microcity.Positions.createPositions
+import microcity.Utils.Attractions.getPopularity
 import microcity.Utils.Attractions.getQueue
 import microcity.Utils.Attractions.getSatisfied
 import microcity.Utils.Attractions.getVisitorsPerRound
@@ -30,7 +31,7 @@ object Queues {
 
     @JvmStatic
     fun createQueue(ctx: AlchemistExecutionContext<*>): List<Queue> = when {
-        role(ctx, ATTRACTION) -> arrayListOf(Queue(Position(getId(ctx), getCoordinates(ctx)), getQueue(ctx)))
+        role(ctx, ATTRACTION) -> arrayListOf(Queue(Position(getId(ctx), getCoordinates(ctx), getPopularity(ctx)), getQueue(ctx)))
         else -> ArrayList()
     }
 

@@ -99,13 +99,13 @@ _attractionPrograms: &attractionPrograms
 # Define visitors
 _visitors: &visitors
   - type: Polygon
-    parameters: [ 10, *bounds ]
+    parameters: [ 1, *bounds ]
     programs: *visitorPrograms
     contents:
       - { molecule: visitor, concentration: true }
       - { molecule: satisfied, concentration: true }
       - { molecule: satisfactions, concentration: 0 }
-      - { molecule: next-policy, concentration: "\"shortestQueueRange\"" }
+      - { molecule: next-policy, concentration: "\"lazyPopular\"" }
       - { molecule: waiting-time, concentration: 0 }
       - { molecule: moving, concentration: false }
       - { molecule: org:protelis:microcity:positions, concentration: [] }
@@ -548,8 +548,8 @@ _attractions: &attractions
 
 # Deploy nodes
 deployments:
-  - *attractions
   - *visitors
+  - *attractions
 
 export:
   - type: CSVExporter
