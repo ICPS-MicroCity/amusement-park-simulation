@@ -31,50 +31,51 @@ _bounds: &bounds
   [[44.338, 12.26],[44.335, 12.263],[44.337, 12.268],[44.34, 12.266],[44.34, 12.264],[44.34, 12.262]]
 
 # Define the movement law with a Walker that moves only on streets towards
-# a GeoPosition indicated by the concentration of the tracking molecule
+# a GeoPosition indicated by the concentration of the tracking molecule.
+# On average, considering different ages, a person can walk at a speed of about 1.35 meters per second.
 _move: &move
-  - time-distribution: 1
+  - time-distribution: 1 # once per second
     type: Event
     actions:
       - type: TargetMapWalker
-        parameters: [org:protelis:microcity:destination, 1.0]
+        parameters: [org:protelis:microcity:destination, 1.35] # meters per second
 
 # Define the broadcast message from attractions to visitors
 # to spread their positions
 _positions: &positions
-  - time-distribution: 1
+  - time-distribution: 1 # once per second
     program: org:protelis:microcity:positions
   - program: send
 
 # Define the rule that establishes how visitors choose the
 # next destination
 _destination: &destination
-  - time-distribution: 1
+  - time-distribution: 1 # once per second
     program: org:protelis:microcity:destination
   - program: send
 
 # Define the message that visitors send when they get to
 # an attraction in order to enqueue themselves
 _queue: &queue
-  - time-distribution: 1
+  - time-distribution: 1 # once per second
     program: org:protelis:microcity:queue
   - program: send
 
 # Define the broadcast message from attractions to visitors
 # to spread their queues
 _queues: &queues
-  - time-distribution: 1
+  - time-distribution: 1 # once per second
     program: org:protelis:microcity:queues
   - program: send
 
 # Define the action of satisfying enqueued visitors
 _satisfaction: &satisfaction
-  - time-distribution: 0.01
+  - time-distribution: 0.01 # once every 100 second
     program: org:protelis:microcity:satisfaction
   - program: send
 
 _moving: &moving
-  - time-distribution: 1
+  - time-distribution: 1 # once per second
     program: org:protelis:microcity:moving
   - program: send
 
@@ -98,7 +99,7 @@ _attractionPrograms: &attractionPrograms
 # Define visitors
 _visitors: &visitors
   - type: Polygon
-    parameters: [ 100, *bounds ]
+    parameters: [ 10, *bounds ]
     programs: *visitorPrograms
     contents:
       - { molecule: visitor, concentration: true }
@@ -109,24 +110,6 @@ _visitors: &visitors
       - { molecule: moving, concentration: false }
       - { molecule: org:protelis:microcity:positions, concentration: [] }
       - { molecule: org:protelis:microcity:queues, concentration: [] }
-
-_less: &less
-  - type: Point
-    parameters: [44.33747, 12.26208]
-    programs: *attractionPrograms
-    contents:
-      - { molecule: attraction, concentration: true }
-      - { molecule: attraction-type, concentration: "\"restaurant\"" }
-      - { molecule: capacity, concentration: 10 }
-      - { molecule: name, concentration: "\"Drive-In\"" }
-  - type: Point
-    parameters: [ 44.33815, 12.2633 ]
-    programs: *attractionPrograms
-    contents:
-      - { molecule: attraction, concentration: true }
-      - { molecule: attraction-type, concentration: "\"restaurant\"" }
-      - { molecule: capacity, concentration: 10 }
-      - { molecule: name, concentration: "\"Bar del Lago\"" }
 
 # Define attractions
 _attractions: &attractions
@@ -538,6 +521,7 @@ export:
       - time
       - type: WaitingTimeExporter
 
+# Terminate the simulation after 5000 seconds
 terminate:
   - type: AfterTime
     parameters: 5000
