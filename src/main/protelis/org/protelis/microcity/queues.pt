@@ -3,10 +3,5 @@ module org:protelis:microcity:queues
 import protelis:coord:nonselfstabilizing:accumulation
 import microcity.Queues.createQueue
 import microcity.Queues.queuesUnion
-import microcity.Queues.flatting
 
-gossip (createQueue(), (a, b) -> { flatting(a, b) })
-
-//share (field <- createQueue()) {
-//    foldHoodPlusSelf(field, { a, b -> queuesUnion(a, b) })
-//}
+gossip (createQueue(), { a, b -> queuesUnion(a, b) })
