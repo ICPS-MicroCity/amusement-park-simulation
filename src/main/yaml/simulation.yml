@@ -120,6 +120,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"restaurant\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 3 }
       - { molecule: name, concentration: "\"Drive-In\"" }
   - type: Point
     parameters: [ 44.33815, 12.2633 ]
@@ -128,6 +129,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"restaurant\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 3 }
       - { molecule: name, concentration: "\"Bar del Lago\"" }
   - type: Point
     parameters: [ 44.33682, 12.26425 ]
@@ -136,6 +138,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"restaurant\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 3 }
       - { molecule: name, concentration: "\"Locanda del Faro\"" }
   - type: Point
     parameters: [ 44.33589, 12.26293 ]
@@ -144,6 +147,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"restaurant\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 3 }
       - { molecule: name, concentration: "\"McDonald's\"" }
   - type: Point
     parameters: [44.33679, 12.26153]
@@ -152,6 +156,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 5 }
       - { molecule: name, concentration: "\"iSpeed\"" }
   - type: Point
     parameters: [44.339, 12.26475]
@@ -160,6 +165,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 5 }
       - { molecule: name, concentration: "\"Rio Bravo\"" }
   - type: Point
     parameters: [44.33861, 12.26225]
@@ -168,6 +174,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 3 }
       - { molecule: name, concentration: "\"Raratonga\"" }
   - type: Point
     parameters: [44.33719, 12.26472]
@@ -176,6 +183,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 3 }
       - { molecule: name, concentration: "\"Delirium\"" }
   - type: Point
     parameters: [44.33927, 12.26615]
@@ -184,6 +192,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 5 }
       - { molecule: name, concentration: "\"Katun\"" }
   - type: Point
     parameters: [44.33861, 12.26225]
@@ -192,6 +201,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 3 }
       - { molecule: name, concentration: "\"Autosplash\"" }
   - type: Point
     parameters: [44.33579, 12.26133]
@@ -200,6 +210,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 4 }
       - { molecule: name, concentration: "\"DiVertical\"" }
   - type: Point
     parameters: [44.33734, 12.26611]
@@ -208,6 +219,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 2 }
       - { molecule: name, concentration: "\"Phobia\"" }
   - type: Point
     parameters: [44.3368, 12.2656]
@@ -216,6 +228,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 2 }
       - { molecule: name, concentration: "\"Columbia\"" }
   - type: Point
     parameters: [44.33779, 12.26399]
@@ -224,6 +237,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 2 }
       - { molecule: name, concentration: "\"Monosaurus\"" }
   - type: Point
     parameters: [ 44.33981, 12.2654 ]
@@ -232,6 +246,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 3 }
       - { molecule: name, concentration: "\"Master Thai\"" }
   - type: Point
     parameters: [ 44.33896, 12.26327 ]
@@ -240,6 +255,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 1 }
       - { molecule: name, concentration: "\"Desmo Race\"" }
   - type: Point
     parameters: [ 44.3391, 12.26335 ]
@@ -248,6 +264,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 1 }
       - { molecule: name, concentration: "\"Kiddy Monster\"" }
   - type: Point
     parameters: [ 44.33922, 12.26328 ]
@@ -256,6 +273,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 1 }
       - { molecule: name, concentration: "\"Diavel Ring\"" }
   - type: Point
     parameters: [ 44.33935, 12.26324 ]
@@ -264,6 +282,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 2 }
       - { molecule: name, concentration: "\"Scrumbler Run\"" }
   - type: Point
     parameters: [ 44.33911, 12.26314 ]
@@ -272,6 +291,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 1 }
       - { molecule: name, concentration: "\"Experience Building\"" }
   - type: Point
     parameters: [ 44.33547, 12.26279 ]
@@ -280,6 +300,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 4 }
       - { molecule: name, concentration: "\"Blue River\"" }
   - type: Point
     parameters: [ 44.3365, 12.26194 ]
@@ -288,6 +309,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 3 }
       - { molecule: name, concentration: "\"Las Vegas\"" }
   - type: Point
     parameters: [ 44.33666, 12.26241 ]
@@ -296,6 +318,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 1 }
       - { molecule: name, concentration: "\"Mini Cars\"" }
   - type: Point
     parameters: [ 44.33692, 12.26213 ]
@@ -304,6 +327,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 2 }
       - { molecule: name, concentration: "\"Naxcar\"" }
   - type: Point
     parameters: [ 44.33799, 12.26254 ]
@@ -312,6 +336,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 1 }
       - { molecule: name, concentration: "\"Mini Stunt\"" }
   - type: Point
     parameters: [ 44.33703, 12.26269 ]
@@ -320,6 +345,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 2 }
       - { molecule: name, concentration: "\"Casa Matta\"" }
   - type: Point
     parameters: [ 44.33696, 12.26288 ]
@@ -328,6 +354,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 2 }
       - { molecule: name, concentration: "\"Flying Arturo\"" }
   - type: Point
     parameters: [ 44.33677, 12.26278 ]
@@ -336,6 +363,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 1 }
       - { molecule: name, concentration: "\"Fantasy Land\"" }
   - type: Point
     parameters: [ 44.33647, 12.26294 ]
@@ -344,6 +372,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 3 }
       - { molecule: name, concentration: "\"Santa Fe Express\"" }
   - type: Point
     parameters: [ 44.33674, 12.26306 ]
@@ -352,6 +381,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 1 }
       - { molecule: name, concentration: "\"Carousel\"" }
   - type: Point
     parameters: [ 44.33749, 12.26245 ]
@@ -360,6 +390,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 2 }
       - { molecule: name, concentration: "\"Mini Rapide\"" }
   - type: Point
     parameters: [ 44.33759, 12.26284 ]
@@ -368,6 +399,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 2 }
       - { molecule: name, concentration: "\"Leprotto Express\"" }
   - type: Point
     parameters: [ 44.33716, 12.26288 ]
@@ -376,6 +408,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 2 }
       - { molecule: name, concentration: "\"Arkade\"" }
   - type: Point
     parameters: [ 44.33727, 12.26452 ]
@@ -384,6 +417,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 3 }
       - { molecule: name, concentration: "\"Reptilium\"" }
   - type: Point
     parameters: [ 44.33743, 12.26489 ]
@@ -392,6 +426,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 2 }
       - { molecule: name, concentration: "\"Bicisauro\"" }
   - type: Point
     parameters: [ 44.33754, 12.26542 ]
@@ -400,6 +435,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 2 }
       - { molecule: name, concentration: "\"Rexplorer\"" }
   - type: Point
     parameters: [ 44.33755, 12.26509 ]
@@ -408,6 +444,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 1 }
       - { molecule: name, concentration: "\"BrontoCars\"" }
   - type: Point
     parameters: [ 44.33782, 12.26465 ]
@@ -416,6 +453,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 2 }
       - { molecule: name, concentration: "\"Raptotana\"" }
   - type: Point
     parameters: [ 44.33696, 12.26486 ]
@@ -424,6 +462,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 2 }
       - { molecule: name, concentration: "\"Fort Alamo\"" }
   - type: Point
     parameters: [ 44.33672, 12.2652 ]
@@ -432,6 +471,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 2 }
       - { molecule: name, concentration: "\"Buffalo Bill Rodeo\"" }
   - type: Point
     parameters: [ 44.3368, 12.26556 ]
@@ -440,6 +480,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 5 }
       - { molecule: name, concentration: "\"Oil Towers\"" }
   - type: Point
     parameters: [ 44.33699, 12.26582 ]
@@ -448,6 +489,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 3 }
       - { molecule: name, concentration: "\"Geronimo Towers\"" }
   - type: Point
     parameters: [ 44.3372, 12.26572 ]
@@ -456,6 +498,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 2 }
       - { molecule: name, concentration: "\"Aquila Tonante\"" }
   - type: Point
     parameters: [ 44.33769, 12.26609 ]
@@ -464,6 +507,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 4 }
       - { molecule: name, concentration: "\"Pakal\"" }
   - type: Point
     parameters: [ 44.33844, 12.26585 ]
@@ -472,6 +516,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 4 }
       - { molecule: name, concentration: "\"El Dorado Falls\"" }
   - type: Point
     parameters: [ 44.33923, 12.2618 ]
@@ -480,6 +525,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 2 }
       - { molecule: name, concentration: "\"Euro Will\"" }
   - type: Point
     parameters: [ 44.33594, 12.26255 ]
@@ -488,6 +534,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 3 }
       - { molecule: name, concentration: "\"Aquaqua\"" }
   - type: Point
     parameters: [ 44.33514, 12.26233 ]
@@ -496,6 +543,7 @@ _attractions: &attractions
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
+      - { molecule: popularity, concentration: 4 }
       - { molecule: name, concentration: "\"Reset\"" }
 
 # Deploy nodes
