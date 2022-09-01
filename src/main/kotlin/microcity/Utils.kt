@@ -101,6 +101,6 @@ object Utils {
             (get(ctx, CAPACITY) as Double).toInt()
 
         @JvmStatic
-        fun getPopularity(ctx: AlchemistExecutionContext<*>): Int = get(ctx, POPULARITY) as Int
+        fun getPopularity(ctx: AlchemistExecutionContext<*>): Int = (get(ctx, POPULARITY) as Double).toInt()
     }
 }
