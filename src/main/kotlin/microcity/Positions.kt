@@ -34,7 +34,9 @@ object Positions {
 
     @JvmStatic
     fun attractionUnion(l1: List<Position>, l2: List<Position>): List<Position> =
-        ArrayList(l1.union(l2).toList().sortedBy { it.id })
+        ArrayList(
+            l1.union(l2).toList().sortedBy { it.id }
+        )
 
     fun getPositions(ctx: AlchemistExecutionContext<*>): List<Position> = when {
         has(ctx, POSITIONS) -> when (val positions = get(ctx, POSITIONS)) {
