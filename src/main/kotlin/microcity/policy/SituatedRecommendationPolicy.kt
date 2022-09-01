@@ -13,9 +13,9 @@ class SituatedRecommendationPolicy : NextPolicy {
                 likelihood(
                     it.attraction.popularity.toDouble(),
                     lazinessFromDistance(
-                        ctx.routingDistance(it.attraction.coordinates),
-                        getPositions(ctx).map { p -> ctx.routingDistance(p.coordinates) }
-                    ) + it.visitors.size.toDouble()
+                        ctx.routingDistance(it.attraction.position.coordinates),
+                        getPositions(ctx).map { p -> ctx.routingDistance(p.position.coordinates) }
+                    ) * queueTimeScore(queueTime(it.visitors.size, it.attraction.capacity, it.attraction.duration.toDouble()))
                 ))
-        }.maxBy { it.second }.first.coordinates
+        }.maxBy { it.second }.first.position.coordinates
 }
