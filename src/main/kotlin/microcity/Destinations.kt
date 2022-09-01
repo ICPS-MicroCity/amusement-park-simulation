@@ -6,6 +6,7 @@ import microcity.Positions.getPositions
 import microcity.Utils.Visitors.getDestination
 import microcity.Utils.Visitors.getNextPolicy
 import microcity.Utils.Visitors.getQueues
+import microcity.Utils.Visitors.getRecommendationPolicy
 import microcity.Utils.Visitors.isSatisfied
 import microcity.Utils.Visitors.satisfy
 import microcity.Utils.Visitors.setPreviousDestination
@@ -29,7 +30,5 @@ object Destinations {
     }
 
     @JvmStatic
-    fun getRecommendation(ctx: AlchemistExecutionContext<*>): Tuple {
-        getNextPolicy(ctx)
-    }
+    fun getRecommendation(ctx: AlchemistExecutionContext<*>): Tuple = getRecommendationPolicy(ctx).getNext(ctx)
 }

@@ -9,6 +9,7 @@ import microcity.Positions.Position
 import microcity.Queues.Queue
 import microcity.Utils.Molecules.CAPACITY
 import microcity.Utils.Molecules.DESTINATION
+import microcity.Utils.Molecules.DURATION
 import microcity.Utils.Molecules.LAZY_POPULAR_POLICY
 import microcity.Utils.Molecules.NEXT_POLICY
 import microcity.Utils.Molecules.POPULARITY
@@ -21,6 +22,7 @@ import microcity.Utils.Molecules.SATISFACTIONS
 import microcity.Utils.Molecules.SATISFIED
 import microcity.Utils.Molecules.SHORTEST_QUEUE_POLICY
 import microcity.Utils.Molecules.SHORTEST_QUEUE_RANGE_POLICY
+import microcity.Utils.Molecules.SITUATED_RECOMMENDATION_POLICY
 import microcity.Utils.Molecules.VISITOR
 import microcity.policy.*
 import org.protelis.lang.datatype.Tuple
@@ -38,6 +40,7 @@ object Utils {
         const val POSITIONS: String = "org:protelis:microcity:positions"
         const val DESTINATION: String = "org:protelis:microcity:destination"
         const val POPULARITY: String = "popularity"
+        const val DURATION: String = "duration"
         const val QUEUE: String = "org:protelis:microcity:queue"
         const val QUEUES: String = "org:protelis:microcity:queues"
         const val SATISFACTION: String = "org:protelis:microcity:satisfaction"
@@ -46,6 +49,7 @@ object Utils {
         const val RECOMMENDATION_POLICY: String = "recommendation-policy"
         const val SHORTEST_QUEUE_POLICY: String = "shortestQueue"
         const val SHORTEST_QUEUE_RANGE_POLICY: String = "shortestQueueRange"
+        const val SITUATED_RECOMMENDATION_POLICY: String = "situatedRecommendation"
         const val LAZY_POPULAR_POLICY: String = "lazyPopular"
         const val PREVIOUS_DESTINATION: String = "previous-destination"
         const val WAITING_TIME: String = "waiting-time"
@@ -94,7 +98,7 @@ object Utils {
         }
 
         fun getRecommendationPolicy(ctx: AlchemistExecutionContext<*>): NextPolicy = when {
-            has(ctx, RECOMMENDATION_POLICY) && get(ctx, RECOMMENDATION_POLICY) == SHORTEST_QUEUE_POLICY -> ShortestQueuePolicy()
+            has(ctx, RECOMMENDATION_POLICY) && get(ctx, RECOMMENDATION_POLICY) == SITUATED_RECOMMENDATION_POLICY -> SituatedRecommendationPolicy()
             else -> getNextPolicy(ctx)
         }
     }
@@ -110,10 +114,12 @@ object Utils {
             else -> arrayListOf()
         }
 
-        fun getVisitorsPerRound(ctx: AlchemistExecutionContext<*>): Int =
-            (get(ctx, CAPACITY) as Double).toInt()
+        fun getCapacity(ctx: AlchemistExecutionContext<*>): Int = (get(ctx, CAPACITY) as Double).toInt()
 
         @JvmStatic
         fun getPopularity(ctx: AlchemistExecutionContext<*>): Int = (get(ctx, POPULARITY) as Double).toInt()
+
+        @JvmStatic
+        fun getDuration(ctx: AlchemistExecutionContext<*>): Int = (get(ctx, DURATION) as Double).toInt()
     }
 }
