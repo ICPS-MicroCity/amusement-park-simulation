@@ -24,4 +24,9 @@ object Destinations {
     fun dissatisfy(ctx: AlchemistExecutionContext<*>, currentDestination: Tuple) {
         satisfy(ctx, currentDestination == getCoordinates(ctx))
     }
+
+    @JvmStatic
+    fun getRecommendation(ctx: AlchemistExecutionContext<*>): Tuple {
+        getNextPolicy(ctx)
+    }
 }

@@ -14,6 +14,7 @@ import microcity.Utils.Molecules.NEXT_POLICY
 import microcity.Utils.Molecules.POPULARITY
 import microcity.Utils.Molecules.QUEUE
 import microcity.Utils.Molecules.QUEUES
+import microcity.Utils.Molecules.RECOMMENDATION_POLICY
 import microcity.Utils.Molecules.SATISFACTION
 import microcity.Utils.Molecules.SATISFACTIONS
 import microcity.Utils.Molecules.SATISFIED
@@ -41,6 +42,7 @@ object Utils {
         const val SATISFACTION: String = "org:protelis:microcity:satisfaction"
         const val SATISFACTIONS: String = "satisfactions"
         const val NEXT_POLICY: String = "next-policy"
+        const val RECOMMENDATION_POLICY: String = "recommendation-policy"
         const val SHORTEST_QUEUE_POLICY: String = "shortestQueue"
         const val SHORTEST_QUEUE_RANGE_POLICY: String = "shortestQueueRange"
         const val LAZY_POPULAR_POLICY: String = "lazyPopular"
@@ -83,6 +85,11 @@ object Utils {
             has(ctx, NEXT_POLICY) && get(ctx, NEXT_POLICY) == SHORTEST_QUEUE_RANGE_POLICY -> ShortestQueueInRangePolicy()
             has(ctx, NEXT_POLICY) && get(ctx, NEXT_POLICY) == LAZY_POPULAR_POLICY -> LazyPopularPolicy()
             else -> RandomPolicy()
+        }
+
+        fun getRecommendationPolicy(ctx: AlchemistExecutionContext<*>): NextPolicy = when {
+            has(ctx, RECOMMENDATION_POLICY) && get(ctx, RECOMMENDATION_POLICY) == SHORTEST_QUEUE_POLICY -> ShortestQueuePolicy()
+            else -> getNextPolicy(ctx)
         }
     }
 
