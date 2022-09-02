@@ -1,4 +1,4 @@
-module org:protelis:microcity:queues
+module org:protelis:microcity:gossipQueues
 
 import protelis:coord:nonselfstabilizing:accumulation
 import microcity.Queues.createQueue

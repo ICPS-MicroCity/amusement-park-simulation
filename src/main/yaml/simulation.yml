@@ -43,7 +43,7 @@ _move: &move
 # to spread their positions
 _positions: &positions
   - time-distribution: 1 # once per second
-    program: org:protelis:microcity:positions
+    program: org:protelis:microcity:gossipPositions
   - program: send
 
 # Define the rule that establishes how visitors choose the
@@ -64,7 +64,7 @@ _queue: &queue
 # to spread their queues
 _queues: &queues
   - time-distribution: 1 # once per second
-    program: org:protelis:microcity:queues
+    program: org:protelis:microcity:gossipQueues
   - program: send
 
 # Define the action of satisfying enqueued visitors
