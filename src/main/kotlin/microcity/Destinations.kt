@@ -2,7 +2,9 @@ package microcity
 
 import it.unibo.alchemist.protelis.AlchemistExecutionContext
 import microcity.Device.getCoordinates
+import microcity.Device.put
 import microcity.Positions.getPositions
+import microcity.Utils.Molecules.DESTINATION
 import microcity.Utils.Visitors.getDestination
 import microcity.Utils.Visitors.getNextPolicy
 import microcity.Utils.Visitors.getQueues
@@ -26,8 +28,7 @@ object Destinations {
     }
 
     @JvmStatic
-    fun getRecommendation(ctx: AlchemistExecutionContext<*>): Tuple = when {
-        getPositions(ctx).size > 10 && getQueues(ctx).size > 1 -> getRecommendationPolicy(ctx).getNext(ctx)
-        else -> getCoordinates(ctx)
+    fun changeDestination(ctx: AlchemistExecutionContext<*>, dst: Tuple) {
+        put(ctx, DESTINATION, dst)
     }
 }

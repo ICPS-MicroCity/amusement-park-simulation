@@ -1,5 +1,5 @@
 module org:protelis:microcity:recommendation
 
-import microcity.Destinations.getRecommendation
+import microcity.Recommendations.recommend
 
-getRecommendation()
+recommend()
