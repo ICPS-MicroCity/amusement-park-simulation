@@ -47,6 +47,7 @@ object Utils {
         const val SATISFACTION: String = "org:protelis:microcity:satisfaction"
         const val SATISFACTIONS: String = "satisfactions"
         const val NEXT_POLICY: String = "next-policy"
+        const val RECOMMENDATION: String = "org:protelis:microcity:recommendation"
         const val RECOMMENDATION_POLICY: String = "recommendation-policy"
         const val SHORTEST_QUEUE_POLICY: String = "shortestQueue"
         const val SHORTEST_QUEUE_RANGE_POLICY: String = "shortestQueueRange"
