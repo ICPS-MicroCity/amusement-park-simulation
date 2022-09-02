@@ -1,4 +1,4 @@
-module org:protelis:microcity:positions
+module org:protelis:microcity:gossipPositions
 
 import protelis:coord:nonselfstabilizing:accumulation
 import microcity.Positions.attractionPositions
