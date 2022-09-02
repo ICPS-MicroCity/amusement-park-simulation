@@ -75,6 +75,9 @@ object Utils {
             put(ctx, PREVIOUS_DESTINATION, destination)
         }
 
+        fun getPreviousDestination(ctx: AlchemistExecutionContext<*>): Tuple =
+            if (has(ctx, PREVIOUS_DESTINATION)) get(ctx, PREVIOUS_DESTINATION) as Tuple else getCoordinates(ctx)
+
         fun getDestination(ctx: AlchemistExecutionContext<*>): Tuple =
             if (has(ctx, DESTINATION)) get(ctx, DESTINATION) as Tuple else getCoordinates(ctx)
 
