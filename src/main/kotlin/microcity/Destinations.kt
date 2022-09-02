@@ -30,5 +30,8 @@ object Destinations {
     }
 
     @JvmStatic
-    fun getRecommendation(ctx: AlchemistExecutionContext<*>): Tuple = getRecommendationPolicy(ctx).getNext(ctx)
+    fun getRecommendation(ctx: AlchemistExecutionContext<*>): Tuple = when {
+        getPositions(ctx).size > 10 && getQueues(ctx).size > 1 -> getRecommendationPolicy(ctx).getNext(ctx)
+        else -> getCoordinates(ctx)
+    }
 }
