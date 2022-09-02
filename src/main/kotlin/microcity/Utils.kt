@@ -41,6 +41,7 @@ object Utils {
         const val DESTINATION: String = "org:protelis:microcity:destination"
         const val POPULARITY: String = "popularity"
         const val DURATION: String = "duration"
+        const val MOVING: String = "moving"
         const val QUEUE: String = "org:protelis:microcity:queue"
         const val QUEUES: String = "org:protelis:microcity:queues"
         const val SATISFACTION: String = "org:protelis:microcity:satisfaction"

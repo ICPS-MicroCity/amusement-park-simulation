@@ -10,7 +10,10 @@ import microcity.Utils.Attractions.getCapacity
 import microcity.Utils.Attractions.getDuration
 import microcity.Utils.Attractions.getPopularity
 import microcity.Utils.Molecules.ATTRACTION
+import microcity.Utils.Molecules.MOVING
 import microcity.Utils.Molecules.POSITIONS
+import microcity.Utils.Visitors.getDestination
+import microcity.Utils.Visitors.setPreviousDestination
 import microcity.Utils.role
 import org.protelis.lang.datatype.Tuple
 
@@ -23,7 +26,10 @@ object Positions {
 
     @JvmStatic
     fun updateMoving(ctx: AlchemistExecutionContext<*>, position: Tuple) {
-        put(ctx, "moving", position != getCoordinates(ctx))
+        put(ctx, MOVING, position != getCoordinates(ctx))
+        if (position == getCoordinates(ctx)) {
+            setPreviousDestination(ctx, getDestination(ctx))
+        }
     }
 
     @JvmStatic
