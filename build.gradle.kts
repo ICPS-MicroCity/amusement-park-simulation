@@ -94,7 +94,7 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
 
 tasks.withType(KotlinCompile::class.java).configureEach {
     kotlinOptions {
-        freeCompilerArgs += "-Xjvm-default=enable"
+        freeCompilerArgs += "-Xjvm-default=all"
     }
 }
 
