@@ -90,7 +90,7 @@ object Queues {
             Device.put(
                 ctx,
                 WAITING_TIME,
-                DoubleTime(Device.get(ctx, WAITING_TIME) as Double).plus(
+                DoubleTime(get(ctx, WAITING_TIME) as Double).plus(
                     DoubleTime(ctx.currentTime.toDouble()).minus(time)
                 ).toDouble()
             )
