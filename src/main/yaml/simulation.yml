@@ -37,7 +37,7 @@ _move: &move
     type: Event
     actions:
       - type: TargetMapWalker
-        parameters: [org:protelis:microcity:destination, 1.35] # meters per second
+        parameters: [org:protelis:microcity:destination, 1] # meters per second
 
 # Define the broadcast message from attractions to visitors
 # to spread their positions
@@ -75,7 +75,7 @@ _satisfaction: &satisfaction
 
 # Generates a recommendation for the visitor
 _recommendation: &recommendation
-  - time-distribution: 0.01 # once every 100 seconds
+  - time-distribution: 0.1 # once every 10 seconds
     program: org:protelis:microcity:recommendation
   - program: send
 
@@ -96,7 +96,6 @@ _visitorPrograms: &visitorPrograms
   - *move
   - *destination
   - *recommendation
-  - *evaluateRecommendation
   - *positions
   - *queue
   - *queues
@@ -113,7 +112,7 @@ _attractionPrograms: &attractionPrograms
 # Define visitors
 _visitors: &visitors
   - type: Polygon
-    parameters: [ 1, *bounds ]
+    parameters: [ 3, *bounds ]
     programs: *visitorPrograms
     contents:
       - { molecule: visitor, concentration: true }
@@ -197,7 +196,7 @@ _attractions: &attractions
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
       - { molecule: duration, concentration: 100 }
-      - { molecule: popularity, concentration: 3 }
+      - { molecule: popularity, concentration: 2 }
       - { molecule: name, concentration: "\"Raratonga\"" }
   - type: Point
     parameters: [44.33719, 12.26472]

@@ -6,6 +6,7 @@ import microcity.Device.get
 import microcity.Device.has
 import microcity.Device.put
 import microcity.Utils.Molecules.RECOMMENDATION
+import microcity.Utils.Visitors.isMoving
 import org.protelis.lang.datatype.Tuple
 import org.protelis.lang.datatype.impl.ArrayTupleImpl
 import kotlin.random.Random
@@ -31,9 +32,8 @@ object Recommendations {
 
     @JvmStatic
     fun evaluateRecommendation(ctx: AlchemistExecutionContext<*>) {
-        when {
-            !getRecommendation(ctx).isEmpty && Random.nextDouble() > 0.5 -> changeDestination(ctx, getRecommendation(ctx))
-            else -> emptyRecommendation(ctx)
-        }
+        if (isMoving(ctx) && !getRecommendation(ctx).isEmpty && Random.nextDouble() > 0.5)
+            changeDestination(ctx, getRecommendation(ctx)).also { println("changed destination to ${getRecommendation(ctx)}") }
+
     }
 }

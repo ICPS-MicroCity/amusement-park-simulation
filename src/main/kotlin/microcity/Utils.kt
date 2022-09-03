@@ -11,6 +11,7 @@ import microcity.Utils.Molecules.CAPACITY
 import microcity.Utils.Molecules.DESTINATION
 import microcity.Utils.Molecules.DURATION
 import microcity.Utils.Molecules.LAZY_POPULAR_POLICY
+import microcity.Utils.Molecules.MOVING
 import microcity.Utils.Molecules.NEXT_POLICY
 import microcity.Utils.Molecules.POPULARITY
 import microcity.Utils.Molecules.PREVIOUS_DESTINATION
@@ -62,6 +63,10 @@ object Utils {
         @JvmStatic
         fun isVisitor(ctx: AlchemistExecutionContext<*>): Boolean =
             role(ctx, VISITOR)
+
+        @JvmStatic
+        fun isMoving(ctx: AlchemistExecutionContext<*>): Boolean =
+            isVisitor(ctx) && has(ctx, MOVING) && get(ctx, MOVING) as Boolean
 
         @JvmStatic
         fun satisfy(ctx: AlchemistExecutionContext<*>, value: Boolean) {
