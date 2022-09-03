@@ -4,6 +4,7 @@ import it.unibo.alchemist.protelis.AlchemistExecutionContext
 import microcity.Positions.getPositions
 import microcity.Utils.Visitors.getDestination
 import org.protelis.lang.datatype.Tuple
+import kotlin.random.Random
 
 class LazyPopularPolicy : NextPolicy {
     override fun getNext(ctx: AlchemistExecutionContext<*>): Tuple =
@@ -13,7 +14,7 @@ class LazyPopularPolicy : NextPolicy {
                 Pair(
                     it.position.coordinates,
                     likelihood(
-                        it.popularity.toDouble(),
+                        it.popularity.toDouble() * Random.nextInt(1, 10),
                         lazinessFromDistance(
                             ctx.routingDistance(it.position.coordinates),
                             getPositions(ctx)
