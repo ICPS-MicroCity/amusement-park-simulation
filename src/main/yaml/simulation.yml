@@ -1,20 +1,5 @@
 incarnation: protelis
 
-variables:
-  strategy: &strategy
-    type: ArbitraryVariable
-    parameters: ["\"random\"", ["\"random\"", "\"shortestQueue\"", "\"shortestQueueRange\""]]
-  scenarioSeed: &scenarioSeed
-    type: LinearVariable
-    parameters: [0, 0, 4, 1]
-  simulationSeed: &simulationSeed
-    type: LinearVariable
-    parameters: [0, 0, 4, 1]
-
-seeds:
-  scenario: *scenarioSeed
-  simulation: *simulationSeed
-
 # The network model used allows to choose the nodes that have the "attraction" molecule in order to simulate an access point behaviour
 network-model:
   type: ConnectToAccessPoint
@@ -79,12 +64,6 @@ _recommendation: &recommendation
     program: org:protelis:microcity:recommendation
   - program: send
 
-# Decide whether following a recommendation or not
-_evaluateRecommendation: &evaluateRecommendation
-  - time-distribution: 1.0 # once per second
-    program: org:protelis:microcity:evaluateRecommendation
-  - program: send
-
 # Establishes whether the visitor is moving or not
 _moving: &moving
   - time-distribution: 1 # once per second
@@ -112,7 +91,7 @@ _attractionPrograms: &attractionPrograms
 # Define visitors
 _visitors: &visitors
   - type: Polygon
-    parameters: [ 3, *bounds ]
+    parameters: [ 100, *bounds ]
     programs: *visitorPrograms
     contents:
       - { molecule: visitor, concentration: true }

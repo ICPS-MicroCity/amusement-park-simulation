@@ -14,7 +14,7 @@ class LazyPopularPolicy : NextPolicy {
                 Pair(
                     it.position.coordinates,
                     likelihood(
-                        it.popularity.toDouble() * Random.nextInt(1, 10),
+                        it.popularity.toDouble() * Random.nextInt(1, 20),
                         lazinessFromDistance(
                             ctx.routingDistance(it.position.coordinates),
                             getPositions(ctx)
