@@ -5,6 +5,7 @@ import microcity.Device.get
 import microcity.Device.getCoordinates
 import microcity.Device.has
 import microcity.Device.put
+import microcity.Maths.gaussian
 import microcity.Positions.Position
 import microcity.Queues.Queue
 import microcity.Utils.Molecules.CAPACITY
@@ -27,6 +28,7 @@ import microcity.Utils.Molecules.SITUATED_RECOMMENDATION_POLICY
 import microcity.Utils.Molecules.VISITOR
 import microcity.policy.*
 import org.protelis.lang.datatype.Tuple
+import java.util.Random
 
 object Utils {
 
@@ -111,6 +113,9 @@ object Utils {
             has(ctx, RECOMMENDATION_POLICY) && get(ctx, RECOMMENDATION_POLICY) == SITUATED_RECOMMENDATION_POLICY -> SituatedRecommendationPolicy()
             else -> getNextPolicy(ctx)
         }
+
+        @JvmStatic
+        fun setGroupCardinality(): Int = gaussian().toInt().coerceIn(1, 6)
     }
 
     object Attractions {

@@ -1,16 +1,14 @@
 package microcity.policy
 
+import microcity.Maths.normalize
+import microcity.Maths.sigmoid
 import org.protelis.lang.datatype.Tuple
 import kotlin.math.exp
 
 fun likelihood(popularity: Double, laziness: Double): Double = popularity / laziness
 
 fun lazinessFromDistance(distance: Double, distances: List<Double>): Double =
-    sigmoid(normalize(distance, distances.min(), distances.max()))
-
-fun sigmoid(x: Double): Double = 1 / (1 + exp(-x + 3))
-
-fun normalize(x: Double, min: Double, max: Double): Double = (x - min) / (max - min) * 5
+    sigmoid(normalize(distance, distances.min(), distances.max()) * 5)
 
 fun queueTime(queueSize: Int, capacity: Int, duration: Double): Double = (queueSize / capacity) * duration
 

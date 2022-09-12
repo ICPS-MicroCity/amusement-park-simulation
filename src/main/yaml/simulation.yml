@@ -70,6 +70,13 @@ _moving: &moving
     program: org:protelis:microcity:moving
   - program: send
 
+_cardinality: &cardinality
+  - time-distribution:
+      type: Trigger
+      parameters: [0.0]
+    program: org:protelis:microcity:cardinality
+  - program: send
+
 # Define the programs that all visitors need to implement
 _visitorPrograms: &visitorPrograms
   - *move
@@ -80,6 +87,7 @@ _visitorPrograms: &visitorPrograms
   - *queues
   - *satisfaction
   - *moving
+  - *cardinality
 
 # Define the programs that all the attractions need to implement
 _attractionPrograms: &attractionPrograms
@@ -91,7 +99,7 @@ _attractionPrograms: &attractionPrograms
 # Define visitors
 _visitors: &visitors
   - type: Polygon
-    parameters: [ 1, *bounds ]
+    parameters: [ 100, *bounds ]
     programs: *visitorPrograms
     contents:
       - { molecule: visitor, concentration: true }

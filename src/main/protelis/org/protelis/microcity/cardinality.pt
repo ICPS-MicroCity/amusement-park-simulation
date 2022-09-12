@@ -1,0 +1,5 @@
+module org:protelis:microcity:cardinality
+
+import microcity.Utils.Visitors.setGroupCardinality
+
+setGroupCardinality()
