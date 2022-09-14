@@ -16,17 +16,18 @@ import microcity.Utils.Attractions.getDuration
 import microcity.Utils.Molecules.ATTRACTION
 import microcity.Utils.Molecules.VISITOR
 import microcity.Utils.Molecules.WAITING_TIME
+import microcity.Utils.Visitors.getCardinality
 import microcity.Utils.Visitors.getDestination
 import microcity.Utils.role
 import org.protelis.lang.datatype.Tuple
 
 object Queues {
-    data class Queue(val attraction: Attraction, var visitors: List<Position>)
-    data class Visitor(val position: Position, val destination: Tuple)
+    data class Queue(val attraction: Attraction, var visitors: List<Visitor>)
+    data class Visitor(val position: Position, val destination: Tuple, val cardinality: Int)
 
     @JvmStatic
     fun createVisitors(ctx: AlchemistExecutionContext<*>): List<Visitor> = when {
-        role(ctx, VISITOR) -> arrayListOf(Visitor(createPositions(ctx)[0], getDestination(ctx)))
+        role(ctx, VISITOR) -> arrayListOf(Visitor(createPositions(ctx)[0], getDestination(ctx), getCardinality(ctx)))
         else -> arrayListOf()
     }
 
@@ -50,11 +51,14 @@ object Queues {
     )
 
     @JvmStatic
-    fun dequeue(ctx: AlchemistExecutionContext<*>): List<Position> = when {
-        role(
-            ctx,
-            ATTRACTION
-        ) -> ArrayList(getQueue(ctx).take(getCapacity(ctx).coerceAtMost(getQueue(ctx).size)))
+    fun dequeue(ctx: AlchemistExecutionContext<*>): List<Visitor> = when {
+        role(ctx, ATTRACTION ) && getQueue(ctx).isNotEmpty() ->
+            ArrayList(getQueue(ctx).take(
+                getQueue(ctx).map { Pair(it.cardinality, 0) }
+                        .reduce { acc, v ->
+                            if (acc.first + v.first < getCapacity(ctx)) Pair(acc.first + v.first, acc.second+1)
+                            else Pair(acc.first, acc.second)}.second
+                ))
         else -> arrayListOf()
     }
 

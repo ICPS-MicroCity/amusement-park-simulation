@@ -9,6 +9,7 @@ import microcity.Maths.gaussian
 import microcity.Positions.Position
 import microcity.Queues.Queue
 import microcity.Utils.Molecules.CAPACITY
+import microcity.Utils.Molecules.CARDINALITY
 import microcity.Utils.Molecules.DESTINATION
 import microcity.Utils.Molecules.DURATION
 import microcity.Utils.Molecules.LAZY_POPULAR_POLICY
@@ -41,6 +42,7 @@ object Utils {
         const val SATISFIED: String = "satisfied"
         const val CAPACITY: String = "capacity"
         const val POSITIONS: String = "org:protelis:microcity:gossipPositions"
+        const val CARDINALITY: String = "org:protelis:microcity:cardinality"
         const val DESTINATION: String = "org:protelis:microcity:destination"
         const val POPULARITY: String = "popularity"
         const val DURATION: String = "duration"
@@ -116,11 +118,16 @@ object Utils {
 
         @JvmStatic
         fun setGroupCardinality(): Int = gaussian().toInt().coerceIn(1, 6)
+
+        fun getCardinality(ctx: AlchemistExecutionContext<*>): Int = when {
+            has(ctx, CARDINALITY) -> get(ctx, CARDINALITY) as Int
+            else -> 0
+        }
     }
 
     object Attractions {
-        fun getQueue(ctx: AlchemistExecutionContext<*>): List<Position> = when {
-            has(ctx, QUEUE) -> (get(ctx, QUEUE) as List<Queues.Visitor>).map { it.position }
+        fun getQueue(ctx: AlchemistExecutionContext<*>): List<Queues.Visitor> = when {
+            has(ctx, QUEUE) -> (get(ctx, QUEUE) as List<Queues.Visitor>)
             else -> arrayListOf()
         }
 
