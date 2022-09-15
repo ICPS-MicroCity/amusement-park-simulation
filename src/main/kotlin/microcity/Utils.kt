@@ -8,6 +8,7 @@ import microcity.Device.put
 import microcity.Maths.gaussian
 import microcity.Positions.Position
 import microcity.Queues.Queue
+import microcity.Queues.Visitor
 import microcity.Utils.Molecules.CAPACITY
 import microcity.Utils.Molecules.CARDINALITY
 import microcity.Utils.Molecules.DESTINATION
@@ -126,13 +127,13 @@ object Utils {
     }
 
     object Attractions {
-        fun getQueue(ctx: AlchemistExecutionContext<*>): List<Queues.Visitor> = when {
-            has(ctx, QUEUE) -> (get(ctx, QUEUE) as List<Queues.Visitor>)
+        fun getQueue(ctx: AlchemistExecutionContext<*>): List<Visitor> = when {
+            has(ctx, QUEUE) -> (get(ctx, QUEUE) as List<Visitor>)
             else -> arrayListOf()
         }
 
-        fun getSatisfied(ctx: AlchemistExecutionContext<*>): List<Position> = when {
-            has(ctx, SATISFACTION) -> get(ctx, SATISFACTION) as List<Position>
+        fun getSatisfied(ctx: AlchemistExecutionContext<*>): List<Visitor> = when {
+            has(ctx, SATISFACTION) -> get(ctx, SATISFACTION) as List<Visitor>
             else -> arrayListOf()
         }
 

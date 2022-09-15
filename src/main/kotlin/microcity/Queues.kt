@@ -57,7 +57,7 @@ object Queues {
                 getQueue(ctx).map { Pair(it.cardinality, 0) }
                         .reduce { acc, v ->
                             if (acc.first + v.first < getCapacity(ctx)) Pair(acc.first + v.first, acc.second+1)
-                            else Pair(acc.first, acc.second)}.second
+                            else acc}.second
                 ))
         else -> arrayListOf()
     }
@@ -75,16 +75,16 @@ object Queues {
             .filter { it.position.coordinates == getCoordinates(ctx) }
             .filter { it.destination == getCoordinates(ctx) }
             .filter { it.position.id != getId(ctx) }
-            .filterNot { getSatisfied(ctx).map { p -> p.id }.contains(it.position.id) }
+            .filterNot { getSatisfied(ctx).map { p -> p.position.id }.contains(it.position.id) }
         else -> createVisitors(ctx)
     }
 
     @JvmStatic
-    fun satisfactionUnion(ctx: AlchemistExecutionContext<*>, a: List<Position>, b: List<Position>): List<Position> =
+    fun satisfactionUnion(ctx: AlchemistExecutionContext<*>, a: List<Visitor>, b: List<Visitor>): List<Visitor> =
         ArrayList(
             when {
-                role(ctx, VISITOR) -> a.union(b).filter { it.id == getId(ctx) }
-                else -> a.union(b).toList().filter { it.coordinates == getCoordinates(ctx) }
+                role(ctx, VISITOR) -> a.union(b).filter { it.position.id == getId(ctx) }
+                else -> a.union(b).toList().filter { it.position.coordinates == getCoordinates(ctx) }
             }
         )
 
