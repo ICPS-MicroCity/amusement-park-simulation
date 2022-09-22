@@ -6,7 +6,6 @@ import microcity.Device.getCoordinates
 import microcity.Device.has
 import microcity.Device.put
 import microcity.Maths.gaussian
-import microcity.Positions.Position
 import microcity.Queues.Queue
 import microcity.Queues.Visitor
 import microcity.Utils.Molecules.CAPACITY
@@ -30,7 +29,6 @@ import microcity.Utils.Molecules.SITUATED_RECOMMENDATION_POLICY
 import microcity.Utils.Molecules.VISITOR
 import microcity.policy.*
 import org.protelis.lang.datatype.Tuple
-import java.util.Random
 
 object Utils {
 

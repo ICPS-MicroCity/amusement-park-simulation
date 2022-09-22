@@ -53,12 +53,9 @@ object Queues {
     @JvmStatic
     fun dequeue(ctx: AlchemistExecutionContext<*>): List<Visitor> = when {
         role(ctx, ATTRACTION ) && getQueue(ctx).isNotEmpty() ->
-            ArrayList(getQueue(ctx).take(
-                getQueue(ctx).map { Pair(it.cardinality, 0) }
-                        .reduce { acc, v ->
-                            if (acc.first + v.first < getCapacity(ctx)) Pair(acc.first + v.first, acc.second+1)
-                            else acc}.second
-                ))
+            getQueue(ctx).mapIndexed { index, visitor ->
+                Pair(visitor, getQueue(ctx).take(index + 1).sumOf { v -> v.cardinality })
+            }.takeWhile { it.second < getCapacity(ctx) }.map { it.first }
         else -> arrayListOf()
     }
 
