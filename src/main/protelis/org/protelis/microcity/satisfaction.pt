@@ -7,7 +7,6 @@ import microcity.Utils.Visitors.satisfy
 
 share (field <- dequeue()) {
     let satisfied = foldHoodPlusSelf(field, { a, b -> satisfactionUnion(a, b) })
-    satisfy(!satisfied.isEmpty())
     addSatisfaction(!satisfied.isEmpty())
     dequeue()
 }
