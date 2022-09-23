@@ -3,7 +3,6 @@ package microcity.policy
 import microcity.Maths.normalize
 import microcity.Maths.sigmoid
 import org.protelis.lang.datatype.Tuple
-import kotlin.math.exp
 
 fun likelihood(popularity: Double, laziness: Double): Double = popularity / laziness
 

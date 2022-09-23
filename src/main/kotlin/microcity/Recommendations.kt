@@ -3,6 +3,7 @@ package microcity
 import it.unibo.alchemist.protelis.AlchemistExecutionContext
 import microcity.Destinations.changeDestination
 import microcity.Device.get
+import microcity.Device.getId
 import microcity.Device.has
 import microcity.Device.put
 import microcity.Utils.Molecules.RECOMMENDATION
@@ -32,8 +33,8 @@ object Recommendations {
 
     @JvmStatic
     fun evaluateRecommendation(ctx: AlchemistExecutionContext<*>) {
-        if (isMoving(ctx) && !getRecommendation(ctx).isEmpty && Random.nextDouble() > 0.5)
-            changeDestination(ctx, getRecommendation(ctx)).also { println("changed destination to ${getRecommendation(ctx)}") }
-
+        if (isMoving(ctx) && !getRecommendation(ctx).isEmpty && Random.nextDouble() > 0.5) {
+            changeDestination(ctx, getRecommendation(ctx)).also { println("${getId(ctx)} changed destination to ${getRecommendation(ctx)}") }
+        }
     }
 }

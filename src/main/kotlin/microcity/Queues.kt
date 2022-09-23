@@ -8,16 +8,17 @@ import microcity.Device.getId
 import microcity.Positions.Attraction
 import microcity.Positions.Position
 import microcity.Positions.createPositions
+import microcity.Utils.Attractions.getCapacity
+import microcity.Utils.Attractions.getDuration
 import microcity.Utils.Attractions.getPopularity
 import microcity.Utils.Attractions.getQueue
 import microcity.Utils.Attractions.getSatisfied
-import microcity.Utils.Attractions.getCapacity
-import microcity.Utils.Attractions.getDuration
 import microcity.Utils.Molecules.ATTRACTION
 import microcity.Utils.Molecules.VISITOR
 import microcity.Utils.Molecules.WAITING_TIME
 import microcity.Utils.Visitors.getCardinality
 import microcity.Utils.Visitors.getDestination
+import microcity.Utils.Visitors.satisfy
 import microcity.Utils.role
 import org.protelis.lang.datatype.Tuple
 
@@ -34,12 +35,15 @@ object Queues {
     @JvmStatic
     fun createQueue(ctx: AlchemistExecutionContext<*>): List<Queue> = when {
         role(ctx, ATTRACTION) -> arrayListOf(
-                Queue(Attraction(
-                                Position(getId(ctx), getCoordinates(ctx)),
-                                getPopularity(ctx),
-                                getCapacity(ctx),
-                                getDuration(ctx)
-                ), getQueue(ctx))
+            Queue(
+                Attraction(
+                    Position(getId(ctx), getCoordinates(ctx)),
+                    getPopularity(ctx),
+                    getCapacity(ctx),
+                    getDuration(ctx)
+                ),
+                getQueue(ctx)
+            )
         )
         else -> ArrayList()
     }
@@ -52,7 +56,7 @@ object Queues {
 
     @JvmStatic
     fun dequeue(ctx: AlchemistExecutionContext<*>): List<Visitor> = when {
-        role(ctx, ATTRACTION ) && getQueue(ctx).isNotEmpty() ->
+        role(ctx, ATTRACTION) && getQueue(ctx).isNotEmpty() ->
             getQueue(ctx).mapIndexed { index, visitor ->
                 Pair(visitor, getQueue(ctx).take(index + 1).sumOf { v -> v.cardinality })
             }.takeWhile { it.second < getCapacity(ctx) }.map { it.first }
@@ -64,6 +68,7 @@ object Queues {
         if (value) {
             Device.put(ctx, Utils.Molecules.SATISFACTIONS, Utils.Visitors.getSatisfactions(ctx) + 1)
         }
+        satisfy(ctx, value)
     }
 
     @JvmStatic
