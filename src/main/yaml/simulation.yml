@@ -18,7 +18,9 @@ _bounds: &bounds
 # a GeoPosition indicated by the concentration of the tracking molecule.
 # On average, considering different ages, a person can walk at a speed of about 1.35 meters per second.
 _move: &move
-  - time-distribution: 1 # once per second
+  - time-distribution: #1 # once per second
+      type: DiracComb
+      parameters: [1.0]
     type: Event
     actions:
       - type: TargetMapWalker
@@ -54,7 +56,7 @@ _queues: &queues
 
 # Define the action of satisfying enqueued visitors
 _satisfaction: &satisfaction
-  - time-distribution: 0.01 # once every 100 second
+  - time-distribution: 0.01 # once every 100 seconds
     program: org:protelis:microcity:satisfaction
   - program: send
 
@@ -62,6 +64,12 @@ _satisfaction: &satisfaction
 _recommendation: &recommendation
   - time-distribution: 0.1 # once every 10 seconds
     program: org:protelis:microcity:recommendation
+  - program: send
+
+# Generates a recommendation for the visitor
+_evaluateRecommendation: &evaluateRecommendation
+  - time-distribution: 0.01 # once every 100 seconds
+    program: org:protelis:microcity:evaluateRecommendation
   - program: send
 
 # Establishes whether the visitor is moving or not
@@ -82,6 +90,7 @@ _visitorPrograms: &visitorPrograms
   - *move
   - *destination
   - *recommendation
+  - *evaluateRecommendation
   - *positions
   - *queue
   - *queues
@@ -99,7 +108,7 @@ _attractionPrograms: &attractionPrograms
 # Define visitors
 _visitors: &visitors
   - type: Polygon
-    parameters: [ 100, *bounds ]
+    parameters: [ 50, *bounds ]
     programs: *visitorPrograms
     contents:
       - { molecule: visitor, concentration: true }
@@ -112,6 +121,7 @@ _visitors: &visitors
       - { molecule: previous-destination, concentration: [] }
       - { molecule: org:protelis:microcity:positions, concentration: [] }
       - { molecule: org:protelis:microcity:queues, concentration: [] }
+      - { molecule: frequency, concentration: 1.0 }
 
 # Define attractions
 _attractions: &attractions
@@ -125,6 +135,7 @@ _attractions: &attractions
       - { molecule: duration, concentration: 100 } # seconds
       - { molecule: popularity, concentration: 3 } # review stars (out of 5)
       - { molecule: name, concentration: "\"Drive-In\"" }
+      - { molecule: frequency, concentration: 0.1 }
   - type: Point
     parameters: [ 44.33815, 12.2633 ]
     programs: *attractionPrograms
