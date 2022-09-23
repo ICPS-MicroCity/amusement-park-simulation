@@ -6,4 +6,5 @@ build
 .idea/
 .vscode/
 bin/
+data/
 

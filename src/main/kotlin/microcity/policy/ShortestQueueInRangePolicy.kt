@@ -12,20 +12,20 @@ import kotlin.random.Random
 
 class ShortestQueueInRangePolicy(private val range: Double = 0.001) : NextPolicy {
     override fun getNext(ctx: AlchemistExecutionContext<*>): Tuple =
-        getQueues(ctx).filter { getDestination(ctx) != it.attraction.coordinates }
+        getQueues(ctx).filter { getDestination(ctx) != it.attraction.position.coordinates }
             .filter { withinRange(it, ctx) }
             .filter { it.visitors.size == getQueues(ctx).minBy { q -> q.visitors.size }.visitors.size }
             .let {
                 when (it.isNotEmpty()) {
-                    true -> it[Random.nextInt(0, it.size)].attraction.coordinates
+                    true -> it[Random.nextInt(0, it.size)].attraction.position.coordinates
                     else -> ShortestQueuePolicy().getNext(ctx)
                 }
             }
 
     private fun withinRange(queue: Queue, ctx: AlchemistExecutionContext<*>): Boolean =
         sqrt(
-            (getCoordinates(ctx).getAsDouble(0) - queue.attraction.coordinates.getAsDouble(0)).pow(2.0) +
-                (getCoordinates(ctx).getAsDouble(1) - queue.attraction.coordinates.getAsDouble(1)).pow(2.0)
+            (getCoordinates(ctx).getAsDouble(0) - queue.attraction.position.coordinates.getAsDouble(0)).pow(2.0) +
+                (getCoordinates(ctx).getAsDouble(1) - queue.attraction.position.coordinates.getAsDouble(1)).pow(2.0)
         ) < this.range
 
     private fun Tuple.getAsDouble(index: Int): Double = this.get(index) as Double

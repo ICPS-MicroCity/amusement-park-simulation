@@ -6,5 +6,5 @@ import org.protelis.lang.datatype.Tuple
 import kotlin.random.Random
 
 class RandomPolicy : NextPolicy {
-    override fun getNext(ctx: AlchemistExecutionContext<*>): Tuple = Positions.getPositions(ctx)[Random.nextInt(0, Positions.getPositions(ctx).size)].coordinates
+    override fun getNext(ctx: AlchemistExecutionContext<*>): Tuple = Positions.getPositions(ctx)[Random.nextInt(0, Positions.getPositions(ctx).size)].position.coordinates
 }

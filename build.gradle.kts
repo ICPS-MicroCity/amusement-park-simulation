@@ -79,7 +79,7 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
                 // Namely, force the simulator not to use graphical output.
                 args("-hl", "-t", maxTime)
                 args("-b")
-                args("-var", "strategy", "scenarioSeed", "simulationSeed")
+                //args("-var", "strategy", "scenarioSeed", "simulationSeed")
             } else {
                 // A graphics environment should be available, so load the effects for the UI from the "effects" folder
                 // Effects are expected to be named after the simulation file
@@ -94,7 +94,7 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
 
 tasks.withType(KotlinCompile::class.java).configureEach {
     kotlinOptions {
-        freeCompilerArgs += "-Xjvm-default=enable"
+        freeCompilerArgs += "-Xjvm-default=all"
     }
 }
 
