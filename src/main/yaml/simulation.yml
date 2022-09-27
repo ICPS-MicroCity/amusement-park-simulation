@@ -1,9 +1,17 @@
 incarnation: protelis
 
+variables:
+  visitorNumber: &visitorNumber
+    formula: 500          # number of visitor groups
+  rate: &rate
+    formula: 0.2          # once every 5 seconds
+  lowRate: &lowRate
+    formula: 0.1 * rate   # once every 50 second
+
 # The network model used allows to choose the nodes that have the "attraction" molecule in order to simulate an access point behaviour
 network-model:
-  type: ConnectToAccessPoint
-  parameters: [150.0, "attraction"]
+  type: ClosestAccessPoint
+  parameters: [attraction, 150.0]
 
 # Use an OpenStreetMap Environment, deploying nodes only on streets
 environment:
@@ -18,9 +26,7 @@ _bounds: &bounds
 # a GeoPosition indicated by the concentration of the tracking molecule.
 # On average, considering different ages, a person can walk at a speed of about 1.35 meters per second.
 _move: &move
-  - time-distribution: #1 # once per second
-      type: DiracComb
-      parameters: [1.0]
+  - time-distribution: *rate # once per second
     type: Event
     actions:
       - type: TargetMapWalker
@@ -29,55 +35,56 @@ _move: &move
 # Define the broadcast message from attractions to visitors
 # to spread their positions
 _positions: &positions
-  - time-distribution: 1 # once per second
+  - time-distribution: *rate # once per second
     program: org:protelis:microcity:gossipPositions
   - program: send
 
 # Define the rule that establishes how visitors choose the
 # next destination
 _destination: &destination
-  - time-distribution: 1 # once per second
+  - time-distribution: *rate # once per second
     program: org:protelis:microcity:destination
   - program: send
 
 # Define the message that visitors send when they get to
 # an attraction in order to enqueue themselves
 _queue: &queue
-  - time-distribution: 1 # once per second
+  - time-distribution: *rate # once per second
     program: org:protelis:microcity:queue
   - program: send
 
 # Define the broadcast message from attractions to visitors
 # to spread their queues
 _queues: &queues
-  - time-distribution: 1 # once per second
+  - time-distribution: *rate # once per second
     program: org:protelis:microcity:gossipQueues
   - program: send
 
 # Define the action of satisfying enqueued visitors
 _satisfaction: &satisfaction
-  - time-distribution: 0.01 # once every 100 seconds
+  - time-distribution: *lowRate # once every 100 seconds
     program: org:protelis:microcity:satisfaction
   - program: send
 
 # Generates a recommendation for the visitor
 _recommendation: &recommendation
-  - time-distribution: 0.1 # once every 10 seconds
+  - time-distribution: *lowRate # once every 10 seconds
     program: org:protelis:microcity:recommendation
   - program: send
 
 # Generates a recommendation for the visitor
 _evaluateRecommendation: &evaluateRecommendation
-  - time-distribution: 0.01 # once every 100 seconds
+  - time-distribution: *lowRate # once every 100 seconds
     program: org:protelis:microcity:evaluateRecommendation
   - program: send
 
 # Establishes whether the visitor is moving or not
 _moving: &moving
-  - time-distribution: 1 # once per second
+  - time-distribution: *rate # once per second
     program: org:protelis:microcity:moving
   - program: send
 
+# Creates groups of visitors with different cardinalities randomly chosen from 1 to 6.
 _cardinality: &cardinality
   - time-distribution:
       type: Trigger
@@ -108,7 +115,7 @@ _attractionPrograms: &attractionPrograms
 # Define visitors
 _visitors: &visitors
   - type: Polygon
-    parameters: [ 50, *bounds ]
+    parameters: [ *visitorNumber, *bounds ]
     programs: *visitorPrograms
     contents:
       - { molecule: visitor, concentration: true }
