@@ -12,6 +12,7 @@ import it.unibo.alchemist.model.interfaces.Position
  *  Access points are connected inside the specified radius.
  *
  *  @param molecule, the molecule that defines whether a node is an access point or not.
+ *  @param radius, the radius access points use to connect themselves.
  */
 class ClosestAccessPoint<T, P: Position<P>>(private val molecule: Molecule, private val radius: Double)
     : AbstractLocallyConsistentLinkingRule<T, P>() {
