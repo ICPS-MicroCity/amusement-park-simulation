@@ -36,7 +36,7 @@ _move: &move
 # to spread their positions
 _positions: &positions
   - time-distribution: *rate # once per second
-    program: org:protelis:microcity:gossipPositions
+    program: org:protelis:microcity:aggregatePositions
   - program: send
 
 # Define the rule that establishes how visitors choose the
@@ -57,7 +57,7 @@ _queue: &queue
 # to spread their queues
 _queues: &queues
   - time-distribution: *rate # once per second
-    program: org:protelis:microcity:gossipQueues
+    program: org:protelis:microcity:aggregateQueues
   - program: send
 
 # Define the action of satisfying enqueued visitors
@@ -126,8 +126,6 @@ _visitors: &visitors
       - { molecule: waiting-time, concentration: 0 } # seconds
       - { molecule: moving, concentration: false }
       - { molecule: previous-destination, concentration: [] }
-      - { molecule: org:protelis:microcity:positions, concentration: [] }
-      - { molecule: org:protelis:microcity:queues, concentration: [] }
       - { molecule: frequency, concentration: 1.0 }
 
 # Define attractions
@@ -267,6 +265,7 @@ _attractions: &attractions
     parameters: [44.33779, 12.26399]
     programs: *attractionPrograms
     contents:
+      - { molecule: leader, concentration: true }
       - { molecule: attraction, concentration: true }
       - { molecule: attraction-type, concentration: "\"ride\"" }
       - { molecule: capacity, concentration: 10 }
