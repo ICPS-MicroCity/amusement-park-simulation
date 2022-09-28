@@ -11,7 +11,6 @@ import microcity.Queues.Visitor
 import microcity.Utils.Molecules.CAPACITY
 import microcity.Utils.Molecules.CARDINALITY
 import microcity.Utils.Molecules.DESTINATION
-import microcity.Utils.Molecules.DURATION
 import microcity.Utils.Molecules.LAZY_POPULAR_POLICY
 import microcity.Utils.Molecules.LEADER
 import microcity.Utils.Molecules.MOVING
@@ -23,6 +22,7 @@ import microcity.Utils.Molecules.QUEUES
 import microcity.Utils.Molecules.RECOMMENDATION_POLICY
 import microcity.Utils.Molecules.SATISFACTION
 import microcity.Utils.Molecules.SATISFACTIONS
+import microcity.Utils.Molecules.SATISFACTION_FREQUENCY
 import microcity.Utils.Molecules.SATISFIED
 import microcity.Utils.Molecules.SHORTEST_QUEUE_POLICY
 import microcity.Utils.Molecules.SHORTEST_QUEUE_RANGE_POLICY
@@ -51,11 +51,11 @@ object Utils {
         const val CARDINALITY: String = "org:protelis:microcity:cardinality"
         const val DESTINATION: String = "org:protelis:microcity:destination"
         const val POPULARITY: String = "popularity"
-        const val DURATION: String = "duration"
         const val MOVING: String = "moving"
         const val QUEUE: String = "org:protelis:microcity:queue"
         const val QUEUES: String = "org:protelis:microcity:aggregateQueues"
         const val SATISFACTION: String = "org:protelis:microcity:satisfaction"
+        const val SATISFACTION_FREQUENCY: String = "satisfaction-frequency"
         const val SATISFACTIONS: String = "satisfactions"
         const val NEXT_POLICY: String = "next-policy"
         const val RECOMMENDATION: String = "org:protelis:microcity:recommendation"
@@ -153,6 +153,6 @@ object Utils {
         fun getPopularity(ctx: AlchemistExecutionContext<*>): Int = (get(ctx, POPULARITY) as Double).toInt()
 
         @JvmStatic
-        fun getDuration(ctx: AlchemistExecutionContext<*>): Int = (get(ctx, DURATION) as Double).toInt()
+        fun getDuration(ctx: AlchemistExecutionContext<*>): Int = (1 / (get(ctx, SATISFACTION_FREQUENCY) as Double)).toInt()
     }
 }
