@@ -30,6 +30,7 @@ import microcity.Utils.Molecules.SITUATED_RECOMMENDATION_POLICY
 import microcity.Utils.Molecules.VISITOR
 import microcity.policy.*
 import org.protelis.lang.datatype.Tuple
+import org.protelis.lang.datatype.impl.ArrayTupleImpl
 
 object Utils {
 
@@ -80,6 +81,11 @@ object Utils {
         @JvmStatic
         fun satisfy(ctx: AlchemistExecutionContext<*>, value: Boolean) {
             if (isVisitor(ctx)) put(ctx, SATISFIED, value)
+        }
+
+        @JvmStatic
+        fun checkSatisfaction(ctx: AlchemistExecutionContext<*>, satisfy: Boolean) {
+            if (satisfy && !isSatisfied(ctx)) satisfy(ctx, true)
         }
 
         @JvmStatic
@@ -138,7 +144,7 @@ object Utils {
 
         fun getSatisfied(ctx: AlchemistExecutionContext<*>): List<Visitor> = when {
             has(ctx, SATISFACTION) -> get(ctx, SATISFACTION) as List<Visitor>
-            else -> listOf()
+            else -> emptyList()
         }
 
         fun getCapacity(ctx: AlchemistExecutionContext<*>): Int = (get(ctx, CAPACITY) as Double).toInt()

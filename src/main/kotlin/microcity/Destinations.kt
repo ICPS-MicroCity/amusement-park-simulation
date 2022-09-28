@@ -7,6 +7,7 @@ import microcity.Positions.getPositions
 import microcity.Recommendations.emptyRecommendation
 import microcity.Recommendations.getRecommendation
 import microcity.Utils.Molecules.DESTINATION
+import microcity.Utils.Visitors.getDestination
 import microcity.Utils.Visitors.getNextPolicy
 import microcity.Utils.Visitors.getPreviousDestination
 import microcity.Utils.Visitors.getQueues
@@ -20,19 +21,18 @@ object Destinations {
 
     @JvmStatic
     fun getNext(ctx: AlchemistExecutionContext<*>, current: Tuple): Tuple = when {
-        isSatisfied(ctx) && getPositions(ctx).size > 10 && getQueues(ctx).size > 1 -> getNextPolicy(ctx).getNext(ctx)
+        isSatisfied(ctx) && getPositions(ctx).size > 10 && getQueues(ctx).size > 1 -> getNextPolicy(ctx).getNext(ctx).also { satisfy(ctx, false) }
         isMoving(ctx) && !getRecommendation(ctx).isEmpty && getRecommendation(ctx) != getPreviousDestination(ctx) && Random.nextDouble() > 0.5 ->
             getRecommendation(ctx).also { emptyRecommendation(ctx) }
         else -> current
     }
 
     @JvmStatic
-    fun dissatisfy(ctx: AlchemistExecutionContext<*>, currentDestination: Tuple) {
-        satisfy(ctx, currentDestination == getCoordinates(ctx))
-    }
-
-    @JvmStatic
     fun changeDestination(ctx: AlchemistExecutionContext<*>, dst: Tuple) {
         put(ctx, DESTINATION, dst)
     }
+
+    @JvmStatic
+    fun getCurrentDestination(ctx: AlchemistExecutionContext<*>): Tuple =
+        getDestination(ctx)
 }

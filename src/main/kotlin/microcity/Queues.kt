@@ -58,7 +58,8 @@ object Queues {
             getQueue(ctx).mapIndexed { index, visitor ->
                 Pair(visitor, getQueue(ctx).take(index + 1).sumOf { v -> v.cardinality })
             }.takeWhile { it.second < getCapacity(ctx) }.map { it.first }
-        else -> listOf()
+        role(ctx, VISITOR) -> emptyList()
+        else -> emptyList()
     }
 
     @JvmStatic
@@ -66,7 +67,6 @@ object Queues {
         if (value) {
             Device.put(ctx, Utils.Molecules.SATISFACTIONS, Utils.Visitors.getSatisfactions(ctx) + 1)
         }
-        satisfy(ctx, value)
     }
 
     @JvmStatic

@@ -3,10 +3,12 @@ module org:protelis:microcity:satisfaction
 import microcity.Queues.dequeue
 import microcity.Queues.addSatisfaction
 import microcity.Queues.satisfactionUnion
-import microcity.Utils.Visitors.satisfy
+import microcity.Utils.Visitors.checkSatisfaction
+import microcity.Utils.Visitors.isSatisfied
 
 share (field <- dequeue()) {
     let satisfied = foldHoodPlusSelf(field, { a, b -> satisfactionUnion(a, b) })
     addSatisfaction(!satisfied.isEmpty())
+    checkSatisfaction(!satisfied.isEmpty())
     dequeue()
 }
