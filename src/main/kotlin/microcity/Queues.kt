@@ -28,13 +28,13 @@ object Queues {
 
     @JvmStatic
     fun createVisitors(ctx: AlchemistExecutionContext<*>): List<Visitor> = when {
-        role(ctx, VISITOR) -> arrayListOf(Visitor(createPositions(ctx)[0], getDestination(ctx), getCardinality(ctx)))
-        else -> arrayListOf()
+        role(ctx, VISITOR) -> listOf(Visitor(createPositions(ctx)[0], getDestination(ctx), getCardinality(ctx)))
+        else -> listOf()
     }
 
     @JvmStatic
     fun createQueue(ctx: AlchemistExecutionContext<*>): List<Queue> = when {
-        role(ctx, ATTRACTION) -> arrayListOf(
+        role(ctx, ATTRACTION) -> listOf(
             Queue(
                 Attraction(
                     Position(getId(ctx), getCoordinates(ctx)),
@@ -45,14 +45,12 @@ object Queues {
                 getQueue(ctx)
             )
         )
-        else -> ArrayList()
+        else -> emptyList()
     }
 
     @JvmStatic
-    fun queuesUnion(a: List<Queue>, b: List<Queue>): List<Queue> = ArrayList(
-        b.filter { a.find { q -> q.attraction.position.id == it.attraction.position.id } == null }
-            .union(a).toList().sortedBy { it.attraction.position.id }
-    )
+    fun queuesUnion(a: List<Queue>, b: List<Queue>): List<Queue> =
+        a.union(b).toList().sortedBy { it.attraction.position.id }
 
     @JvmStatic
     fun dequeue(ctx: AlchemistExecutionContext<*>): List<Visitor> = when {
@@ -60,7 +58,7 @@ object Queues {
             getQueue(ctx).mapIndexed { index, visitor ->
                 Pair(visitor, getQueue(ctx).take(index + 1).sumOf { v -> v.cardinality })
             }.takeWhile { it.second < getCapacity(ctx) }.map { it.first }
-        else -> arrayListOf()
+        else -> listOf()
     }
 
     @JvmStatic
@@ -74,21 +72,21 @@ object Queues {
     @JvmStatic
     fun queueUnion(ctx: AlchemistExecutionContext<*>, a: List<Visitor>, b: List<Visitor>): List<Visitor> = when {
         role(ctx, ATTRACTION) -> b.union(a)
-            .filter { it.position.coordinates == getCoordinates(ctx) }
-            .filter { it.destination == getCoordinates(ctx) }
-            .filter { it.position.id != getId(ctx) }
-            .filterNot { getSatisfied(ctx).map { p -> p.position.id }.contains(it.position.id) }
+            .filter {
+                it.position.coordinates == getCoordinates(ctx) &&
+                    it.destination == getCoordinates(ctx) &&
+                    it.position.id != getId(ctx) &&
+                    !getSatisfied(ctx).map { p -> p.position.id }.contains(it.position.id)
+            }
         else -> createVisitors(ctx)
     }
 
     @JvmStatic
     fun satisfactionUnion(ctx: AlchemistExecutionContext<*>, a: List<Visitor>, b: List<Visitor>): List<Visitor> =
-        ArrayList(
-            when {
-                role(ctx, VISITOR) -> a.union(b).filter { it.position.id == getId(ctx) }
-                else -> a.union(b).toList().filter { it.position.coordinates == getCoordinates(ctx) }
-            }
-        )
+        when {
+            role(ctx, VISITOR) -> a.union(b).filter { it.position.id == getId(ctx) }
+            else -> a.union(b).toList().filter { it.position.coordinates == getCoordinates(ctx) }
+        }
 
     @JvmStatic
     fun updateWaitingTime(ctx: AlchemistExecutionContext<*>, time: DoubleTime) {

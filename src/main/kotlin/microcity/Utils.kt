@@ -13,6 +13,7 @@ import microcity.Utils.Molecules.CARDINALITY
 import microcity.Utils.Molecules.DESTINATION
 import microcity.Utils.Molecules.DURATION
 import microcity.Utils.Molecules.LAZY_POPULAR_POLICY
+import microcity.Utils.Molecules.LEADER
 import microcity.Utils.Molecules.MOVING
 import microcity.Utils.Molecules.NEXT_POLICY
 import microcity.Utils.Molecules.POPULARITY
@@ -35,19 +36,24 @@ object Utils {
     fun role(ctx: AlchemistExecutionContext<*>, role: String): Boolean =
         has(ctx, role) && (get(ctx, role) as Boolean)
 
+    @JvmStatic
+    fun leader(ctx: AlchemistExecutionContext<*>): Boolean =
+        has(ctx, LEADER) && (get(ctx, LEADER) as Boolean)
+
     object Molecules {
+        const val LEADER: String = "leader"
         const val ATTRACTION: String = "attraction"
         const val VISITOR: String = "visitor"
         const val SATISFIED: String = "satisfied"
         const val CAPACITY: String = "capacity"
-        const val POSITIONS: String = "org:protelis:microcity:gossipPositions"
+        const val POSITIONS: String = "org:protelis:microcity:aggregatePositions"
         const val CARDINALITY: String = "org:protelis:microcity:cardinality"
         const val DESTINATION: String = "org:protelis:microcity:destination"
         const val POPULARITY: String = "popularity"
         const val DURATION: String = "duration"
         const val MOVING: String = "moving"
         const val QUEUE: String = "org:protelis:microcity:queue"
-        const val QUEUES: String = "org:protelis:microcity:gossipQueues"
+        const val QUEUES: String = "org:protelis:microcity:aggregateQueues"
         const val SATISFACTION: String = "org:protelis:microcity:satisfaction"
         const val SATISFACTIONS: String = "satisfactions"
         const val NEXT_POLICY: String = "next-policy"
@@ -100,7 +106,7 @@ object Utils {
                 is List<*> -> l as List<Queue>
                 else -> listOf()
             }
-            else -> arrayListOf()
+            else -> listOf()
         }
 
         fun getNextPolicy(ctx: AlchemistExecutionContext<*>): NextPolicy = when {
@@ -127,12 +133,12 @@ object Utils {
     object Attractions {
         fun getQueue(ctx: AlchemistExecutionContext<*>): List<Visitor> = when {
             has(ctx, QUEUE) -> (get(ctx, QUEUE) as List<Visitor>)
-            else -> arrayListOf()
+            else -> listOf()
         }
 
         fun getSatisfied(ctx: AlchemistExecutionContext<*>): List<Visitor> = when {
             has(ctx, SATISFACTION) -> get(ctx, SATISFACTION) as List<Visitor>
-            else -> arrayListOf()
+            else -> listOf()
         }
 
         fun getCapacity(ctx: AlchemistExecutionContext<*>): Int = (get(ctx, CAPACITY) as Double).toInt()
