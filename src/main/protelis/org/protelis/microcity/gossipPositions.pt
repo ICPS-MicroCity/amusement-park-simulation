@@ -1,8 +1,0 @@
-module org:protelis:microcity:gossipPositions
-
-import protelis:coord:nonselfstabilizing:accumulation
-import microcity.Positions.attractionPositions
-import microcity.Positions.attractionUnion
-
-gossip (attractionPositions(), { a, b -> attractionUnion(a, b) })
-

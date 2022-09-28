@@ -1,0 +1,9 @@
+module org:protelis:microcity:aggregatePositions
+
+import protelis:coord:accumulation
+import microcity.Positions.attractionPositions
+import microcity.Positions.attractionUnion
+import microcity.Utils.leader
+
+let positions = attractionPositions()
+summarize(leader(), { a, b -> attractionUnion(a, b) }, positions, positions)

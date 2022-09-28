@@ -1,0 +1,8 @@
+module org:protelis:microcity:aggregateQueues
+
+import protelis:coord:accumulation
+import microcity.Queues.createQueue
+import microcity.Queues.queuesUnion
+import microcity.Utils.leader
+
+summarize(leader(), { a, b -> queuesUnion(a, b) }, createQueue(), createQueue())

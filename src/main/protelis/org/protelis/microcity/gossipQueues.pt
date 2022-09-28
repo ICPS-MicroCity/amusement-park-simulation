@@ -1,7 +1,0 @@
-module org:protelis:microcity:gossipQueues
-
-import protelis:coord:nonselfstabilizing:accumulation
-import microcity.Queues.createQueue
-import microcity.Queues.queuesUnion
-
-gossip (createQueue(), { a, b -> queuesUnion(a, b) })
