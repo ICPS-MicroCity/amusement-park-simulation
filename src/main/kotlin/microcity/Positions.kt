@@ -27,7 +27,6 @@ object Positions {
     fun updateMoving(ctx: AlchemistExecutionContext<*>, position: Tuple) {
         put(ctx, MOVING, position != getCoordinates(ctx))
         if (position == getCoordinates(ctx)) {
-            // setPreviousDestination(ctx, getDestination(ctx))
             setPreviousDestination(ctx, position)
         }
     }

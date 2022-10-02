@@ -16,6 +16,7 @@ import microcity.Utils.Attractions.getSatisfied
 import microcity.Utils.Molecules.ATTRACTION
 import microcity.Utils.Molecules.VISITOR
 import microcity.Utils.Molecules.WAITING_TIME
+import microcity.Utils.Visitors.checkSatisfaction
 import microcity.Utils.Visitors.getCardinality
 import microcity.Utils.Visitors.getDestination
 import microcity.Utils.Visitors.satisfy
@@ -57,8 +58,7 @@ object Queues {
         role(ctx, ATTRACTION) && getQueue(ctx).isNotEmpty() ->
             getQueue(ctx).mapIndexed { index, visitor ->
                 Pair(visitor, getQueue(ctx).take(index + 1).sumOf { v -> v.cardinality })
-            }.takeWhile { it.second < getCapacity(ctx) }.map { it.first }
-        role(ctx, VISITOR) -> emptyList()
+            }.takeWhile { it.second < getCapacity(ctx) }.map { it.first }.also { println("ciao"+it)}
         else -> emptyList()
     }
 
@@ -82,11 +82,13 @@ object Queues {
     }
 
     @JvmStatic
-    fun satisfactionUnion(ctx: AlchemistExecutionContext<*>, a: List<Visitor>, b: List<Visitor>): List<Visitor> =
-        when {
-            role(ctx, VISITOR) -> a.union(b).filter { it.position.id == getId(ctx) }
-            else -> a.union(b).toList().filter { it.position.coordinates == getCoordinates(ctx) }
+    fun satisfactionUnion(ctx: AlchemistExecutionContext<*>, a: List<Visitor>, b: List<Visitor>): List<Visitor> = when {
+        role(ctx, VISITOR) -> a.union(b).filter { it.position.id == getId(ctx) }.also {
+            addSatisfaction(ctx, it.isNotEmpty())
+            checkSatisfaction(ctx, it.isNotEmpty())
         }
+        else -> a.union(b).filter { it.position.coordinates == getCoordinates(ctx) }
+    }
 
     @JvmStatic
     fun updateWaitingTime(ctx: AlchemistExecutionContext<*>, time: DoubleTime) {

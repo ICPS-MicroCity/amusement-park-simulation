@@ -16,7 +16,7 @@ object Recommendations {
     @JvmStatic
     fun recommend(ctx: AlchemistExecutionContext<*>): Tuple = when {
         Positions.getPositions(ctx).size > 10 && Utils.Visitors.getQueues(ctx).size > 1 -> Utils.Visitors.getRecommendationPolicy(ctx).getNext(ctx)
-        else -> Device.getCoordinates(ctx)
+        else -> ArrayTupleImpl()
     }
 
     @JvmStatic

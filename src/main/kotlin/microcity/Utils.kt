@@ -30,7 +30,6 @@ import microcity.Utils.Molecules.SITUATED_RECOMMENDATION_POLICY
 import microcity.Utils.Molecules.VISITOR
 import microcity.policy.*
 import org.protelis.lang.datatype.Tuple
-import org.protelis.lang.datatype.impl.ArrayTupleImpl
 
 object Utils {
 
@@ -99,8 +98,7 @@ object Utils {
         fun getPreviousDestination(ctx: AlchemistExecutionContext<*>): Tuple =
             if (has(ctx, PREVIOUS_DESTINATION)) get(ctx, PREVIOUS_DESTINATION) as Tuple else getCoordinates(ctx)
 
-        fun getDestination(ctx: AlchemistExecutionContext<*>): Tuple =
-            if (has(ctx, DESTINATION)) get(ctx, DESTINATION) as Tuple else getCoordinates(ctx)
+        fun getDestination(ctx: AlchemistExecutionContext<*>): Tuple = get(ctx, DESTINATION) as Tuple
 
         fun getSatisfactions(ctx: AlchemistExecutionContext<*>): Double = when {
             has(ctx, SATISFACTIONS) -> get(ctx, SATISFACTIONS) as Double
