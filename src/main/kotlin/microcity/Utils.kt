@@ -10,7 +10,9 @@ import microcity.Queues.Queue
 import microcity.Queues.Visitor
 import microcity.Utils.Molecules.CAPACITY
 import microcity.Utils.Molecules.CARDINALITY
+import microcity.Utils.Molecules.DEQUEUE
 import microcity.Utils.Molecules.DESTINATION
+import microcity.Utils.Molecules.JUST_DEQUEUED
 import microcity.Utils.Molecules.LAZY_POPULAR_POLICY
 import microcity.Utils.Molecules.LEADER
 import microcity.Utils.Molecules.MOVING
@@ -54,11 +56,13 @@ object Utils {
         const val QUEUE: String = "org:protelis:microcity:queue"
         const val QUEUES: String = "org:protelis:microcity:aggregateQueues"
         const val SATISFACTION: String = "org:protelis:microcity:satisfaction"
+        const val DEQUEUE: String = "org:protelis:microcity:dequeue"
         const val SATISFACTION_FREQUENCY: String = "satisfaction-frequency"
         const val SATISFACTIONS: String = "satisfactions"
         const val NEXT_POLICY: String = "next-policy"
         const val RECOMMENDATION: String = "org:protelis:microcity:recommendation"
         const val RECOMMENDATION_POLICY: String = "recommendation-policy"
+        const val JUST_DEQUEUED: String = "just-dequeued"
         const val SHORTEST_QUEUE_POLICY: String = "shortestQueue"
         const val SHORTEST_QUEUE_RANGE_POLICY: String = "shortestQueueRange"
         const val SITUATED_RECOMMENDATION_POLICY: String = "situatedRecommendation"
@@ -140,6 +144,22 @@ object Utils {
             else -> listOf()
         }
 
+        @JvmStatic
+        fun getDequeued(ctx: AlchemistExecutionContext<*>): List<Visitor> = when {
+            has(ctx, DEQUEUE) -> get(ctx, DEQUEUE) as List<Visitor>
+            else -> emptyList()
+        }
+
+        fun justDequeued(ctx: AlchemistExecutionContext<*>, visitors: List<Visitor>) {
+            put(ctx, JUST_DEQUEUED, visitors)
+        }
+
+        fun getJustDequeued(ctx: AlchemistExecutionContext<*>): List<Visitor> = when {
+            has(ctx, JUST_DEQUEUED) -> get(ctx, JUST_DEQUEUED) as List<Visitor>
+            else -> emptyList()
+        }
+
+        @JvmStatic
         fun getSatisfied(ctx: AlchemistExecutionContext<*>): List<Visitor> = when {
             has(ctx, SATISFACTION) -> get(ctx, SATISFACTION) as List<Visitor>
             else -> emptyList()

@@ -1,0 +1,5 @@
+module org:protelis:microcity:emptyDequeued
+
+import microcity.Queues.emptyDequeued
+
+emptyDequeued()

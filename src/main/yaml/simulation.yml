@@ -6,7 +6,7 @@ variables:
   rate: &rate
     formula: 1 / 3          # time unit (once every 3 seconds)
   lowRate: &lowRate
-    formula: 1 / 60         # once every minute
+    formula: rate / 20      # once every minute
   highFrequency: &highFrequency
     formula: 1 / 300        # once every 5 minutes
   mediumFrequency: &mediumFrequency
@@ -66,11 +66,22 @@ _queues: &queues
     program: org:protelis:microcity:aggregateQueues
   - program: send
 
-# Define the action of satisfying enqueued visitors
-_satisfaction: &satisfaction
+_emptyDequeued: &emptyDequeued
+  - time-distribution: *lowRate
+    program: org:protelis:microcity:emptyDequeued
+  - program: send
+
+# Dequeue visitors from attractions
+_dequeue: &dequeue
   - time-distribution:
       type: MoleculeDefinedDiracComb
       parameters: [satisfaction-frequency]
+    program: org:protelis:microcity:dequeue
+  - program: send
+
+# Define the action of satisfying enqueued visitors
+_satisfaction: &satisfaction
+  - time-distribution: *rate
     program: org:protelis:microcity:satisfaction
   - program: send
 
@@ -117,6 +128,8 @@ _visitorPrograms: &visitorPrograms
 _attractionPrograms: &attractionPrograms
   - *positions
   - *queue
+  - *dequeue
+  - *emptyDequeued
   - *queues
   - *satisfaction
 

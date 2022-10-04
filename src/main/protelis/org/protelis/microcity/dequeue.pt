@@ -1,0 +1,5 @@
+module org:protelis:microcity:dequeue
+
+import microcity.Queues.dequeue
+
+dequeue()
