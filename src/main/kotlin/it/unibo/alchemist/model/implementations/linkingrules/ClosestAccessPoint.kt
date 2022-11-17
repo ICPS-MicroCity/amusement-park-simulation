@@ -14,8 +14,8 @@ import it.unibo.alchemist.model.interfaces.Position
  *  @param molecule, the molecule that defines whether a node is an access point or not.
  *  @param radius, the radius access points use to connect themselves.
  */
-class ClosestAccessPoint<T, P: Position<P>>(private val molecule: Molecule, private val radius: Double)
-    : AbstractLocallyConsistentLinkingRule<T, P>() {
+class ClosestAccessPoint<T, P : Position<P>>(private val molecule: Molecule, private val radius: Double) :
+    AbstractLocallyConsistentLinkingRule<T, P>() {
 
     private val Node<T>.isAccessPoint
         get() = contains(molecule)
@@ -35,5 +35,4 @@ class ClosestAccessPoint<T, P: Position<P>>(private val molecule: Molecule, priv
         }
         return Neighborhoods.make(environment, center, neighbors)
     }
-
 }

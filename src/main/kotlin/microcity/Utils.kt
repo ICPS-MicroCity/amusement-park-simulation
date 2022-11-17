@@ -1,13 +1,12 @@
 package microcity
 
 import it.unibo.alchemist.protelis.AlchemistExecutionContext
-import microcity.Device.get
-import microcity.Device.getCoordinates
-import microcity.Device.has
-import microcity.Device.put
+import microcity.Devices.get
+import microcity.Devices.getCoordinates
+import microcity.Devices.has
+import microcity.Devices.put
 import microcity.Maths.gaussian
 import microcity.Queues.Queue
-import microcity.Queues.Visitor
 import microcity.Utils.Molecules.CAPACITY
 import microcity.Utils.Molecules.CARDINALITY
 import microcity.Utils.Molecules.DEQUEUE
@@ -30,6 +29,7 @@ import microcity.Utils.Molecules.SHORTEST_QUEUE_POLICY
 import microcity.Utils.Molecules.SHORTEST_QUEUE_RANGE_POLICY
 import microcity.Utils.Molecules.SITUATED_RECOMMENDATION_POLICY
 import microcity.Utils.Molecules.VISITOR
+import microcity.entities.Entities.Visitor
 import microcity.policy.*
 import org.protelis.lang.datatype.Tuple
 

@@ -1,7 +1,7 @@
 module org:protelis:microcity:moving
 
 import microcity.Positions.updateMoving
-import microcity.Device.getCoordinates
+import microcity.Devices.getCoordinates
 
 // Check whether the visitor is moving or not.
 rep (pos <- getCoordinates()) {

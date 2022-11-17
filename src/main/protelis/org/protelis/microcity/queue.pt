@@ -1,9 +1,9 @@
 module org:protelis:microcity:queue
 
-import microcity.Queues.createVisitors
-import microcity.Queues.queueUnion
+import microcity.entities.Entities.visitor
+import microcity.Queues.visitorUnionForQueue
 import microcity.Queues.updateWaitingTime
-import microcity.Device.getCurrentTime
+import microcity.Devices.getCurrentTime
 
 // Update the waiting time of the visitor in a queue.
 rep (time <- getCurrentTime()) {
@@ -13,6 +13,6 @@ rep (time <- getCurrentTime()) {
 
 // Each visitor sends its information to the attractions in its neighborhood.
 // Attractions create their queue looking for visitors on their coordinates.
-share (field <- createVisitors()) {
-    foldHoodPlusSelf(field, { a, b -> queueUnion(a, b) })
+share (field <- visitor()) {
+    foldHoodPlusSelf(field, { a, b -> visitorUnionForQueue(a, b) })
 }

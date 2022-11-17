@@ -6,7 +6,10 @@ import it.unibo.alchemist.protelis.AlchemistExecutionContext
 import org.protelis.lang.datatype.Tuple
 import kotlin.math.roundToInt
 
-object Device {
+/**
+ * Set of operations that can be performed on a device.
+ */
+object Devices {
 
     private const val DEVICE_PREFIX: String = "PtDevice"
     private const val EMPTY_PREFIX: String = ""

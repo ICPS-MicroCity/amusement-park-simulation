@@ -1,7 +1,7 @@
 module org:protelis:microcity:satisfaction
 
-import microcity.Queues.justSatisfied
-import microcity.Queues.satisfactionUnion
+import microcity.Satisfactions.justSatisfied
+import microcity.Satisfactions.satisfactionUnion
 
 // Satisfy visitors that benefited from the attraction.
 share (field <- justSatisfied()) {

@@ -1,11 +1,11 @@
 module org:protelis:microcity:aggregateQueues
 
 import protelis:coord:accumulation
-import microcity.Queues.createQueue
+import microcity.Queues.queue
 import microcity.Queues.queuesUnion
 import microcity.Utils.leader
 
 // Share the attraction's queues among all the nodes.
 // The summarize function is used instead of the share function
 // in order to keep the shared values updated.
-summarize(leader(), { a, b -> queuesUnion(a, b) }, createQueue(), createQueue())
+summarize(leader(), { a, b -> queuesUnion(a, b) }, queue(), queue())

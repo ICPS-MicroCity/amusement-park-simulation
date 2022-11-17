@@ -1,7 +1,7 @@
 package microcity.policy
 
 import it.unibo.alchemist.protelis.AlchemistExecutionContext
-import microcity.Device.getCoordinates
+import microcity.Devices.getCoordinates
 import microcity.Queues.Queue
 import microcity.Utils.Visitors.getDestination
 import microcity.Utils.Visitors.getQueues
@@ -10,11 +10,14 @@ import kotlin.math.pow
 import kotlin.math.sqrt
 import kotlin.random.Random
 
+/**
+ * A policy that chooses the next destination based on the length of the queues and within a range.
+ */
 class ShortestQueueInRangePolicy(private val range: Double = 0.001) : NextPolicy {
     override fun getNext(ctx: AlchemistExecutionContext<*>): Tuple =
         getQueues(ctx).filter { getDestination(ctx) != it.attraction.position.coordinates }
             .filter { withinRange(it, ctx) }
-            .filter { it.visitors.size == getQueues(ctx).minBy { q -> q.visitors.size }.visitors.size }
+            .filter { it.visitors.size == getQueues(ctx).minByOrNull { q -> q.visitors.size }?.visitors?.size }
             .let {
                 when (it.isNotEmpty()) {
                     true -> it[Random.nextInt(0, it.size)].attraction.position.coordinates

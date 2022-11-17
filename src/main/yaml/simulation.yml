@@ -2,7 +2,7 @@ incarnation: protelis
 
 variables:
   visitorNumber: &visitorNumber
-    formula: 1            # number of visitor groups
+    formula: 100            # number of visitor groups
   rate: &rate
     formula: 1 / 3          # time unit (once every 3 seconds)
   lowRate: &lowRate
@@ -61,11 +61,12 @@ _queue: &queue
 
 # Define the broadcast message from attractions to visitors
 # to spread their queues
-_queues: &queues
+_aggregateQueues: &aggregateQueues
   - time-distribution: *rate
     program: org:protelis:microcity:aggregateQueues
   - program: send
 
+# Empty the set of visitors that have just been dequeued
 _emptyDequeued: &emptyDequeued
   - time-distribution: *lowRate
     program: org:protelis:microcity:emptyDequeued
@@ -98,7 +99,7 @@ _evaluateRecommendation: &evaluateRecommendation
   - program: send
 
 # Establishes whether the visitor is moving or not
-_moving: &moving
+_isMoving: &isMoving
   - time-distribution: *rate
     program: org:protelis:microcity:moving
   - program: send
@@ -119,9 +120,9 @@ _visitorPrograms: &visitorPrograms
   - *evaluateRecommendation
   - *positions
   - *queue
-  - *queues
+  - *aggregateQueues
   - *satisfaction
-  - *moving
+  - *isMoving
   - *cardinality
 
 # Define the programs that all the attractions need to implement
@@ -130,7 +131,7 @@ _attractionPrograms: &attractionPrograms
   - *queue
   - *dequeue
   - *emptyDequeued
-  - *queues
+  - *aggregateQueues
   - *satisfaction
 
 # Define visitors
@@ -639,6 +640,7 @@ deployments:
   - *attractions
   - *visitors
 
+# Export simulation data
 export:
   - type: CSVExporter
     parameters:
