@@ -3,5 +3,6 @@ module org:protelis:microcity:destination
 import microcity.Destinations.getNext
 import microcity.Destinations.getCurrentDestination
 
+// Decide the next attraction to visit.
+// It takes into account the previous destination.
 getNext(getCurrentDestination())
-

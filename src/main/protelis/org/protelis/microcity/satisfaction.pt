@@ -1,18 +1,9 @@
 module org:protelis:microcity:satisfaction
 
-import protelis:coord:accumulation
-import microcity.Queues.dequeue
 import microcity.Queues.justSatisfied
-import microcity.Queues.emptyQueue
 import microcity.Queues.satisfactionUnion
-import microcity.Utils.leader
-import microcity.Utils.Visitors.isVisitor
-import microcity.Utils.Attractions.getDequeued
 
+// Satisfy visitors that benefited from the attraction.
 share (field <- justSatisfied()) {
     foldHood(justSatisfied(), field, { a, b -> satisfactionUnion(a, b) })
 }
-
-//share (field <- dequeue()) {
-//    foldHoodPlusSelf(field, { a, b -> satisfactionUnion(a, b) })
-//}

@@ -5,11 +5,14 @@ import microcity.Queues.queueUnion
 import microcity.Queues.updateWaitingTime
 import microcity.Device.getCurrentTime
 
+// Update the waiting time of the visitor in a queue.
 rep (time <- getCurrentTime()) {
     updateWaitingTime(time)
     getCurrentTime()
 }
 
+// Each visitor sends its information to the attractions in its neighborhood.
+// Attractions create their queue looking for visitors on their coordinates.
 share (field <- createVisitors()) {
     foldHoodPlusSelf(field, { a, b -> queueUnion(a, b) })
 }

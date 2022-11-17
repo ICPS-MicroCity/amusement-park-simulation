@@ -2,4 +2,5 @@ module org:protelis:microcity:recommendation
 
 import microcity.Recommendations.recommend
 
+// Make a recommendation for a visitor.
 recommend()

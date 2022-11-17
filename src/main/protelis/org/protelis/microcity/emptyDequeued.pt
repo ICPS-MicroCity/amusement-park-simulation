@@ -2,4 +2,5 @@ module org:protelis:microcity:emptyDequeued
 
 import microcity.Queues.emptyDequeued
 
+// Empties the set of dequeued visitors from an attraction.
 emptyDequeued()

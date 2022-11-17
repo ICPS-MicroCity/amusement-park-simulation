@@ -5,5 +5,8 @@ import microcity.Positions.attractionPositions
 import microcity.Positions.attractionUnion
 import microcity.Utils.leader
 
+// Share the attraction's positions among all the nodes.
+// The summarize function is used instead of the share function
+// in order to keep the shared values updated.
 let positions = attractionPositions()
 summarize(leader(), { a, b -> attractionUnion(a, b) }, positions, positions)

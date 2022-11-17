@@ -3,5 +3,7 @@ module org:protelis:microcity:evaluateRecommendation
 import microcity.Recommendations.emptyRecommendation
 import microcity.Recommendations.evaluateRecommendation
 
+// Decide whether to accept or reject a recommendation.
+// After deciding, the recommendation is removed.
 evaluateRecommendation()
 emptyRecommendation()

@@ -2,4 +2,6 @@ module org:protelis:microcity:dequeue
 
 import microcity.Queues.dequeue
 
+// Dequeue a set of visitors from the queue of the attraction.
+// Every attraction has its own dequeue frequency.
 dequeue()

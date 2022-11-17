@@ -2,4 +2,6 @@ module org:protelis:microcity:cardinality
 
 import microcity.Utils.Visitors.setGroupCardinality
 
+// Set the cardinality of the group of visitors
+// choosing with a normal distribution from 1 to 6.
 setGroupCardinality()
