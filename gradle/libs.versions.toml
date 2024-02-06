@@ -16,4 +16,4 @@ alchemist = ["alchemist", "protelis-interpreter", "alchemist-incarnation-proteli
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 multiJvmTesting = "org.danilopianini.multi-jvm-test-plugin:0.4.23"
-taskTree = "com.dorongold.task-tree:2.1.0"
+taskTree = "com.dorongold.task-tree:2.1.1"
