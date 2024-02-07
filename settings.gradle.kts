@@ -1,5 +1,5 @@
 plugins {
-    id("com.gradle.enterprise") version "3.11.4"
+    id("com.gradle.enterprise") version "3.16.2"
 }
 
 rootProject.name = "amusement-park-alchemist-simulation"
