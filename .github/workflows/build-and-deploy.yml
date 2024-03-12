@@ -28,7 +28,7 @@ jobs:
     steps:
       # Checkout the repository
       - name: Checkout
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.2
       - name: Check the simulations on CI
         uses: DanySK/build-check-deploy-gradle-action@2.4.0
         with:
